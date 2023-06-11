@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+  background-color: #202020;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+  rgba(0, 0, 0, 0.5)), url("images/bldg-henry.jpeg");
+  height: 50vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+
+.banner-text {
+  position: absolute;
+  color: white;
+  font-size:5vh;
+  text-shadow: 1px 1px 2px black;
+  font-weight:bold;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+
+.banner-button {
+  position: absolute;
+  border-color:black;
+  background-color:#FFD100;
+  font-size:2vh;
+  padding-top:0.8rem;
+  padding-bottom:0.8rem;
+  top: 62%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.review-button {
+  position:relative;
+  border-color:#FFD100;
+  color:#FFD100;
+  
+  padding-top:0.5rem;
+  padding-bottom:0.5rem;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.banner-button:hover {
+  background-color:#FEFAE0;
+}
+
+.review-button:hover {
+  background-color:#FEFAE0;
+  z-index:9999;
+}
+
+
+.explore-line {
+  width: 100%; 
+  padding-top:3rem;
+  border-bottom: 1px solid #F5CB5C; 
+  line-height: 0.1em;
+} 
+
+.explore {
+  color: #FFFFFF;
+  background:#202020;
+  padding:0 10px; 
+  margin-left:6rem;
+}
+
+.bathroom-container {
+  display:block;
+  flex: 0 0 25rem; 
+  height:33rem;
+}
+
+.bathroom-image {
+  height: 23rem;
+  margin: 1rem;
+  margin-top: 2rem;
+  border-style: solid;
+  border-color: #F5CB5C;
+  border-width: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding:5px;
+
+  background-color:1A1A1A;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+.image-name h4 {
+  z-index:9999;
+  color:white;
+  position:absolute;
+  font-size:3rem;
+  font-weight:800;
+  margin-left:10px;
+  margin-top:120px;
+  text-shadow: 1px 1px 2px black;
+}
+
+.image-name p {
+  z-index:9999;
+  color:white;
+  position:absolute;
+  font-size:2rem;
+  font-weight:800;
+  margin-left:15px;
+  margin-top:80px;
+  text-shadow: 1px 1px 2px black;
+}
+
+
+.image-description {
+  position:absolute;
+  z-index:9999;
+  visibility: hidden;
+  color:white;
+}
+
+.image-description h4 {
+  font-size:2rem;
+  font-weight:bold;
+  text-align:center;
+}
+
+.image-description p {
+  font-size: 1.5rem;
+  text-align:center;
+}
+
+.bathroom-image:hover .image-description {
+  visibility: visible;
+  opacity: 1;
+}
+
+.bathroom-image:hover .image-container img{
+  visibility:hidden;
+  opacity:0;
+}
+
+.bathroom-image:hover .image-name{
+  visibility:hidden;
+  opacity:0;
+}
+
+.bathrooms {
+  display:flex;
+  justify-content: center;
+}
+
+.carousel-control-prev {
+  margin:-7rem;
+}
+
+.carousel-control-next {
+  margin:-7rem;
+}
+
+.rating {
+  display:flex;
+  justify-content:center;
+}
+
+.tissue {
+  padding:5px;
+}
+
+/* RESULTS.HTML */
+.search-text {
+  margin-top:10px;
+  color:white;
+
+}
+
+.container {
+  margin-top:3rem;
+  margin-left:3rem;
+}
+
+.search-bar {
+  display:flex;
+}
+
+.form-control {
+  border-radius:0%;
+}
+
+.search-button {
+
+  background-color:none;
+  border-color: #FFD100;
+  color: #FFD100;
+  border-style:solid;
+
+  font-size:2vh;
+  padding:0.8rem 2.5rem 0.8rem 2.5rem;
+  margin-left:10px;
+}
+
+.search-button:hover {
+  border-color:black;
+  background-color:#FFD100;
+}
+
+.btn-drop {
+  background-color:none;
+  border-color: white;
+  color: white;
+  border-style:solid;
+
+  font-size:2vh;
+  padding:0.8rem 1.5rem 0.8rem 1.5rem;
+  margin-left:10px;
+}
+
+.btn-drop:hover{
+  background-color:none;
+  border-color: white;
+  color: white;
+  border-style:solid;
+}
+
+.search-things {
+  display:flex;
+}
+
+.search-line {
+  width: 100%; 
+  border-bottom: 1px solid #F5CB5C; 
+  line-height: 0.1em;
+} 
+
+.search-res-line {
+  width: 100%; 
+  border-bottom: 1px solid #FFFFFF; 
+  line-height: 0.1em;
+} 
+
+.bathroom-search {
+  display:flex;
+}
+
+.search-image {
+  width: 13rem;
+  height: 13rem;
+  margin: 1rem;
+  margin-top: 2rem;
+  border-style: solid;
+  border-color: #F5CB5C;
+  border-width: 2px;
+  padding:5px;
+
+}
+
+
+
+.search-description {
+  color:white;
+  margin-top:25px;
+  margin-left:10px;
+}
+
+.search-description h4 {
+  font-size:2.5rem;
+  font-weight:600;
+}
+
+.search-description h3 {
+  font-size:1.5rem;
+  font-weight:300;
+}
+
+.search-description p {
+  font-size:1.2rem;
+  margin-left:15px;
+}
+
+.see-more {
+  color:white;
+  font-weight:bold;
+}
+
+.search-res {
+  color:white;
+  text-decoration:none;
+}
+
+.search-res:hover {
+  color:white;
+  text-decoration:none;
+}
+
+.review-sample {
+  display:flex;
+  margin-top:50px;
+}
