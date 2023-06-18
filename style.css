@@ -1,8 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-body {
+.home-html {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; 
+}
+
+.home-body {
   background-color: #202020;
   font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; 
+  padding-bottom:50px;
 }
 
 .banner {
@@ -49,8 +63,6 @@ body {
   padding-top:0.5rem;
   padding-bottom:0.5rem;
   top: 8%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .banner-button:hover {
@@ -74,18 +86,21 @@ body {
   color: #FFFFFF;
   background:#202020;
   padding:0 10px; 
-  margin-left:6rem;
+  margin-left:2rem;
+  font-size: 1.5rem;
 }
 
 .bathroom-container {
   display:block;
-  flex: 0 0 25rem; 
-  height:33rem;
+  height:22.5rem;
+  text-align:center;
+  margin-left:1rem;
+  margin-right:1rem;
 }
 
 .bathroom-image {
-  height: 23rem;
-  margin: 1rem;
+  height: 14rem;
+  width: 14rem;
   margin-top: 2rem;
   border-style: solid;
   border-color: #F5CB5C;
@@ -98,65 +113,74 @@ body {
   padding:5px;
 
   background-color:1A1A1A;
+
 }
 
-.image-container {
+.image-container, .alt-image {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow:hidden;
+  display:block;
+
 }
 
-.image-container img {
+.image-container img, .alt-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
+  filter: grayscale(100%); 
+}
+
+.alt-image {
+  visibility:hidden;
+  opacity:0;
+}
+
+.image-description {
+  position:absolute;
+  color:white;
+  text-align:center;
+  visibility:hidden;
+  
+  max-width:190px;
+  user-select: none;
+
 }
 
 .image-name h4 {
   z-index:9999;
   color:white;
   position:absolute;
-  font-size:3rem;
+  font-size:1.7rem;
   font-weight:800;
-  margin-left:10px;
-  margin-top:120px;
+  margin-left:5px;
+  margin-top:85px;
   text-shadow: 1px 1px 2px black;
+  white-space:nowrap;
 }
 
 .image-name p {
   z-index:9999;
   color:white;
   position:absolute;
-  font-size:2rem;
+  font-size:1.2rem;
   font-weight:800;
-  margin-left:15px;
-  margin-top:80px;
+  margin-left:5px;
+  margin-top:60px;
   text-shadow: 1px 1px 2px black;
+  white-space:nowrap;
 }
 
-
-.image-description {
-  position:absolute;
-  z-index:9999;
-  visibility: hidden;
-  color:white;
-}
-
-.image-description h4 {
-  font-size:2rem;
-  font-weight:bold;
-  text-align:center;
-}
-
-.image-description p {
-  font-size: 1.5rem;
-  text-align:center;
-}
 
 .bathroom-image:hover .image-description {
   visibility: visible;
   opacity: 1;
+}
+
+.bathroom-image:hover .alt-image {
+  visibility:visible;
+  opacity:1;
 }
 
 .bathroom-image:hover .image-container img{
@@ -171,16 +195,21 @@ body {
 
 .bathrooms {
   display:flex;
-  justify-content: center;
+  margin-left:80px;
 }
 
 .carousel-control-prev {
-  margin:-7rem;
+  margin-left:-5rem;
+  margin-top:-2rem;
+
 }
 
 .carousel-control-next {
-  margin:-7rem;
+  margin-right:-5rem;
+  margin-top:-2rem;
 }
+
+
 
 .rating {
   display:flex;
@@ -188,7 +217,8 @@ body {
 }
 
 .tissue {
-  padding:5px;
+  margin-left:5px;
+  margin-top:30px;
 }
 
 /* RESULTS.HTML */
@@ -198,9 +228,12 @@ body {
 
 }
 
-.container {
-  margin-top:3rem;
+
+.results-body {
   margin-left:3rem;
+  margin-right:3rem;
+  background-color: #202020;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .search-bar {
@@ -218,7 +251,7 @@ body {
   color: #FFD100;
   border-style:solid;
 
-  font-size:2vh;
+  font-size:1rem;
   padding:0.8rem 2.5rem 0.8rem 2.5rem;
   margin-left:10px;
 }
@@ -228,18 +261,24 @@ body {
   background-color:#FFD100;
 }
 
-.btn-drop {
-  background-color:none;
+.btn-dark {
+  background-color:#202020;
   border-color: white;
   color: white;
   border-style:solid;
 
-  font-size:2vh;
+  font-size:1rem;
   padding:0.8rem 1.5rem 0.8rem 1.5rem;
   margin-left:10px;
 }
 
-.btn-drop:hover{
+.btn-dark:hover{
+  background-color:none;
+  color: white;
+  border-style:solid;
+}
+
+.dropdown-item:hover .btn-drop {
   background-color:none;
   border-color: white;
   color: white;
@@ -247,6 +286,7 @@ body {
 }
 
 .search-things {
+  margin-top:3rem;
   display:flex;
 }
 
@@ -258,19 +298,21 @@ body {
 
 .search-res-line {
   width: 100%; 
-  border-bottom: 1px solid #FFFFFF; 
+  border-bottom: 1px solid #919191; 
   line-height: 0.1em;
 } 
 
 .bathroom-search {
   display:flex;
+  margin-bottom:10px;
 }
 
 .search-image {
-  width: 13rem;
-  height: 13rem;
+  width: 11rem;
+  height: 11rem;
   margin: 1rem;
-  margin-top: 2rem;
+  margin-bottom:0rem;
+  margin-top: 0.5rem;
   border-style: solid;
   border-color: #F5CB5C;
   border-width: 2px;
@@ -278,26 +320,24 @@ body {
 
 }
 
-
-
 .search-description {
   color:white;
-  margin-top:25px;
+  margin-top:5px;
   margin-left:10px;
 }
 
 .search-description h4 {
-  font-size:2.5rem;
+  font-size:1.8rem;
   font-weight:600;
 }
 
 .search-description h3 {
-  font-size:1.5rem;
+  font-size:1rem;
   font-weight:300;
 }
 
 .search-description p {
-  font-size:1.2rem;
+  font-size:1rem;
   margin-left:15px;
 }
 
@@ -318,5 +358,60 @@ body {
 
 .review-sample {
   display:flex;
-  margin-top:50px;
+  margin-top:40px;
+}
+
+.fa-comment {
+  margin-top:10px;
+}
+
+.search-title {
+  display:flex;
+}
+
+.search-title h3{
+  margin-top:0.8rem;
+  margin-left:10px;
+}
+
+.review-num {
+  margin-top:20px;
+}
+
+.rating-search {
+  display:flex;
+  margin-left:24px;
+  width:115px;
+}
+
+.tissue-search {
+  margin-left:5px;
+}
+
+.rating-rev-container {
+  display:flex;
+  margin-top:-15px;
+}
+
+.with-rating {
+  color: #f5cb5c;
+}
+
+.no-rating {
+  color: #595959;
+}
+
+.search-amenities {
+  display:flex;
+  margin-top:-5px;
+  gap:5px;
+}
+
+.badge {
+  background-color: #929493;
+  color: #383838;
+}
+
+.dropdown-item {
+  z-index:9999;
 }
