@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 .home-html {
   width: 100%;
   height: 100%;
@@ -415,3 +414,109 @@
 .dropdown-item {
   z-index:9999;
 }
+
+
+/* Start of CSS for Navbar */
+
+.global-header {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+}
+
+.header-title {
+  letter-spacing: 0.5rem;
+  margin: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 50%;
+}
+
+.header-right {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 30px;
+  width: 50%;
+}
+
+.no-decoration {
+  text-decoration: none;
+}
+
+.text-gray {
+  color: #9E9E9E;
+}
+
+.header-search-box {
+  display: flex;
+  align-items: center;
+  flex-grow: 2;
+  border: solid 1px #757575;
+  border-radius: 10px;
+  max-width: 300px;
+  padding: 8px;
+  gap: 10px;
+}
+
+.pointer-hover {
+  cursor: pointer;
+}
+
+.fa-magnifying-glass:hover, .fa-microphone:hover {
+  opacity: 0.5;
+}
+
+
+.push-right {
+  margin-left: auto;
+}
+
+.push-left {
+  margin-right: auto;
+}
+
+.write-review-btn {
+  color: white;
+  font-size: 1.4rem;
+  letter-spacing: 0.05rem;
+  font-weight: 600;
+  
+  display: inline-block;
+  padding-bottom:2px;
+  background-image: linear-gradient(#fff 0 0);
+  background-position: 0 100%; 
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  transition:
+    background-size 0.3s,
+    background-position 0s 0.3s; /*change after the size immediately*/
+}
+
+.write-review-btn:hover {
+  background-position: 100% 100%; 
+  background-size: 100% 2px;
+}
+
+.login-btn, .signup-btn {
+  color: white;
+  font-weight: 500;
+  padding: 8px 15px;
+  border: 2px solid white;
+  border-radius: 7px;
+
+  /* For a nicer hover effect */
+  box-shadow: inset 0 0 0 0 white;
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.login-btn:hover, .signup-btn:hover {
+  color: black;
+  box-shadow: inset 200px 0 0 0 white;
+}
+
+/* End of CSS for Navbar */
