@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+p {
+  margin: 0px;
+}
+
 .home-html {
   width: 100%;
   height: 100%;
@@ -15,7 +20,6 @@
   margin: 0px;
   padding: 0px;
   overflow-x: hidden; 
-  padding-bottom:50px;
 }
 
 .banner {
@@ -89,7 +93,7 @@
   font-size: 1.5rem;
 }
 
-.bathroom-container {
+.restroom-container {
   display:block;
   height:22.5rem;
   text-align:center;
@@ -97,7 +101,7 @@
   margin-right:1rem;
 }
 
-.bathroom-image {
+.restroom-image {
   height: 14rem;
   width: 14rem;
   margin-top: 2rem;
@@ -172,27 +176,27 @@
 }
 
 
-.bathroom-image:hover .image-description {
+.restroom-image:hover .image-description {
   visibility: visible;
   opacity: 1;
 }
 
-.bathroom-image:hover .alt-image {
+.restroom-image:hover .alt-image {
   visibility:visible;
   opacity:1;
 }
 
-.bathroom-image:hover .image-container img{
+.restroom-image:hover .image-container img{
   visibility:hidden;
   opacity:0;
 }
 
-.bathroom-image:hover .image-name{
+.restroom-image:hover .image-name{
   visibility:hidden;
   opacity:0;
 }
 
-.bathrooms {
+.restrooms {
   display:flex;
   margin-left:80px;
 }
@@ -229,10 +233,13 @@
 
 
 .results-body {
-  margin-left:3rem;
-  margin-right:3rem;
   background-color: #202020;
   font-family: 'Montserrat', sans-serif;
+}
+
+.search-page-body {
+  margin-left:3rem;
+  margin-right:3rem;
 }
 
 .search-bar {
@@ -301,7 +308,7 @@
   line-height: 0.1em;
 } 
 
-.bathroom-search {
+.restroom-search {
   display:flex;
   margin-bottom:10px;
 }
@@ -463,6 +470,14 @@
   gap: 10px;
 }
 
+#search-box-text {
+  width: 100%;
+}
+
+#search-box-text:hover {
+  opacity: 0.5;
+}
+
 .pointer-hover {
   cursor: pointer;
 }
@@ -480,7 +495,7 @@
   margin-right: auto;
 }
 
-.write-review-btn {
+.write-review-btn, .footer-heading {
   color: white;
   font-size: 1.4rem;
   letter-spacing: 0.05rem;
@@ -497,7 +512,7 @@
     background-position 0s 0.3s; /*change after the size immediately*/
 }
 
-.write-review-btn:hover {
+.write-review-btn:hover, .footer-heading:hover {
   background-position: 100% 100%; 
   background-size: 100% 2px;
 }
@@ -520,3 +535,60 @@
 }
 
 /* End of CSS for Navbar */
+
+/* Start of CSS for Footer */
+
+.global-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding: 2rem 5rem;
+  background-color: #292929;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.2rem;
+  flex-wrap: wrap;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.footer-heading {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.footer-heading:hover {
+  opacity: 0.9;
+}
+
+.footer-subheading {
+  text-decoration: none;
+  color: #797979;
+  font-size: 0.9rem;
+}
+
+.fade-hover:hover {
+  opacity: 0.5;
+}
+
+#social-media-icons {
+  font-size: 1.5rem;
+}
+/* End of CSS for Footer */

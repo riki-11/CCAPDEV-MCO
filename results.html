@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
-        
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+      
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
   
 </head>
 <body class="results-body">
-   
+  <header class="global-header">
+      <div class="header-left">
+        <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+        <a href="index.html" class="no-decoration">
+          <h1 class="header-title text-white">FLUSH FINDER</h1>
+        </a>
+        <div class="header-search-box text-gray">
+          <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+            <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+            Search
+          </a>
+          <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+        </div>
+      </div>
+      <div class="header-right">
+        <a class="write-review-btn no-decoration text-white" href="">Write a Review</a>
+        <a class="signup-btn no-decoration" href="">Sign Up</a>
+        <a class="login-btn no-decoration" href="">Log In</a>
+      </div>
+  </header>
+  <div class="search-page-body">
     <div class="search-things">
 
         <div class="col-md-6 search-bar">
@@ -43,7 +63,7 @@
     <h2 class="search-line"></h2>
 
     <!--First Search Result-->
-    <div class="bathroom-search">
+    <div class="restroom-search">
         <a href="#" class="search-res">
             <div class="search-image">
                 
@@ -82,7 +102,7 @@
 
             <div class="review-sample">
                 <i class="fa-regular fa-comment fa-xl" style="color: #ffffff;"></i>
-                <p>“Henry Sy 6th floor is the best bathroom in DLSU. It is air conditioned and always clean. Abot pa wifi para makatext habang...” <a href="#" class="see-more">see more</a></p>
+                <p>“Henry Sy 6th floor is the best restroom in DLSU. It is air conditioned and always clean. Abot pa wifi para makatext habang...” <a href="#" class="see-more">see more</a></p>
             </div>
         </div>
     </div>
@@ -90,7 +110,7 @@
     <h2 class="search-res-line"></h2>
 
     <!--Second Search Result-->
-    <div class="bathroom-search">
+    <div class="restroom-search">
         <a href="#" class="search-res">
             <div class="search-image">
                 
@@ -134,7 +154,7 @@
     <h2 class="search-res-line"></h2>
     
     <!--Third Search Result-->
-    <div class="bathroom-search">
+    <div class="restroom-search">
         <a href="#" class="search-res">
             <div class="search-image">
                 
@@ -180,7 +200,7 @@
 
     <h2 class="search-res-line"></h2>
     <!--Fourth Search Result-->
-    <div class="bathroom-search">
+    <div class="restroom-search">
         <a href="#" class="search-res">
             <div class="search-image">
                 
@@ -219,10 +239,48 @@
             </div>
         </div>
     </div>
-    
+  
+  </div>
+  <footer class="global-footer">
 
-
-    <script src="https://kit.fontawesome.com/3db8d82098.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+      <div class="footer-col">
+        <div class="footer-title">
+          <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
+        </div>
+        <div class="text-gray">
+          © 2023
+        </div>
+      </div>
+      
+      <div class="footer-col text-white">
+        <a href="" class="footer-heading">Explore Restrooms</a>
+        <a href="" class="footer-subheading fade-hover">by Building</a>
+        <a href="" class="footer-subheading fade-hover">by Ratings</a>
+        <a href="" class="footer-subheading fade-hover">by Gender</a>
+      </div>
+  
+      <div class="footer-col">
+        <a href="" class="footer-heading">For Students & Faculty</a>
+        <a href="" class="footer-subheading fade-hover">Log In / Sign Up</a>
+        <a href="" class="footer-subheading fade-hover">Write a Review</a>
+      </div>
+  
+      <div class="footer-col">
+        <a href="business-profile.html" class="footer-heading">For Business</a>
+      </div>
+  
+      <div class="footer-col">
+        <a href="" class="footer-heading">Contact Us</a>
+        <a href="" class="footer-subheading fade-hover"><i class="fa-regular fa-envelope"></i> help@flushfinder.com</a>
+        <a id="social-media-icons" href="" class="footer-subheading">
+          <i class="fa-brands fa-facebook fade-hover"></i>
+          <i class="fa-brands fa-twitter fade-hover"></i>
+          <i class="fa-brands fa-linkedin fade-hover"></i>
+        </a>
+      </div>
+  
+  </footer>
+  <script src="https://kit.fontawesome.com/3db8d82098.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>
