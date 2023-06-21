@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+  background-color: #F5F5F5;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.search-container{
+    position: absolute;
+    width: 100%;
+    height: 110%;
+    top: 0;
+    left: 0;
+    background: #202020;
+}
+.makereview-title{
+    position: absolute;
+    height: auto;
+    left: calc(50% - 50vw/2 + 0.5px);
+    top: 35vh;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.5vw;
+    line-height: 1;
+    /* identical to box height */
+    color: #FFFFFF;
+}
+.makereview-subtitle{        
+    position: absolute;
+    width: 65%;
+    height: auto;
+    left: calc(50% - 65vw/2 + 0.5px);
+    top: 42vh;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2vw;
+    line-height: 1.2;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.search-box form{
+  /* search bar */
+  position: absolute;
+  width: 50vw;
+  height:7vh;
+  left: calc(50% - 50vw/2);
+  top: 50%;
+
+  display: flex;
+  align-items: center;
+  flex-grow: 2;
+  
+  border: 1px solid #F5CB5C;
+  background: #33353300;
+  border-radius: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
+  gap: 10px;
+}
+.search-box input{
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #33353300;
+  color: #FFFFFF;
+}
+
+.search-box input:focus{
+  outline: none;
+}
+
+.search-box input:hover{
+  opacity: 0.5;
+}
+
+.search-box-content::placeholder  {
+  width: 100%;
+  color: #f5cc5c1e;
+}
+
+#search-box-text-content:hover {
+  opacity: 0.5;
+}
+
+.pointer-hover {
+  cursor: pointer;
+}
+
+.fa-magnifying-glass:hover, .fa-microphone:hover {
+  opacity: 0.5;
+}
+
+
+.reviews-containter{
+  position: absolute;
+  width: 100%;
+  height: 110%;
+  left: 0;
+  top: 110%;
+  background: rgba(214, 214, 214, .25);
+}
+
+.reviews-title{
+  /* Your reviews */
+  position: absolute;
+  left: calc(50% - 75vw/2);
+  top: 20vh;
+  
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2.5em;
+  line-height: 49px;
+  color: #333533;
+}
+.reviews{
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 30%;
+  left: 20%;
+}
+.review-content-container{
+  display: flex;
+}
+.review-content-container:hover{
+  background-color: #3335330c;
+}
+
+.img-review-content-container{
+position:initial;
+width: 118px;
+height: 114px;
+padding-left: 1%;
+padding-top: 1%;
+padding-right: 1.5%;
+}
+
+.img-border{ 
+width: 118px;
+height: 114px;
+border: 1px solid #F5CB5C;
+}
+.img-review-content-container .img-border img{
+width: 100%;
+height: 100%;
+object-fit: cover;
+filter: grayscale(100%); 
+}
+borderreview-content-details{
+margin-top: 25px;
+}
+.review-content-spans{
+font-family: 'Montserrat';
+font-style: normal;
+position:static;
+padding-top: 2%;
+}
+
+.review-content-name{
+margin-top: 100px;
+font-weight: 800;
+}
+
+.reviews-containter hr{
+border: 1px solid;
+opacity: .05;
+}
