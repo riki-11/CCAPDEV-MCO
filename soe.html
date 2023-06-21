@@ -2,20 +2,27 @@
 <html lang="en">
 <html>
     <head>
+
         <title></title>
         <link rel="stylesheet" href="soe.css">
+        <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="search-container">
             <span class="makereview-title">Make a <span style="color: #F5CB5C;">review</span>, make someone<span style="color: #F5CB5C;"> comfy</span></span>
             <span class="makereview-subtitle">Stories like yours are what helps flushers have better comfort. Share your experience and help out a fellow flusher!</span>
-            <input type="text" placeholder="What would you like to review?">
+            <!-- <input type="text" placeholder="What would you like to review?"> -->
+            <div class="search-box">
+                <form id="search-box-content" action="results.html">
+                    <i class="fa-solid fa-magnifying-glass pointer-hover" style="color: #f5cc5c1e;"></i> 
+                    <input type="text" class="search-box-content" placeholder="What would you like to review?">
+                    <i class="fa-solid fa-microphone push-right pointer-hover" style="color: #f5cc5c1e;"></i>                    
+                </form>
+              </div>
         </div>
         <div class="reviews-containter">
             <span class="reviews-title">Your Reviews</span>
             <div class="reviews">
-                
-
             </div>
         </div>
     </body>
