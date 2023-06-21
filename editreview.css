@@ -2,13 +2,14 @@
 body {
   font-family: 'Montserrat', sans-serif;
 }
+
 .content-container{
     display:flex;
     justify-content: flex-start;
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-    box-shadow: 5px 10px 19px -3px rgba(0,0,0,0.27);
-    
+    box-shadow: 5px 10px 19px -3px rgba(0,0,0,0.27);   
 }
+
 .left-container{
     width: 35%;
 }
@@ -87,7 +88,11 @@ body {
 .right-containter{
     padding: 5%;
     width: 50%;
-    line-break:auto;
+}
+.right-containter label{ 
+    color: #333533d5;
+    font-size: larger;
+    line-height: 4.5vh;
 }
 
 .right-containter form{
@@ -108,13 +113,22 @@ body {
     color: #3335339c;
 }
 
-.right-containter form label{
-    color: #333533d5;
-    font-size: 1.1rem;
-}
-
 /* Rating */
-
+.rating label {
+    font-weight: 700;
+    color: #F5CB5C;
+}
+.rating input{
+    display: none;
+}
+.rating input + label{
+    font-size: 3rem;
+    text-shadow: 1px 1px 0 #ffe400;
+    cursor: pointer;
+}
+.rating input:checked + label ~ label{
+    color: #666 ;
+}
 
 #form-review {
     width: 96%;
@@ -136,6 +150,15 @@ body {
     font-size: 1rem;
     font-weight:500;
 }
+
+.input-date{
+    margin: 1%;
+    padding: 4%;
+    border-radius: 8px;
+    border: 1px solid #333533d5;
+    font-size: large;
+}
+
 .form-img-container{
     display: grid;
     place-items: center;
@@ -195,7 +218,7 @@ body {
 
 .edit:hover {
     color: #e8e8e8;
-    background-color: #F5CB5C;
+    background-color: #a68529;
 }  
 .delete:hover {
     color: #e8e8e8;

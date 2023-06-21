@@ -7,6 +7,8 @@
     </head>
     <body>
         <div class="content-container">
+
+            <!-- LEFT CONTAINER -->
             <div class="left-container">
                 <div class="left-wrapper">      
                     <div class="caption-container">
@@ -20,26 +22,26 @@
                     </div>
                 </div>
             </div>
-
             <hr class="line">
-
-            <div class="right-containter">
+            <!-- RIGHT CONTAINER -->
+            <div class="right-container">
                 <form action="">
                     <!-- RATING -->
                     <span class="label">Rate your overall experience</span> <br>
-                    <!--<div class="rating">
-                        <input type="radio" id="star5" name="rate" value="5">
-                        <label for="star5" title="text"></label>
-                        <input type="radio" id="star4" name="rate" value="4">
-                        <label for="star4" title="text"></label>
-                        <input checked="" type="radio" id="star3" name="rate" value="3">
-                        <label for="star3" title="text"></label>
-                        <input type="radio" id="star2" name="rate" value="2">
-                        <label for="star2" title="text"></label>
+                    <div class="rating">
+                        <!-- NOT SURE HOW TO ADD THE TISSUE FONT -->
                         <input type="radio" id="star1" name="rate" value="1">
-                        <label for="star1" title="text"></label>
-                    </div> -->
-
+                        <label for="star1" title="text">1</label>
+                        <input type="radio" id="star2" name="rate" value="2">
+                        <label for="star2" title="text">2</label>
+                        <input type="radio" id="star3" name="rate" value="3">
+                        <label for="star3" title="text">3</label>
+                        <input type="radio" id="star4" name="rate" value="4">
+                        <label for="star4" title="text">4</label>
+                        <input checked="" type="radio" id="star5" name="rate" value="5">
+                        <label for="star5" title="text">5</label>
+                    </div>
+                    
                     <!-- Gender -->
                     <span class="label">For what gender is your cubicle?</span> <br>
                     <input type="radio" name="form-gender" value="Male">
@@ -47,7 +49,7 @@
                     <input type="radio" name="form-gender" value="Female">
                         <label for="Female">Female</label><br>
                     <!-- Check Boxes -->
-                    <span class="label">Does your cubicle have:</span> <br>
+                    <span class="label">Amenities:</span> <br>
                     <input type="checkbox" name="form-chkbx" value="Bidet">
                         <label for="Bidet">Bidet</label><br>
                     <input type="checkbox" name="form-chkbx" value="flush">
@@ -60,7 +62,7 @@
                         <label for="handdryer">Hand Dryer</label><br>
                         
                     <span class="label">Date of visit</span> <br>
-                    <input  type="date" name="form-date"> <br>
+                    <input class="input-date" type="date" name="form-date"> <br>
                     
                     <span class="label">Write a Review</span> <br>
                     <textarea name="form-review" id="form-review" cols="10" rows="10" placeholder="I experienced my best bidet of my life..."></textarea>
@@ -80,6 +82,7 @@
                         <div class="form-img-wrapper">
                             <span>Click to Add Photos<br>or drag and drop</span>
                         </div>                        
+                        <!-- TO BE REVISED -->  
                         <!-- <input id="form-img-default-btn" type="file" name="upload-image">
                         <button id="form-img-custom-btn">Choose File</button> -->
                     </div>
