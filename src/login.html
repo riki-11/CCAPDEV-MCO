@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="output.css">
+    <style>@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';</style>
+    <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-primary text-white bg-primarybg">
+    <!-- START OF NAVBAR -->
+    <header class="global-header">
+        <div class="header-left">
+          <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+          <a href="index.html" class="no-decoration">
+            <h1 class="header-title text-white">FLUSH FINDER</h1>
+          </a>
+          <div class="header-search-box text-gray">
+            <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+              <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+              Search
+            </a>
+            <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+          </div>
+        </div>
+        <div class="header-right">
+          <a class="write-review-btn no-decoration text-white" href="">Write a Review</a>
+          <a class="signup-btn no-decoration" href="">Sign Up</a>
+          <a class="login-btn no-decoration" href="">Log In</a>
+        </div>
+    </header>
+
+    <!-- START OF MAIN CONTENT -->
+    <div class="bg-[url('henry_sy-bg.jpg')] h-full bg-cover bg-center overflow-hidden bg-fixed">
+        <div class="h-screen w-screen backdrop-grayscale overflow-auto">
+            <div class="flex flex-col m-auto h-3/5 bg-black/75 mt-32 w-2/5 rounded-[1.5rem]">
+                <div class="w-8/12 self-center h-full">
+                    <div class="text-center mt-5">
+                        <h2><i class="fa-solid fa-toilet fa-2xl text-white"></i></h2>
+                    </div>
+                    <div class="text-center mt-10">
+                        <span class="font-bold text-3xl">Log in to </span><span class="text-3xl font-medium">  Flush Finder</span> 
+                    </div>
+                    <div class="mt-5 flex flex-col">
+                        <form method="post">
+                            <div class="flex flex-col">
+                                <div>
+                                    <label for="username">Username</label><br>
+                                    <input class="focus:bg-white focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="text" name="username" id="username" placeholder=" Username" required><br>
+                                </div>
+                                <div class="mt-3 ">
+                                    <label for="password">Password</label><br>
+                                    <input class="focus:bg-white focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="password" name="password" id="password" placeholder=" ***********"><br>
+                                </div>
+                            </div>
+                            <div class="mt-10 text-center">
+                                <button class="border-[2px] hover:text-black border-white rounded-md border-w hover:bg-secondary hover:border-secondary">Log in</button>
+                            </div>
+                        </form>   
+                    </div>
+                </div>
+                <div class="text-xs text-center mb-8 font-thin">
+                        Don't have an account yet? <a class="text-secondary hover:underline">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- START OF FOOTER -->
+    <footer class="global-footer" style="margin-top: 0px;">
+
+        <div class="footer-col">
+          <div class="footer-title">
+            <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
+          </div>
+          <div class="text-gray">
+            © 2023
+          </div>
+        </div>
+        
+        <div class="footer-col text-white">
+          <a href="" class="footer-heading">Explore Restrooms</a>
+          <a href="" class="footer-subheading fade-hover">by Building</a>
+          <a href="" class="footer-subheading fade-hover">by Ratings</a>
+          <a href="" class="footer-subheading fade-hover">by Gender</a>
+        </div>
+    
+        <div class="footer-col">
+          <a href="" class="footer-heading">For Students & Faculty</a>
+          <a href="" class="footer-subheading fade-hover">Log In / Sign Up</a>
+          <a href="" class="footer-subheading fade-hover">Write a Review</a>
+        </div>
+    
+        <div class="footer-col">
+          <a href="business-profile.html" class="footer-heading">For Business</a>
+        </div>
+    
+        <div class="footer-col">
+          <a href="" class="footer-heading">Contact Us</a>
+          <a href="" class="footer-subheading fade-hover"><i class="fa-regular fa-envelope"></i> help@flushfinder.com</a>
+          <a id="social-media-icons" href="" class="footer-subheading">
+            <i class="fa-brands fa-facebook fade-hover"></i>
+            <i class="fa-brands fa-twitter fade-hover"></i>
+            <i class="fa-brands fa-linkedin fade-hover"></i>
+          </a>
+        </div>
+    
+    </footer>
+</body>
+</html>
