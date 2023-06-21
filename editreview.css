@@ -85,28 +85,28 @@ body {
 }
 
 /*right container*/
-.right-containter{
+.right-container{
     padding: 5%;
     width: 50%;
 }
-.right-containter label{ 
+.right-container label{ 
     color: #333533d5;
     font-size: larger;
     line-height: 4.5vh;
 }
 
-.right-containter form{
+.right-container form{
     display: inline;
     line-break: normal;
     line-height: 1.5rem;
 }
-.right-containter .label{
+.right-container .label{
     font-size: 1.5rem;
     font-weight:bolder;
     color: #333533;
     line-height: 3rem;
 }
-.right-containter .label-limit{
+.right-container .label-limit{
     float: right;
     font-weight:lighter;
     font-size: .6rem;
