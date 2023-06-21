@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Log in</title>
     <link rel="stylesheet" href="output.css">
     <style>@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';</style>
     <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind.config.js"></script>
 </head>
 <body class="font-primary text-white bg-primarybg">
-    <!-- NAVBAR -->
+    <!-- START OF NAVBAR -->
     <header class="global-header">
         <div class="header-left">
           <i class="fa-solid fa-toilet fa-2xl text-white"></i>
@@ -33,59 +35,42 @@
     </header>
 
     <!-- START OF MAIN CONTENT -->
-    <div class="h-screen bg-cover bg-center overflow-hidden bg-fixed" style="background-image:url('henry_sy-bg.jpg');">
-        <div class="h-screen w-screen backdrop-grayscale overflow-hidden">
-            <div class="flex flex-col m-auto h-auto bg-black/75 mt-32 w-2/5 rounded-[1.5rem] overflow-auto mb-12">
+    <div class="bg-[url('henry_sy-bg.jpg')] h-full bg-cover bg-center overflow-hidden bg-fixed">
+        <div class="h-screen w-screen backdrop-grayscale overflow-auto">
+            <div class="flex flex-col m-auto h-3/5 bg-black/75 mt-32 w-2/5 rounded-[1.5rem]">
                 <div class="w-8/12 self-center h-full">
                     <div class="text-center mt-5">
-                        <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+                        <h2><i class="fa-solid fa-toilet fa-2xl text-white"></i></h2>
                     </div>
-
                     <div class="text-center mt-10">
-                        <span class="font-bold text-3xl">Sign up to </span><span class="text-3xl font-medium">  Flush Finder</span> 
+                        <span class="font-bold text-3xl">Log in to </span><span class="text-3xl font-medium">  Flush Finder</span> 
                     </div>
-                    <div class="mt-6">
+                    <div class="mt-5 flex flex-col">
                         <form method="post">
-                            <div> <!-- Remember to edit as grid-->
+                            <div class="flex flex-col">
                                 <div>
-                                    <label for="firstname">First Name</label><br>
-                                    <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="text" name="firstname" id="firstname" placeholder=" First Name" required><br>
-                                </div>
-                                <div class="mt-3 ">
-                                    <label for="lastname">Last Name</label><br>
-                                    <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="text" name="lastname" id="lastname" placeholder=" Last Name"><br>
-                                </div>
-                                <div class="mt-3 ">
                                     <label for="username">Username</label><br>
-                                    <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="text" name="username" id="username" placeholder=" @username"><br>
-                                </div>
-                                <div class="mt-3 ">
-                                    <label for="email">Email</label><br>
-                                    <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="text" name="email" id="email" placeholder=" sample@email.com"><br>
+                                    <input class="focus:bg-white focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="text" name="username" id="username" placeholder=" Username" required><br>
                                 </div>
                                 <div class="mt-3 ">
                                     <label for="password">Password</label><br>
-                                    <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="password" name="password" id="password" placeholder=" *******"><br>
-                                </div>
-                                <div class="mt-3 ">
-                                    <label for="birthdate">Birth Date</label><br>
-                                    <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="date" name="birthday" id="birthday"><br>
+                                    <input class="focus:bg-white focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="password" name="password" id="password" placeholder=" ***********"><br>
                                 </div>
                             </div>
                             <div class="mt-10 text-center">
-                                <button class="border-[2px] hover:text-black border-white rounded-md border-w hover:bg-secondary hover:border-secondary">Sign up</button>
+                                <button class="border-[2px] hover:text-black border-white rounded-md border-w hover:bg-secondary hover:border-secondary">Log in</button>
                             </div>
-                        </form>     
+                        </form>   
                     </div>
                 </div>
-                <div class="text-xs text-center mt-6 font-thin">
+                <div class="text-xs text-center mb-8 font-thin">
                         Don't have an account yet? <a class="text-secondary hover:underline">Sign up</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- START OF FOOTER -->
     <footer class="global-footer" style="margin-top: 0px;">
 
         <div class="footer-col">

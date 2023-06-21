@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 p {
   margin: 0px;
@@ -202,13 +206,13 @@ p {
 }
 
 .carousel-control-prev {
-  margin-left:-5rem;
+  margin-left:-5vw;
   margin-top:-2rem;
 
 }
 
 .carousel-control-next {
-  margin-right:-5rem;
+  margin-right:-5vw;
   margin-top:-2rem;
 }
 
@@ -330,6 +334,10 @@ p {
   color:white;
   margin-top:5px;
   margin-left:10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 3px;
 }
 
 .search-description h4 {
@@ -364,7 +372,6 @@ p {
 
 .review-sample {
   display:flex;
-  margin-top:40px;
 }
 
 .fa-comment {
@@ -381,22 +388,18 @@ p {
 }
 
 .review-num {
-  margin-top:20px;
+  /*margin-top:20px;*/
 }
 
 .rating-search {
   display:flex;
-  margin-left:24px;
+  margin-left:13px;
   width:115px;
-}
-
-.tissue-search {
-  margin-left:5px;
 }
 
 .rating-rev-container {
   display:flex;
-  margin-top:-15px;
+  gap: 3px;
 }
 
 .with-rating {
@@ -409,7 +412,6 @@ p {
 
 .search-amenities {
   display:flex;
-  margin-top:-5px;
   gap:5px;
 }
 
@@ -429,6 +431,7 @@ p {
   padding: 10px 15px;
   display: flex;
   align-items: center;
+  background-color: #202020;
 }
 
 .header-title {

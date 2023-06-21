@@ -2,10 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://kit.fontawesome.com/d0cef78398.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <h1>Business Profile</h1>
+<body class="home-body">
+    <header class="global-header">
+        <div class="header-left">
+          <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+          <a href="index.html" class="no-decoration">
+            <!-- Edit this! -->
+            <h1 class="header-title text-white text-4xl font-medium">FLUSH FINDER</h1>
+          </a>
+          <div class="header-search-box text-gray">
+            <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+              <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+              Search
+            </a>
+            <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+          </div>
+        </div>
+        <div class="header-right">
+          <a class="write-review-btn no-decoration text-white" href="">Write a Review</a>
+          <a class="signup-btn no-decoration" href="">Sign Up</a>
+          <a class="login-btn no-decoration" href="">Log In</a>
+        </div>
+      </header>
 </body>
 </html>
