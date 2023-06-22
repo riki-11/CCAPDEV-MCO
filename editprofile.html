@@ -8,34 +8,36 @@
     <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');</style>
     <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind.custom.js"></script>
 </head>
 <body class="font-primary text-white overflow-auto" style="background-color: #202020;">
     <!-- NAVBAR -->
     <header class="global-header">
         <div class="header-left">
-          <i class="fa-solid fa-toilet fa-2xl text-white"></i>
-          <a href="index.html" class="no-decoration">
-            <h1 class="header-title text-white">FLUSH FINDER</h1>
-          </a>
-          <div class="header-search-box text-gray">
-            <a id="search-box-text" href="results.html" class="no-decoration text-gray">
-              <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
-              Search
+            <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+            <a href="index.html" class="no-decoration">
+              <h1 class="header-title text-white">FLUSH FINDER</h1>
             </a>
-            <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+            <div class="header-search-box text-gray">
+              <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+                <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+                Search
+              </a>
+              <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+            </div>
           </div>
-        </div>
-        <div class="header-right">
-          <a class="write-review-btn no-decoration text-white" href="">Write a Review</a>
-          <a class="signup-btn no-decoration" href="">Sign Up</a>
-          <a class="login-btn no-decoration" href="">Log In</a>
+          <div class="header-right">
+            <a class="write-review-btn no-decoration text-white" href="createreview.html">Write a Review</a>
+            <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
+            <a class="login-btn no-decoration" href="login.html">Log In</a>
         </div>
     </header>
 
     <!-- START OF MAIN CONTENT -->
     <div class="w-[60%] flex h-screen justify-center gap-10 m-auto overflow-auto mt-28">
         <div class="justify center mt-5 w-48 text-center">
-            <div class="justify-center bg-[url('henry_sy-bg.jpg')] bg-cover h-[9.5rem] w-[9.5rem] bg-center m-auto rounded-[5rem]">
+            <div class="justify-center bg-[url('./images/henry_sy-bg.jpg')] bg-cover h-[9.5rem] w-[9.5rem] bg-center m-auto rounded-[5rem]">
             </div>
             <div>
                 <div class="font-bold mt-2 text-xl">
