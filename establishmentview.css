@@ -7,21 +7,20 @@ body {
 
 .content-container {
     width: 100%;
-    height: max-content;
+    height: 100%;
 }
 .establishment-container{
-  
     width: 100%;
     left: 0px;
     top: -200px;
 }
 .establishment-image-container{
     width: 100%;
-    height: 1080px;
+    height: 800px;
 }
 .establishment-image-container img{
     width: 100%;
-    height: 80%;
+    height: 100%;
 }
 .establishment-name-container{
     position: absolute;
@@ -82,4 +81,15 @@ background-color: chartreuse;
 .leave-a-review-container{
     width: 100%;
 background-color: darkgoldenrod;
+}
+
+/* ESTABLISHMENT DETAILS CONTAINER */
+.establishment-details-container{
+    width: 100%;
+    height: 750px;
+    background-color: blue;
+}
+.details-container{
+    place-items: center;
+    background-color: #F5CB5C;
 }
