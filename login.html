@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="tailwind.config.js"></script>
+    <script src="tailwind.custom.js"></script>
 </head>
 <body class="font-primary text-white bg-primarybg">
     <!-- START OF NAVBAR -->
@@ -28,14 +28,14 @@
           </div>
         </div>
         <div class="header-right">
-          <a class="write-review-btn no-decoration text-white" href="">Write a Review</a>
-          <a class="signup-btn no-decoration" href="">Sign Up</a>
-          <a class="login-btn no-decoration" href="">Log In</a>
+          <a class="write-review-btn no-decoration text-white" href="createreview.html">Write a Review</a>
+          <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
+          <a class="login-btn no-decoration" href="login.html">Log In</a>
         </div>
     </header>
 
     <!-- START OF MAIN CONTENT -->
-    <div class="bg-[url('henry_sy-bg.jpg')] h-full bg-cover bg-center overflow-hidden bg-fixed">
+    <div class="bg-[url('./images/henry_sy-bg.jpg')] h-full bg-cover bg-center overflow-hidden bg-fixed">
         <div class="h-screen w-screen backdrop-grayscale overflow-auto">
             <div class="flex flex-col m-auto h-3/5 bg-black/75 mt-32 w-2/5 rounded-[1.5rem]">
                 <div class="w-8/12 self-center h-full">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="text-xs text-center mb-8 font-thin">
-                        Don't have an account yet? <a class="text-secondary hover:underline">Sign up</a>
+                        Don't have an account yet? <a href="register.html" class="text-secondary hover:underline">Sign up</a>
                 </div>
             </div>
         </div>
