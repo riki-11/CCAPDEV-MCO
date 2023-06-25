@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -544,6 +545,7 @@ p {
 .global-footer {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-top: 3rem;
   padding: 2rem 5rem;
   background-color: #292929;
@@ -595,3 +597,40 @@ p {
   font-size: 1.5rem;
 }
 /* End of CSS for Footer */
+
+
+/* Beginning of CSS for business-profile.html */
+
+.title-in-line {
+  text-align: left;
+}
+
+.title-in-line::before, .title-in-line::after {
+  background-color: #fff;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 60%;
+}
+
+.title-in-line::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.title-in-line::after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+.my-establishment-img-box {
+  background-image: url("images/bldg-henry.jpeg");
+}
+
+/* End of CSS for business-profile.html */
+
+.yes {
+  color: #f5cb5c;
+}
