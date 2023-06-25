@@ -14,24 +14,24 @@
 <body class="font-primary text-white bg-primarybg">
     <!-- START OF NAVBAR -->
     <header class="global-header">
-        <div class="header-left">
-          <i class="fa-solid fa-toilet fa-2xl text-white"></i>
-          <a href="index.html" class="no-decoration">
-            <h1 class="header-title text-white">FLUSH FINDER</h1>
+      <div class="header-left">
+        <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+        <a href="index.html" class="no-decoration">
+          <h1 class="header-title font-medium text-4xl text-white">FLUSH FINDER</h1>
+        </a>
+        <div class="header-search-box text-gray">
+          <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+            <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+            Search
           </a>
-          <div class="header-search-box text-gray">
-            <a id="search-box-text" href="results.html" class="no-decoration text-gray">
-              <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
-              Search
-            </a>
-            <i class="fa-solid fa-microphone push-right pointer-hover"></i>
-          </div>
+          <i class="fa-solid fa-microphone push-right pointer-hover"></i>
         </div>
-        <div class="header-right">
-          <a class="write-review-btn no-decoration text-white" href="createreview.html">Write a Review</a>
-          <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
-          <a class="login-btn no-decoration" href="login.html">Log In</a>
-        </div>
+      </div>
+      <div class="header-right">
+        <a class="write-review-btn no-decoration text-white" href="">Write a Review</a>
+        <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
+        <a class="login-btn no-decoration" href="login.html">Log In</a>
+      </div>
     </header>
 
     <!-- START OF MAIN CONTENT -->
@@ -43,10 +43,11 @@
                         <h2><i class="fa-solid fa-toilet fa-2xl text-white"></i></h2>
                     </div>
                     <div class="text-center mt-10">
-                        <span class="font-bold text-3xl">Log in to </span><span class="text-3xl font-medium">  Flush Finder</span> 
+                        <span class="font-bold text-3xl">Login to </span><span class="text-3xl font-medium">Flush Finder</span> 
                     </div>
                     <div class="mt-5 flex flex-col">
-                        <form method="post">
+                      <!-- Turn this into a post request eventually -->
+                        <form action="index.html">
                             <div class="flex flex-col">
                                 <div>
                                     <label for="username">Username</label><br>
@@ -58,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="mt-10 text-center">
-                                <button class="border-[2px] hover:text-black border-white rounded-md border-w hover:bg-secondary hover:border-secondary">Log in</button>
+                                <button class="border-[2px] hover:text-black border-white rounded-md border-w hover:bg-secondary hover:border-secondary py-2 px-5">Login</button>
                             </div>
                         </form>   
                     </div>

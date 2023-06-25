@@ -13,26 +13,26 @@
 </head>
 <body class="font-primary text-white bg-primarybg">
     <!-- NAVBAR -->
-    <header class="global-header">
-        <div class="header-left">
-          <i class="fa-solid fa-toilet fa-2xl text-white"></i>
-          <a href="index.html" class="no-decoration">
-            <h1 class="header-title text-white">FLUSH FINDER</h1>
-          </a>
-          <div class="header-search-box text-gray">
-            <a id="search-box-text" href="results.html" class="no-decoration text-gray">
-              <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
-              Search
-            </a>
-            <i class="fa-solid fa-microphone push-right pointer-hover"></i>
-          </div>
-        </div>
-        <div class="header-right">
-          <a class="write-review-btn no-decoration text-white" href="createreview.html">Write a Review</a>
-          <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
-          <a class="login-btn no-decoration" href="login.html">Log In</a>
-        </div>
-    </header>
+  <header class="global-header">
+    <div class="header-left">
+      <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+      <a href="index.html" class="no-decoration">
+        <h1 class="header-title font-medium text-4xl text-white">FLUSH FINDER</h1>
+      </a>
+      <div class="header-search-box text-gray">
+        <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+          <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+          Search
+        </a>
+        <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="write-review-btn no-decoration text-white" href="">Write a Review</a>
+      <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
+      <a class="login-btn no-decoration" href="login.html">Log In</a>
+    </div>
+  </header>
 
     <!-- START OF MAIN CONTENT -->
     <div class="h-screen bg-cover bg-center overflow-hidden bg-fixed" style="background-image:url('./images/henry_sy-bg.jpg');">
@@ -49,7 +49,8 @@
                         </div>
                     </div>
                     <div class="mt-6 w-1/2 pr-10">
-                        <form method="post">
+                      <!-- Turn this into a post request eventually -->
+                        <form action="login.html" >
                             <div> <!-- Remember to edit as grid-->
                                 <div>
                                     <label for="firstname">First Name</label><br>
@@ -69,19 +70,19 @@
                                 </div>
                                 <div class="mt-3 ">
                                     <label for="password">Password</label><br>
-                                    <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="password" name="password" id="password" placeholder=" *******"><br>
+                                    <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="password" name="password" id="password" placeholder="8 or more characters"><br>
                                 </div>
                                 <div class="mt-3 ">
-                                    <label for="birthdate">Birth Date</label><br>
+                                    <label for="birthdate">Date of Birth</label><br>
                                     <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="date" name="birthday" id="birthday"><br>
                                 </div>
                             </div>
                             <div class="mt-10 text-center">
-                                <button class="border-[2px] hover:text-black border-white rounded-md border-w hover:bg-secondary hover:border-secondary">Sign up</button>
+                                <button class="border-[2px] hover:text-black border-white rounded-md border-w hover:bg-secondary hover:border-secondary py-2 px-5">Sign up</button>
                             </div>
                         </form>     
                         <div class="text-xs text-center mt-6 mb-8 font-thin">
-                                Already have an account? <a class="text-secondary hover:underline" href="login.html">Sign in</a>
+                                Already have an account? <a class="text-secondary hover:underline" href="login.html">Login</a>
                         </div>
                     </div>
                     
@@ -90,45 +91,45 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="global-footer" style="margin-top: 0px;">
+    <footer class="global-footer">
 
-        <div class="footer-col">
-          <div class="footer-title">
-            <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
-          </div>
-          <div class="text-gray">
-            © 2023
-          </div>
+      <div class="footer-col">
+        <div class="footer-title">
+          <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
         </div>
-        
-        <div class="footer-col text-white">
-          <a href="" class="footer-heading">Explore Restrooms</a>
-          <a href="" class="footer-subheading fade-hover">by Building</a>
-          <a href="" class="footer-subheading fade-hover">by Ratings</a>
-          <a href="" class="footer-subheading fade-hover">by Gender</a>
+        <div class="text-gray">
+          © 2023
         </div>
-    
-        <div class="footer-col">
-          <a href="" class="footer-heading">For Students & Faculty</a>
-          <a href="" class="footer-subheading fade-hover">Log In / Sign Up</a>
-          <a href="" class="footer-subheading fade-hover">Write a Review</a>
-        </div>
-    
-        <div class="footer-col">
-          <a href="business-profile.html" class="footer-heading">For Business</a>
-        </div>
-    
-        <div class="footer-col">
-          <a href="" class="footer-heading">Contact Us</a>
-          <a href="" class="footer-subheading fade-hover"><i class="fa-regular fa-envelope"></i> help@flushfinder.com</a>
-          <a id="social-media-icons" href="" class="footer-subheading">
-            <i class="fa-brands fa-facebook fade-hover"></i>
-            <i class="fa-brands fa-twitter fade-hover"></i>
-            <i class="fa-brands fa-linkedin fade-hover"></i>
-          </a>
-        </div>
-    
+      </div>
+      
+      <div class="footer-col text-white">
+        <a href="results.html" class="footer-heading">Explore Restrooms</a>
+        <a href="results.html" class="footer-subheading fade-hover">by Building</a>
+        <a href="results.html" class="footer-subheading fade-hover">by Ratings</a>
+        <a href="results.html" class="footer-subheading fade-hover">by Gender</a>
+      </div>
+  
+      <div class="footer-col">
+        <a class="footer-heading">For Students & Faculty</a>
+        <a href="login.html" class="footer-subheading fade-hover">Log In</a>
+        <a href="signup.html" class="footer-subheading fade-hover">Sign Up</a>
+        <a href="review.html" class="footer-subheading fade-hover">Write a Review</a>
+      </div>
+  
+      <div class="footer-col">
+        <a href="business-profile.html" class="footer-heading">For Business</a>
+      </div>
+  
+      <div class="footer-col">
+        <a href="" class="footer-heading">Contact Us</a>
+        <a href="" class="footer-subheading fade-hover"><i class="fa-regular fa-envelope"></i> help@flushfinder.com</a>
+        <a id="social-media-icons" href="" class="footer-subheading">
+          <i class="fa-brands fa-facebook fade-hover"></i>
+          <i class="fa-brands fa-twitter fade-hover"></i>
+          <i class="fa-brands fa-linkedin fade-hover"></i>
+        </a>
+      </div>
+  
     </footer>
 </body>
 </html>

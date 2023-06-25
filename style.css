@@ -455,6 +455,23 @@ p {
   width: 50%;
 }
 
+.header-profile-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white; 
+  color: white;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+}
+
+.header-profile-btn:hover {
+  opacity: 80%;
+  background-color: white;
+  color: black;
+}
+
 .no-decoration {
   text-decoration: none;
 }
@@ -630,7 +647,3 @@ p {
 }
 
 /* End of CSS for business-profile.html */
-
-.yes {
-  color: #f5cb5c;
-}
