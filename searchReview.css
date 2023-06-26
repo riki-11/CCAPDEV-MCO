@@ -82,7 +82,6 @@ body {
 
 .search-box-content::placeholder  {
   width: 100%;
-  color: #f5cc5c1e;
 }
 
 #search-box-text-content:hover {

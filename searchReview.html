@@ -5,10 +5,34 @@
         <title></title>
         <link rel="stylesheet" href="searchReview.css">
         <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <!-- HEADER -->
-        <!--  -->
+        <header class="global-header">
+            <div class="header-left">
+              <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+              <a href="index.html" class="no-decoration">
+                <h1 class="text-4xl header-title text-white">FLUSH FINDER</h1>
+              </a>
+              <div class="header-search-box text-gray">
+                <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+                  <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+                  Search
+                </a>
+                <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+              </div>
+            </div>
+            <div class="header-right">
+              <a class="write-review-btn no-decoration text-white" href="createreview.html">Write a Review</a>
+              <a href="viewprofile.html" class="header-profile-btn">
+                <i class="fa-regular fa-user fa-lg"></i>
+              </a>
+              <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
+              <a class="login-btn no-decoration" href="login.html">Log In</a>
+            </div>
+        </header>
 
         <!-- First Section of the Paage -->
         <div class="search-container">
@@ -17,17 +41,56 @@
             <!-- Search box container -->
             <a href="createreview.html"> 
                 <div class="search-box">
-                <form id="search-box-content" action="results.html">
-                    <i class="fa-solid fa-magnifying-glass pointer-hover" style="color: #f5cc5c1e;"></i> 
+                <form id="search-box-content" class="text-white" action="results.html">
+                    <i class="fa-solid fa-magnifying-glass pointer-hover"></i> 
                     <input type="text" class="search-box-content" placeholder="What would you like to review?">
-                    <i class="fa-solid fa-microphone push-right pointer-hover" style="color: #f5cc5c1e;"></i>                    
+                    <i class="fa-solid fa-microphone push-right pointer-hover"></i>                    
                 </form>
               </div>
             </a>
         </div>
         
         <!-- Footer -->
-        <!--  -->
+        <footer class="global-footer">
+
+            <div class="footer-col">
+              <div class="footer-title">
+                <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
+              </div>
+              <div class="text-gray">
+                © 2023
+              </div>
+            </div>
+            
+            <div class="footer-col text-white">
+              <a href="results.html" class="footer-heading">Explore Restrooms</a>
+              <a href="results.html" class="footer-subheading fade-hover">by Building</a>
+              <a href="results.html" class="footer-subheading fade-hover">by Ratings</a>
+              <a href="results.html" class="footer-subheading fade-hover">by Gender</a>
+            </div>
+        
+            <div class="footer-col">
+              <a class="footer-heading">For Students & Faculty</a>
+              <a href="login.html" class="footer-subheading fade-hover">Log In</a>
+              <a href="signup.html" class="footer-subheading fade-hover">Sign Up</a>
+              <a href="createreview.html" class="footer-subheading fade-hover">Write a Review</a>
+            </div>
+        
+            <div class="footer-col">
+              <a href="business-profile.html" class="footer-heading">For Business</a>
+            </div>
+        
+            <div class="footer-col">
+              <a href="" class="footer-heading">Contact Us</a>
+              <a href="" class="footer-subheading fade-hover"><i class="fa-regular fa-envelope"></i> help@flushfinder.com</a>
+              <a id="social-media-icons" href="" class="footer-subheading">
+                <i class="fa-brands fa-facebook fade-hover"></i>
+                <i class="fa-brands fa-twitter fade-hover"></i>
+                <i class="fa-brands fa-linkedin fade-hover"></i>
+              </a>
+            </div>
+        
+        </footer>
 
     </body>
 </html>
