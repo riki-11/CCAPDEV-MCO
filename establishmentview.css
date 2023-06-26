@@ -191,6 +191,10 @@ body {
     opacity: 1;
     background-color: #F5CB5C;
 }
+
+/* .user-rate-icons-container{
+    
+} */
 .establishment-review-container [class^="review-container"] img{
     border-radius: 20px;
 }
@@ -240,7 +244,7 @@ body {
 }
 .leave-a-review-text-container{
     width: 45%;
-    padding: 10px;
+    padding: 5px;
     opacity: .8;
 }
 .leave-a-review-text-container p{
