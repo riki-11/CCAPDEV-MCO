@@ -4,115 +4,375 @@
         <title></title>
         <link rel="stylesheet" href="establishmentview.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>  
-        <div class="content-container">
-            <div class="establishment-container">
-                <div class="establishment-image-container">
-                    <img src="images/bldg-henry.jpeg" alt="Henry">                    
-                </div>
-                <div class="establishment-name-container">
-                    <hr>
-                    <span>HENRY SY</span>
-                </div>
-                <div class="review-ctr">
-                    <span>15 Reviews</span> 
-                </div>
-                <div class="down-container">
-                    <a href="#establishment-details-container">&lt;</a>
-                    
-                </div>
+        <header class="global-header">
+            <div class="header-left">
+              <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+              <a href="index.html" class="no-decoration">
+                <h1 class="header-title text-white">FLUSH FINDER</h1>
+              </a>
+              <div class="header-search-box text-gray">
+                <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+                  <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+                  Search
+                </a>
+                <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+              </div>
             </div>
-            <div id="establishment-details-container" class="establishment-details-container">
-                <!-- DETAILS CONTAINER -->
-                <div class="establishment-details-content-container">
-                    <!-- CONTENT CONTAINER -->
-                    <div class="left-details-container">
-                        <div class="left-title-details-container">
-                            <br><hr>
-                            <span>HENRY SY</span>
+            <div class="header-right">
+              <a class="write-review-btn no-decoration text-white" href="createreview.html">Write a Review</a>
+              <a href="viewprofile.html" class="header-profile-btn">
+                <i class="fa-regular fa-user fa-lg"></i>
+              </a>
+              <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
+              <a class="login-btn no-decoration" href="login.html">Log In</a>
+            </div>
+          </header>
+        <div class="w-full px-10">
+            <div class="content-container">
+                <div id="establishment-details-container" class="establishment-details-container">
+                    <!-- DETAILS CONTAINER -->
+                    <div class="establishment-details-content-container">
+                        <!-- Image --> 
+                        <div class="establishment-image-container">
+                            <div class="establishment-image"></div>                
                         </div>
-                        <div class="left-captions-details-container">
-                            <span>
-                                Built on the concept of a habitable tree, the DLSU Henry Sy, Sr. Hall commemorates the University’s centenary and illustrates its growing role in Philippine education as well as its commitment to environmental responsibility. 
-                                <br>
-                                The Hall has 14 floors of eco-friendly learning spaces and function areas where the academic community can gather for relaxation, interaction with one another, and official university activities. Interior areas of the building are named after various parts of a life-giving and nurturing tree
-                            </span>
+                        
+                        <div class="establishment-details-text-content-container">
+                            <!-- CONTENT CONTAINER -->
+                            <div class="left-details-container">
+                                <div class="left-title-details-container">
+                                    <span class="title">HENRY SY</span>
+                                    <div class="establishment-rating">
+                                        <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
+                                        <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
+                                        <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
+                                        <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
+                                        <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl no-rating"></i>              
+                                    </div>
+                                </div>
+                                
+                                <div class="left-captions-details-container">
+                                    <span>
+                                        Built on the concept of a habitable tree, the DLSU Henry Sy, Sr. Hall commemorates the University’s centenary and illustrates its growing role in Philippine education as well as its commitment to environmental responsibility. 
+                                        <br><br>
+                                        The Hall has 14 floors of eco-friendly learning spaces and function areas where the academic community can gather for relaxation, interaction with one another, and official university activities. Interior areas of the building are named after various parts of a life-giving and nurturing tree
+                                    </span>
+                                </div>
+                                <div class="left-gotomap-details-container"> <br>
+                                    <a href="images/campus-map-large.jpg" >Go To DLSU Map ></a>
+                                </div>
+                            </div>
+                            <div class="right-details-container">
+                                <div class="right-details">
+                                    <h1 class="right-details-amenities">Property Amenities</h1>
+                                    <h2 class="search-line"></h2>
+                                    <div class="right-amenities">
+
+                                        <i class="fa-solid fa-water"></i> <span> Bidet</span>
+                                        <br><i class="fa-solid fa-toilet"></i><span> Flush</span>
+                                        <br><i class="fa-solid fa-box-tissue"></i><span> Tissue</span>
+                                    </div>
+                                </div>
+                                <div class="other-right-details">
+                                    <br><i class="fa-solid fa-faucet"></i><span> Faucet</span>
+                                    <br><i class="fa-solid fa-hands"></i><span> Hand Dryer</span>
+                                    <br><i class="fa-solid fa-soap"></i><span> Hand Soap</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="left-gotomap-details-container"> <br>
-                            <a href="images/campus-map-large.jpg" >Go To DLSU Map ></a>
-                        </div>
-                    </div>
-                    <!-- IMAGES -->
-                    <div class="right-details-container">
-                        <div class="img1" onclick="location.href='images/cr-henry.png'"></div>
-                        <div class="img2" onclick="location.href='images/cr-temp3.jpg'"></div>
-                        <div class="img3" onclick="location.href='images/cr-temp2.jpg'"></div>
-                    </div>
-                </div>
-                <!-- REVIEWS CONTAINER -->
-                <div class="establishment-review-container">
-                    <div class="review-container-2">
-                        <img src="images/profile-icon.png" alt="user" width="70px" height="70px">
-                        <br><br><span class="user">John Anderson</span>
-                        <div class="user-rate-icons-container">
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                        </div>
-                        <br><span class="user-review-content">I highly recommend this restroom to anyone in need of a clean, comfortable, and hassle-free visit. It's a true testament to the fact that a restroom can be more than just a functional space—it can be an oasis of cleanliness and relaxation in the midst of a busy day.</span>
-                        <br><div class="reactions-container">
-                            <span class="reactions-count">16</span>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <div class="review-container-3">
-                        <img src="images/profile-icon.png" alt="user" width="70px" height="70px">
-                        <br><br><span class="user">Prince Ronalds</span>
-                        <br>
-                        <div class="user-rate-icons-container">
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                        </div>
-                        <br><span class="user-review-content">My visit to this restroom was a delightfully luxurious experience. The combination of immaculate cleanliness, upscale amenities, and elegant design created a truly exceptional environment. It was evident that no detail was overlooked in providing a restroom experience that exceeded expectations.</span>
-                        <br><div class="reactions-container">
-                            <span class="reactions-count">3</span>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <div class="review-container-1">
-                        <img src="images/profile-icon.png" alt="user" width="70px" height="70px">
-                        <br><br><span class="user">Juan De La Salle</span>
-                        <div class="user-rate-icons-container">
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                            <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
-                        </div>
-                        <br><span class="user-review-content">My visit to this restroom was truly exceptional. It surpassed my expectations in every aspect, from cleanliness to design and amenities. The attention to detail and commitment to maintaining a high standard of hygiene were evident throughout. I left feeling refreshed, rejuvenated, and grateful for such a positive restroom experience.</span>
-                        <br><div class="reactions-container">
-                            <span class="reactions-count">37</span>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
+                        <!-- 
+                        IMAGES 
+                        <div class="right-details-container">
+                            <div class="img1" onclick="location.href='images/cr-henry.png'"></div>
+                            <div class="img2" onclick="location.href='images/cr-temp3.jpg'"></div>
+                            <div class="img3" onclick="location.href='images/cr-temp2.jpg'"></div>
+                        </div> -->
                     </div>
                 </div>
-                <div class="leave-a-review-container">
-                    <div class="leave-a-review-text-container">
-                        <h1>Leave a Review</h1>
-                        <p>Your review matters! Help others by sharing your experience to this establishment!</p>
-                    </div>
-                    <div class="gotolink-container">
-                        <div class="gotolink-text-container">
-                            <a href="searchReview.html">Go to this link</a>
+
+                
+                <div class="flex w-full m-auto overflow-hidden p-10">
+                    <div class="flex flex-col w-1/4 space-y-4 mt-[2.5rem]">
+                        <!-- Gender Filter -->
+                        <h2 class="filter-font">Filters</h2>
+                        <div>
+                        <label for="gender" class="font-bold">Gender</label>
+                            <div>
+                                <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" name="gender" value="male">
+                                <span class="ml-2">Male</span>
+                                </label>
+                                <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" name="gender" value="female">
+                                <span class="ml-2">Female</span>
+                                </label>
+                                <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox" name="gender" value="all">
+                                <span class="ml-2">All</span>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="filter-line">
+                    
+                        <!-- Category Filter -->
+                        <div>
+                        <label for="category" class="font-bold">Category</label>
+                        <div>
+                            <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox" name="category" value="student">
+                            <span class="ml-2">Student</span>
+                            </label>
+                            <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox" name="category" value="faculty">
+                            <span class="ml-2">Faculty</span>
+                            </label>
+                            <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox" name="category" value="all">
+                            <span class="ml-2">All</span>
+                            </label>
+                        </div>
+                        </div>
+                        <hr class="filter-line">
+                        <!-- Floor Number Filter -->
+                        <div>
+                        <label for="floor" class="font-bold">Floor Number: </label>
+                        <select name="floor" class="form-select text-black">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="3">4</option>
+                            <option value="3">5</option>
+                            <option value="3">6</option>
+                        </select>
+                        </div>
+                        <div class="mt-auto"> 
+                            <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Apply Filters</button>
                         </div>
                     </div>
+                    <div class="w-3/4">
+                        <div class="flex items-center gap-x-5 header">
+                            <h1 class="review-header">Reviews</h1>
+                            <div class="review-search-box text-gray">
+                            <a id="search-box-text" href="#" class="no-decoration text-gray">
+                                <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+                                Search
+                            </a>
+                            </div>
+                            <div class="dropdown">
+                                <button class="dropbtn">Sort By &nbsp;<i class="fa-solid fa-sort" style="color: #000000;"></i></button>
+                                <div class="dropdown-content">
+                                <a href="#">Most Recent</a>
+                                <a href="#">Rating (High to Low)</a>
+                                <a href="#">Rating (Low to High)</a>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="search-line"></h2>
+                        
+                        <div class="w-full overflow-auto mb-10"> <!--Review Container-->
+                            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
+                                <div class="w-1/4">
+                                    <img src="./images/bldg-henry.jpeg" alt="Building Image" class="rounded-sm h-auto w-auto">
+                                </div>
+                                <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">
+                                    <div class="flex overflow-hidden">
+                                        <p>Enrique Lejano posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 8th Floor, Male</a></p>
+                                        <p class="w-fit ml-auto">5 days ago</p>
+                                    </div>       
+                                    <div class="mt-1">
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                    </div>
+                                    <div class="text-white mt-1">
+                                        Sobrang linis at maayos yung restroom na 'to, promise! Parang bago lang siya. Walang amoy na hindi maganda, kahit na madaming tao ang gumagamit.
+                                    </div>
+                                    <div class="flex mt-1 gap-x-5">
+                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
+                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
+                                <div class="w-1/4">
+                                    <img src="./images/bldg-henry.jpeg" alt="Building Image" class="rounded-sm h-auto w-auto">
+                                </div>
+                                <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">   
+                                    <div class="flex overflow-hidden">
+                                        <p>Patrick Leonida posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 9th Floor, Male</a></p>
+                                        <p class="w-fit ml-auto">10 days ago</p>
+                                    </div>       
+                                    <div class="mt-1">
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
+                                    </div>
+                                    <div class="text-white mt-1">
+                                        Ay grabe, ang baho ng CR na 'to! Parang hindi na nalinis ng matagal. Nakakasuka talaga. Sana mas maalagaan nila nang maayos, kasi nakaka-turn off talaga ang amoy.
+                                    </div>
+                                    <div class="flex mt-1 gap-x-5">
+                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
+                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
+                                <div class="w-1/4">
+                                    <img src="./images/bldg-henry.jpeg" alt="Building Image" class=" rounded-sm h-auto w-auto">
+                                </div>
+                                <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">
+                                    <div class="flex overflow-hidden">
+                                        <p>Mark Abergos posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 2nd Floor, Male</a></p>
+                                        <p class="w-fit ml-auto">12 days ago</p>
+                                    </div>    
+                                    <div class="mt-1">
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
+                                    </div>
+                                    <div class="text-white mt-1">
+                                        <p>Nakakainis talaga ang restroom na 'to! Hindi lang mabaho, kundi sobrang dumi rin. Parang hindi pinupunasan o nililinis ng maayos.</p>
+                                    </div>
+                                    <div class="flex mt-1 gap-x-5">
+                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
+                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
+                                <div class="w-1/4">
+                                    <img src="./images/bldg-henry.jpeg" alt="Building Image" class="rounded-sm h-auto w-auto">
+                                </div>
+                                <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">        
+                                    <div class="flex overflow-hidden">
+                                        <p>Mark Abergos posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 7th Floor, Male</a></p>
+                                        <p class="w-fit ml-auto">19 days ago</p>
+                                    </div>  
+                                    <div class="mt-1">
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
+                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
+                                    </div>
+                                    <div class="text-white mt-1">
+                                        Okay naman yung restroom na 'to, pero medyo kulang sa kasilyas at tissue. Hindi siya masyadong maayos ma-maintain. Pero hindi naman ganun kalala. Medyo average lang siya.
+                                    </div>
+                                    <div class="flex mt-1 gap-x-5">
+                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
+                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
+
+                    <!-- REVIEWS CONTAINER 
+                    <div class="establishment-review-container">
+                        <div class="review-container-2">
+                            <img src="images/profile-icon.png" alt="user" width="70px" height="70px">
+                            <br><br><span class="user">John Anderson</span>
+                            <div class="user-rate-icons-container">
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                            </div>
+                            <br><span class="user-review-content">I highly recommend this restroom to anyone in need of a clean, comfortable, and hassle-free visit. It's a true testament to the fact that a restroom can be more than just a functional space—it can be an oasis of cleanliness and relaxation in the midst of a busy day.</span>
+                            <br><div class="reactions-container">
+                                <span class="reactions-count">16</span>
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="review-container-3">
+                            <img src="images/profile-icon.png" alt="user" width="70px" height="70px">
+                            <br><br><span class="user">Prince Ronalds</span>
+                            <br>
+                            <div class="user-rate-icons-container">
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                            </div>
+                            <br><span class="user-review-content">My visit to this restroom was a delightfully luxurious experience. The combination of immaculate cleanliness, upscale amenities, and elegant design created a truly exceptional environment. It was evident that no detail was overlooked in providing a restroom experience that exceeded expectations.</span>
+                            <br><div class="reactions-container">
+                                <span class="reactions-count">3</span>
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="review-container-1">
+                            <img src="images/profile-icon.png" alt="user" width="70px" height="70px">
+                            <br><br><span class="user">Juan De La Salle</span>
+                            <div class="user-rate-icons-container">
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-l"></i>
+                            </div>
+                            <br><span class="user-review-content">My visit to this restroom was truly exceptional. It surpassed my expectations in every aspect, from cleanliness to design and amenities. The attention to detail and commitment to maintaining a high standard of hygiene were evident throughout. I left feeling refreshed, rejuvenated, and grateful for such a positive restroom experience.</span>
+                            <br><div class="reactions-container">
+                                <span class="reactions-count">37</span>
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                    </div> -->
+                    
             </div>
         </div>
+        <footer class="global-footer">
+
+            <div class="footer-col">
+              <div class="footer-title">
+                <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
+              </div>
+              <div class="text-gray">
+                © 2023
+              </div>
+            </div>
+            
+            <div class="footer-col text-white">
+              <a href="results.html" class="footer-heading">Explore Restrooms</a>
+              <a href="results.html" class="footer-subheading fade-hover">by Building</a>
+              <a href="results.html" class="footer-subheading fade-hover">by Ratings</a>
+              <a href="results.html" class="footer-subheading fade-hover">by Gender</a>
+            </div>
+        
+            <div class="footer-col">
+              <a class="footer-heading">For Students & Faculty</a>
+              <a href="login.html" class="footer-subheading fade-hover">Log In</a>
+              <a href="signup.html" class="footer-subheading fade-hover">Sign Up</a>
+              <a href="createreview.html" class="footer-subheading fade-hover">Write a Review</a>
+            </div>
+        
+            <div class="footer-col">
+              <a href="business-profile.html" class="footer-heading">For Business</a>
+            </div>
+        
+            <div class="footer-col">
+              <a href="" class="footer-heading">Contact Us</a>
+              <a href="" class="footer-subheading fade-hover"><i class="fa-regular fa-envelope"></i> help@flushfinder.com</a>
+              <a id="social-media-icons" href="" class="footer-subheading">
+                <i class="fa-brands fa-facebook fade-hover"></i>
+                <i class="fa-brands fa-twitter fade-hover"></i>
+                <i class="fa-brands fa-linkedin fade-hover"></i>
+              </a>
+            </div>
+        
+          </footer>
     </body>
 </html>
