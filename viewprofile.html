@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Profile</title>
-    <style> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');</style>
     <link rel="stylesheet" href="output.css">
     <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,32 +14,36 @@
     <!-- NAVBAR -->
     <header class="global-header">
         <div class="header-left">
-            <i class="fa-solid fa-toilet fa-2xl text-white"></i>
-            <a href="index.html" class="no-decoration">
-              <h1 class="header-title text-white">FLUSH FINDER</h1>
+          <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+          <a href="index.html" class="no-decoration">
+            <h1 class="header-title font-medium text-4xl text-white">FLUSH FINDER</h1>
+          </a>
+          <div class="header-search-box text-gray">
+            <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+              <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+              Search
             </a>
-            <div class="header-search-box text-gray">
-              <a id="search-box-text" href="results.html" class="no-decoration text-gray">
-                <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
-                Search
-              </a>
-              <i class="fa-solid fa-microphone push-right pointer-hover"></i>
-            </div>
+            <i class="fa-solid fa-microphone push-right pointer-hover"></i>
           </div>
-          <div class="header-right">
-            <a class="write-review-btn no-decoration text-white" href="createreview.html">Write a Review</a>
-            <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
-            <a class="login-btn no-decoration" href="login.html">Log In</a>
+        </div>
+        <div class="header-right">
+          <a class="write-review-btn no-decoration text-white" href="">Write a Review</a>
+          <a href="viewprofile.html" class="header-profile-btn">
+            <i class="fa-regular fa-user fa-lg"></i>
+          </a>
+          <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
+          <a class="login-btn no-decoration" href="login.html">Log In</a>
         </div>
     </header>
     
     <!-- START OF MAIN CONTENT -->
     <div class="w-7/12 m-auto overflow-hidden mt-16 ">
         <div class="flex gap-10">
-            <div class="justify-center rounded-[5px] mt-5">
+            <div class="flex flex-col justify-center items-center gap-y-5 rounded-[5px] mt-5">
                 <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[5rem] h-[9.5rem] w-[9.5rem]">
+                <a href="editprofile.html" class="border border-white rounded-lg hover:bg-white hover:text-black p-2"><i class="fa-solid fa-pencil fa-sm"></i> Edit Profile</a>
             </div>
-            <div class="self-center mt-8">
+            <div class="flex flex-col self-center mt-8">
                 <div>
                     <span class="text-4xl font-extrabold">Juan Dela Cruz</span>
                 </div>
@@ -52,18 +55,16 @@
         <div class="mt-11">
             <h2 class="border-b-2 border-secondary leading-[.01rem]"><span class="ml-[6rem] bg-primarybg px-[10px] text-[30px]">My Reviews: 4</span></h2>
         </div>
-        <div class="w-full overflow-auto mb-10"> <!--Review Container-->
-            <div class="mt-8 gap-4 flex ml-4 justify-center"> <!--Review Blocks-->
-                <div class="w-32">
+        <div class="w-full overflow-auto mb-10"> <!--Revie0w Container-->
+            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
+                <div class="min-w-fit">
                     <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
                 </div>
-                <div class="text-sm text-neutral-400 mt-3">
-                    <div class="float-right">
-                        5 days ago
-                    </div>           
-                    <div class="overflow-hidden">
-                        Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 8th Floor, Male</a>
-                    </div>
+                <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
+                    <div class="flex overflow-hidden">
+                        <p>Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 8th Floor, Male</a></p>
+                        <p class="w-fit ml-auto">5 days ago</p>
+                    </div>       
                     <div class="mt-1">
                         <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
                         <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
@@ -74,19 +75,21 @@
                     <div class="text-white mt-1">
                         Sobrang linis at maayos yung restroom na 'to, promise! Parang bago lang siya. Walang amoy na hindi maganda, kahit na madaming tao ang gumagamit.
                     </div>
+                    <div class="flex mt-1 gap-x-5">
+                        <a href="editreview.html" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
+                        <a href="editreview.html" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
+                    </div>
                 </div>  
             </div>
-            <div class="mt-8 gap-4 flex ml-4 justify-center"> <!--Review Blocks-->
-                <div class="w-32">
+            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
+                <div class="min-w-fit">
                     <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
                 </div>
-                <div class="text-sm text-neutral-400 mt-3">
-                    <div class="float-right">
-                        5 days ago
-                    </div>           
-                    <div class="overflow-hidden">
-                        Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 9th Floor, Male</a>
-                    </div>
+                <div class="flex flex-col gap-y-1 text-sm text-neutral-400">   
+                    <div class="flex overflow-hidden">
+                        <p>Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 9th Floor, Male</a></p>
+                        <p class="w-fit ml-auto">10 days ago</p>
+                    </div>       
                     <div class="mt-1">
                         <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
                         <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
@@ -97,19 +100,21 @@
                     <div class="text-white mt-1">
                         Ay grabe, ang baho ng CR na 'to! Parang hindi na nalinis ng matagal. Nakakasuka talaga. Sana mas maalagaan nila nang maayos, kasi nakaka-turn off talaga ang amoy.
                     </div>
+                    <div class="flex mt-1 gap-x-5">
+                        <a href="editreview.html" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
+                        <a href="editreview.html" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
+                    </div>
                 </div>  
             </div>
-            <div class="mt-8 gap-4 flex ml-4 justify-center"> <!--Review Blocks-->
-                <div class="w-32">
+            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
+                <div class="min-w-fit">
                     <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
                 </div>
-                <div class="text-sm text-neutral-400 mt-3">
-                    <div class="float-right">
-                        5 days ago
-                    </div>           
-                    <div class="overflow-hidden">
-                        Posted a review for <a href="establishmentview.html" class="text-secondary">Velasco, 3rd Floor, Male</a>
-                    </div>
+                <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
+                    <div class="flex overflow-hidden">
+                        <p>Posted a review for <a href="establishmentview.html" class="text-secondary">Velasco, 3rd Floor, Male</a></p>
+                        <p class="w-fit ml-auto">12 days ago</p>
+                    </div>    
                     <div class="mt-1">
                         <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
                         <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
@@ -120,19 +125,21 @@
                     <div class="text-white mt-1">
                         Nakakainis talaga ang restroom na 'to! Hindi lang mabaho, kundi sobrang dumi rin. Parang hindi pinupunasan o nililinis ng maayos. Hindi rin consistently refilled ung sabon dito 
                     </div>
+                    <div class="flex mt-1 gap-x-5">
+                        <a href="editreview.html" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
+                        <a href="editreview.html" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
+                    </div>
                 </div>  
             </div>
-            <div class="mt-8 gap-4 flex ml-4 justify-center"> <!--Review Blocks-->
-                <div class="w-32">
+            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
+                <div class="min-w-fit">
                     <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
                 </div>
-                <div class="text-sm text-neutral-400 mt-3">
-                    <div class="float-right">
-                        5 days ago
-                    </div>           
-                    <div class="overflow-hidden">
-                        Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 7th Floor, Male</a>
-                    </div>
+                <div class="flex flex-col gap-y-1 text-sm text-neutral-400">        
+                    <div class="flex overflow-hidden">
+                        <p>Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 7th Floor, Male</a></p>
+                        <p class="w-fit ml-auto">19 days ago</p>
+                    </div>  
                     <div class="mt-1">
                         <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
                         <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
@@ -142,6 +149,10 @@
                     </div>
                     <div class="text-white mt-1">
                         Okay naman yung restroom na 'to, pero medyo kulang sa kasilyas at tissue. Hindi siya masyadong maayos ma-maintain. Pero hindi naman ganun kalala. Medyo average lang siya.
+                    </div>
+                    <div class="flex mt-1 gap-x-5">
+                        <a href="editreview.html" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
+                        <a href="editreview.html" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
                     </div>
                 </div>  
             </div>
