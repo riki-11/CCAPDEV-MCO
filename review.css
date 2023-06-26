@@ -125,17 +125,17 @@ textarea {
 }
 
 /* Rating */
-.rating label {
+.ratings label {
     font-weight: 700;
     color: #F5CB5C;
 }
-.rating input{
+.ratings input{
     display: none;
 }
-.rating input + label{
+.ratings input + label{
     cursor: pointer;
 }
-.rating input:checked + label ~ label{
+.ratings input:checked + label ~ label{
     color: #666 ;
 }
 
@@ -163,6 +163,7 @@ textarea {
 }
 
 .input-date{
+    color: black;
     padding: 2%;
     border-radius: 8px;
     border: 1px solid #333533d5;
