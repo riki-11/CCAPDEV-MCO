@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 body {
   font-family: 'Montserrat', sans-serif;
+  background-color:#202020;
+  color:white;
 }
 
 .content-container{
@@ -10,6 +12,7 @@ body {
     box-shadow: 5px 10px 19px -3px rgba(0,0,0,0.27);   
 }
 
+
 .left-container{
     width: 35%;
 }
@@ -17,23 +20,38 @@ body {
 .left-wrapper{
     position: sticky;
     top: 10%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
 }
 
 .establishment-container{
     width: 50%;     
     border: unset;
     border-radius: 6px;
-    margin: 3% 10% 10% 10%;
     padding: 5%;
+    background-color:white;
+
+
    /*  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27); */
-    box-shadow: 5px 10px 19px -3px rgba(0,0,0,0.27);
+   color: #202020
+}
+
+.img-shadow {
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
 }
 
 .caption-container{
     position: sticky;
     top: 0;
     width: 70%;
-    margin-left: 10%;
+}
+
+textarea {
+    font-family: 'Montserrat';
+    font-style: normal;  
 }
 
 .left-caption{
@@ -43,7 +61,6 @@ body {
     font-style: normal;
     font-weight: 700;
     font-size: 2.5rem;    
-    color: #333533;
 }
 
 .establishment-container img{
@@ -56,7 +73,6 @@ body {
     font-size: 1.7rem;
     line-height: 39px;
     /* identical to box height */
-    color: #333533;
 }
 
 .establishment-floor{    
@@ -66,7 +82,6 @@ body {
     font-size: 1.2rem;
     line-height: 24px;
 
-    color: #333533;
 }
 
 .establishment-details{    
@@ -75,7 +90,6 @@ body {
     font-weight: 700;
     font-size: 1rem;
     line-height: 24px;
-    color: #333533;
 }
 
 /* line */
@@ -90,7 +104,6 @@ body {
     width: 50%;
 }
 .right-container label{ 
-    color: #333533d5;
     font-size: larger;
     line-height: 4.5vh;
 }
@@ -103,14 +116,12 @@ body {
 .right-container .label{
     font-size: 1.5rem;
     font-weight:bolder;
-    color: #333533;
     line-height: 3rem;
 }
 .right-container .label-limit{
     float: right;
     font-weight:lighter;
     font-size: .6rem;
-    color: #3335339c;
 }
 
 /* Rating */
@@ -122,13 +133,13 @@ body {
     display: none;
 }
 .rating input + label{
-    font-size: 3rem;
-    text-shadow: 1px 1px 0 #ffe400;
     cursor: pointer;
 }
 .rating input:checked + label ~ label{
     color: #666 ;
 }
+
+
 
 #form-review {
     width: 96%;
@@ -152,11 +163,11 @@ body {
 }
 
 .input-date{
-    margin: 1%;
-    padding: 4%;
+    padding: 2%;
     border-radius: 8px;
     border: 1px solid #333533d5;
     font-size: large;
+    margin-bottom:20px;
 }
 
 .form-img-container{
@@ -170,14 +181,16 @@ body {
     place-items: center;
     text-align: center;
     border: 2px dashed rgba(51, 53, 51, 0.2);
-    background-color: #33353313;
     border-radius: 10px;
     height: 250px;
     width: 100%;
+    background-color:white;
 }
-.form-img-container .form-img-wrapper span{
-   color: #33353375;
+
+.drag-text {
+    color:#202020;
 }
+
 
 .submit {
     width: 100%;
@@ -198,9 +211,63 @@ body {
 }
    
 .submit:hover {
-    color: #e8e8e8;
+    color: black;
     background-color: #F5CB5C;
 }  
+.submit:hover::before {
+    width: 100%;
+}
+
+.delete {
+    width: 40%;
+    place-items: center;
+    padding: 15px 25px;
+    border: unset;
+    border-radius: 15px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+    margin-left:  5%;
+}
+ 
+.edit {
+    width: 40%;
+    place-items: center;
+    padding: 15px 25px;
+    border: unset;
+    border-radius: 15px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+    margin-left:  5%;
+}
+
+.edit:hover {
+    color: black;
+    background-color: #F5CB5C;
+}  
+.delete:hover {
+    color: white;
+    background-color: #b50c00;
+}  
+.submit-container{
+    display: flex;
+    
+}
 .submit:hover::before {
     width: 100%;
 }
