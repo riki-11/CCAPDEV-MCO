@@ -72,24 +72,194 @@ body {
 }
 .establishment-details-container{
     width: 100%;
-background-color: brown;
-}
-.establishment-review-container{
-    width: 100%;
-background-color: chartreuse;
-}
-.leave-a-review-container{
-    width: 100%;
-background-color: darkgoldenrod;
+    display:inline-block;
 }
 
 /* ESTABLISHMENT DETAILS CONTAINER */
 .establishment-details-container{
     width: 100%;
     height: 750px;
-    background-color: blue;
 }
-.details-container{
+.establishment-details-content-container{
     place-items: center;
+    display: inline-flex;
+    position: relative;
+    left: 15%;
+    top: 20%;
+    width: 70%;
+    gap: 10%;
+}
+.left-details-container{
+    gap: 90px;
+    width: 40%;
+}
+.left-title-details-container{
+    display:inline-flex;
+    gap: 6px;
+}
+
+.left-title-details-container span{
+    gap: 10%;
+
+    font-size: 3rem;
+    font-weight: bolder;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+.left-captions-details-container {
+    font-weight: lighter;
+    opacity: .9;
+    padding: 5px;
+}
+.left-gotomap-details-container a{
+    color: #F5CB5C;
+    font-weight: bold;
+    text-decoration: none;
+    padding-left: 5px;
+    text-shadow: 1px 2px 5.5px rgba(0, 0, 0, 0.20);
+}
+
+.right-details-container{
+    width: 650px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.right-details-container .img1{
+    width: 100px;
+    height: 285px;
+    padding: 10%;
+    border-radius: 5px;
+    background: url(images/cr-henry.png);
+    background-size:cover;
+    opacity: .85;
+}
+
+.right-details-container .img2{
+    width: 100px;
+    height: 285px;
+    padding: 10%;
+    border-radius: 5px;
+    background: url(images/cr-temp3.jpg);
+    background-size: cover;
+    opacity: .85;
+}
+
+.right-details-container .img3{
+    width: 100px;
+    height: 285px;
+    padding: 10%;
+    border-radius: 5px;
+    background: url(images/cr-temp2.jpg);
+    background-size: cover;
+    opacity: .85;
+    
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+}
+.img1:hover,.img2:hover,.img3:hover{
+    opacity: 1;
+}
+
+.establishment-review-container{
+    position:relative;
+    display: flex;
+    top: 45%;
+    left: 10%;
+    width: 80%;
+    height: 600px;
+}
+
+.establishment-review-container [class^="review-container"]{
+    position:absolute;
+    display:inline;
+    word-wrap: break-word;
+    text-align: center;
+    padding: 5%;
+
+    width: 23%;
+    height: 75%;
+    background-color: #ffd86e;
+    opacity: 1;
+    border-radius: 25px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+
+}
+.establishment-review-container [class^="review-container"]:hover{
+    z-index: 1;
+    opacity: 1;
     background-color: #F5CB5C;
+}
+.establishment-review-container [class^="review-container"] img{
+    border-radius: 20px;
+}
+
+.establishment-review-container .user{
+    font-size: 1.5rem;
+    font-weight:bold;
+}
+.establishment-review-container .user-rate{
+    font-size: 1rem;
+    font-weight:lighter;
+}
+.establishment-review-container .user-review-content{
+    font-size: 1rem;
+    font-weight:light;
+}
+
+.establishment-review-container .reactions-container{
+    position: inherit;
+    
+    width: fit-content;
+    text-align: right;
+
+    top: 92%;
+    left: 85%;
+}
+
+.establishment-review-container .review-container-1{
+    left: 33%;
+}
+.establishment-review-container .review-container-2{
+    top: 5%;
+    left: 1%;
+}
+.establishment-review-container .review-container-3{
+    top: 5%;
+    left: 65.5%;
+}
+
+.leave-a-review-container{
+    position:relative;
+    display: flex;
+    top: 65%;
+    left: 10%;
+    width: 80%;
+    display: flex;
+}
+.leave-a-review-text-container{
+    width: 45%;
+    padding: 10px;
+    opacity: .8;
+}
+.leave-a-review-text-container p{
+    font-weight: lighter;
+    opacity: .6;
+}
+
+.gotolink-container{
+    width: 100%;
+}
+.gotolink-text-container{
+    background: #F5CB5C;
+    height:100%;
+}
+.gotolink-container a{
+    position:relative;
+    top:40%;
+    color: #fff4d6;
+    font-size: 2rem;
+    text-decoration: none;
+    padding: 4%;
 }
