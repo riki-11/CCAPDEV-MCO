@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 
+
 p {
   margin: 0px;
 }
@@ -63,6 +64,10 @@ p {
   transform: translate(-50%, -50%);
 }
 
+.banner-button a {
+  color: black;
+}
+
 .review-button {
   position:relative;
   border-color:#FFD100;
@@ -71,6 +76,10 @@ p {
   padding-top:0.5rem;
   padding-bottom:0.5rem;
   top: 8%;
+}
+
+.review-button a {
+  color: inherit;
 }
 
 .banner-button:hover {
