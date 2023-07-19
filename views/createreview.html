@@ -2,11 +2,37 @@
 <html lang="en">
 <html>
     <head>
-        <title></title>
-        <link rel="stylesheet" href="review.css">
+        <title>Write a Review</title>
+        <script src="https://css/styles.csscss.com"></script>
+        <link rel="stylesheet" href="css/review.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
+    <header class="global-header">
+        <div class="header-left">
+          <i class="fa-solid fa-toilet fa-2xl text-white"></i>
+          <a href="/" class="no-decoration">
+            <h1 class="header-title font-medium text-4xl text-white">FLUSH FINDER</h1>
+          </a>
+          <div class="header-search-box text-gray">
+            <a id="search-box-text" href="search" class="no-decoration text-gray">
+              <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
+              Search
+            </a>
+            <i class="fa-solid fa-microphone push-right pointer-hover"></i>
+          </div>
+        </div>
+        <div class="header-right">
+          <a class="write-review-btn no-decoration text-white" href="search">Write a Review</a>
+          <a href="profile" class="header-profile-btn">
+            <i class="fa-regular fa-user fa-lg"></i>
+          </a>
+          <a class="signup-btn no-decoration" href="register">Sign Up</a>
+          <a class="login-btn no-decoration" href="login">Log In</a>
+        </div>
+    </header>
         <div class="content-container">
+
             <!-- LEFT CONTAINER -->
             <div class="left-container">
                 <div class="left-wrapper">      
@@ -27,7 +53,7 @@
                 <form action="">
                     <!-- RATING -->
                     <span class="label">Rate your overall experience</span> <br>
-                    <div class="rating">
+                    <div class="ratings">
                         <input type="radio" id="star1" name="rate" value="1">
                         <label for="star1" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i> 
                         </label>
@@ -48,7 +74,7 @@
                     </div>
                     
                     <!-- Gender -->
-                    <span class="label">Edit Gender</span> <br>
+                    <span class="label">For what gender is your cubicle?</span> <br>
                     <input type="radio" name="form-gender" value="Male">
                         <label for="Male">Male</label>
                     <input type="radio" name="form-gender" value="Female">
@@ -66,21 +92,21 @@
                     <input type="checkbox" name="form-chkbx" value="handdryer">
                         <label for="handdryer">Hand Dryer</label><br>
                         
-                    <span class="label">Edit Date of Visit</span> <br>
+                    <span class="label">Date of visit</span> <br>
                     <input class="input-date" type="date" name="form-date"> <br>
                     
-                    <span class="label">Edit Title</span> <br>
-                    <textarea name="form-review-title" id="form-review-title" cols="20" rows="10" placeholder="Awesome cubicle!"></textarea>
+                    <span class="label">Title of your Review</span> <br>
+                    <textarea name="form-review-title" id="form-review-title" cols="20" rows="20" placeholder="Awesome cubicle!"></textarea>
                     <br>
                     <span class="label-limit">0/50 characters</span>
                     <br>                    
-                    <span class="label">Edit Review</span> <br>
+                    <span class="label">Write a Review</span> <br>
                     <textarea name="form-review" id="form-review" cols="10" rows="10" placeholder="I experienced the best bidet of my life..."></textarea>
                     <br>
                     <span class="label-limit">0/200 characters</span>
                     <br>
 
-                    <span class="label">Add more Photos</span> <br>
+                    <span class="label">Add some Photos</span> <br>
                     <span class="label-detail">Keep it clean! Literally.</span>
 
                     <div class="form-img-container">
@@ -91,14 +117,51 @@
                     </div>
 
                     <br>
-                    <div class="submit-container">
-                        <input type="submit" class="delete" value="Delete Review">
-                        <input type="submit" class="edit" value="Update Review">
-                    </div>
+                    <input type="submit" class="submit" value="Submit Review">
                 </form>
             </div>
         </div>
-        <script src="https://kit.fontawesome.com/3db8d82098.js" crossorigin="anonymous"></script>
+        <footer class="global-footer">
 
+          <div class="footer-col">
+            <div class="footer-title">
+              <a href="/" class="text-white no-decoration no-margin">Flush Finder</a>
+            </div>
+            <div class="text-gray">
+              © 2023
+            </div>
+          </div>
+          
+          <div class="footer-col text-white">
+            <a href="search" class="footer-heading">Explore Restrooms</a>
+            <a href="search" class="footer-subheading fade-hover">by Building</a>
+            <a href="search" class="footer-subheading fade-hover">by Ratings</a>
+            <a href="search" class="footer-subheading fade-hover">by Gender</a>
+          </div>
+      
+          <div class="footer-col">
+            <a class="footer-heading">For Students & Faculty</a>
+            <a href="login" class="footer-subheading fade-hover">Log In</a>
+            <a href="signup.html" class="footer-subheading fade-hover">Sign Up</a>
+            <a href="search" class="footer-subheading fade-hover">Write a Review</a>
+          </div>
+      
+          <div class="footer-col">
+            <a href="establishment-business" class="footer-heading">For Business</a>
+          </div>
+      
+          <div class="footer-col">
+            <a href="" class="footer-heading">Contact Us</a>
+            <a href="" class="footer-subheading fade-hover"><i class="fa-regular fa-envelope"></i> help@flushfinder.com</a>
+            <a id="social-media-icons" href="" class="footer-subheading">
+              <i class="fa-brands fa-facebook fade-hover"></i>
+              <i class="fa-brands fa-twitter fade-hover"></i>
+              <i class="fa-brands fa-linkedin fade-hover"></i>
+            </a>
+          </div>
+      
+        </footer>
+        <script src="https://kit.fontawesome.com/3db8d82098.js" crossorigin="anonymous"></script>
+        <script src="//localhost:35729/livereload.js"></script>
     </body>
 </html>

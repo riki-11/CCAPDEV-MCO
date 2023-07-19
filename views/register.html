@@ -4,23 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="output.css">
     <style>@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';</style>
     <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="tailwind.custom.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="tailwind.custom.js"></script>  
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body class="font-primary text-white bg-primarybg">
     <!-- NAVBAR -->
   <header class="global-header">
     <div class="header-left">
       <i class="fa-solid fa-toilet fa-2xl text-white"></i>
-      <a href="index.html" class="no-decoration">
+      <a href="/" class="no-decoration">
         <h1 class="header-title font-medium text-4xl text-white">FLUSH FINDER</h1>
       </a>
       <div class="header-search-box text-gray">
-        <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+        <a id="search-box-text" href="search" class="no-decoration text-gray">
           <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
           Search
         </a>
@@ -28,13 +26,14 @@
       </div>
     </div>
     <div class="header-right">
-      <a class="write-review-btn no-decoration text-white" href="searchReview.html">Write a Review</a>
-      <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
-      <a class="login-btn no-decoration" href="login.html">Log In</a>
+      <a class="write-review-btn no-decoration text-white" href="search">Write a Review</a>
+      <a class="signup-btn no-decoration" href="register">Sign Up</a>
+      <a class="login-btn no-decoration" href="login">Log In</a>
     </div>
   </header>
 
     <!-- START OF MAIN CONTENT -->
+    <!-- PLEASE FIND A WAY TO FIX THE INLINE STLYING-->
     <div class="h-screen bg-cover bg-center overflow-hidden bg-fixed" style="background-image:url('./images/henry_sy-bg.jpg');">
         <div class="h-screen w-screen backdrop-grayscale overflow-hidden">
             <div class="m-auto h-auto bg-black/75 mt-32 w-3/5 rounded-[1.5rem] overflow-auto mb-12">
@@ -82,7 +81,7 @@
                             </div>
                         </form>     
                         <div class="text-xs text-center mt-6 mb-8 font-thin">
-                                Already have an account? <a class="text-secondary hover:underline" href="login.html">Login</a>
+                                Already have an account? <a class="text-secondary hover:underline" href="login">Login</a>
                         </div>
                     </div>
                     
@@ -95,7 +94,7 @@
 
       <div class="footer-col">
         <div class="footer-title">
-          <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
+          <a href="/" class="text-white no-decoration no-margin">Flush Finder</a>
         </div>
         <div class="text-gray">
           © 2023
@@ -103,20 +102,20 @@
       </div>
       
       <div class="footer-col text-white">
-        <a href="results.html" class="footer-heading">Explore Restrooms</a>
-        <a href="results.html" class="footer-subheading fade-hover">by Building</a>
-        <a href="results.html" class="footer-subheading fade-hover">by Ratings</a>
-        <a href="results.html" class="footer-subheading fade-hover">by Gender</a>
+        <a href="search" class="footer-heading">Explore Restrooms</a>
+        <a href="search" class="footer-subheading fade-hover">by Building</a>
+        <a href="search" class="footer-subheading fade-hover">by Ratings</a>
+        <a href="search" class="footer-subheading fade-hover">by Gender</a>
       </div>
   
       <div class="footer-col">
         <a class="footer-heading">For Students & Faculty</a>
-        <a href="login.html" class="footer-subheading fade-hover">Log In</a>
+        <a href="login" class="footer-subheading fade-hover">Log In</a>
         <a href="signup.html" class="footer-subheading fade-hover">Sign Up</a>
       </div>
   
       <div class="footer-col">
-        <a href="business-profile.html" class="footer-heading">For Business</a>
+        <a href="establishment-business" class="footer-heading">For Business</a>
       </div>
   
       <div class="footer-col">
@@ -130,5 +129,6 @@
       </div>
   
     </footer>
+    <script src="//localhost:35729/livereload.js"></script>
 </body>
 </html>

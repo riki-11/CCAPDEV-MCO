@@ -2,20 +2,19 @@
 <html>
     <head>
         <title></title>
-        <link rel="stylesheet" href="establishmentview.css">
+        <link rel="stylesheet" href="css/establishmentview.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>  
         <header class="global-header">
             <div class="header-left">
               <i class="fa-solid fa-toilet fa-2xl text-white"></i>
-              <a href="index.html" class="no-decoration">
+              <a href="/" class="no-decoration">
                 <h1 class="text-4xl header-title text-white">FLUSH FINDER</h1>
               </a>
               <div class="header-search-box text-gray">
-                <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+                <a id="search-box-text" href="search" class="no-decoration text-gray">
                   <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
                   Search
                 </a>
@@ -23,12 +22,12 @@
               </div>
             </div>
             <div class="header-right">
-              <a class="write-review-btn no-decoration text-white" href="createreview.html">Write a Review</a>
-              <a href="viewprofile.html" class="header-profile-btn">
+              <a class="write-review-btn no-decoration text-white" href="create-review">Write a Review</a>
+              <a href="profile" class="header-profile-btn">
                 <i class="fa-regular fa-user fa-lg"></i>
               </a>
-              <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
-              <a class="login-btn no-decoration" href="login.html">Log In</a>
+              <a class="signup-btn no-decoration" href="register">Sign Up</a>
+              <a class="login-btn no-decoration" href="login">Log In</a>
             </div>
         </header>
         <div class="w-full px-10">
@@ -180,7 +179,7 @@
                                 </div>
                                 <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">
                                     <div class="flex overflow-hidden">
-                                        <p>Enrique Lejano posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 8th Floor, Male</a></p>
+                                        <p>Enrique Lejano posted a review for <a href="establishment" class="text-secondary">Henry Sy, 8th Floor, Male</a></p>
                                         <p class="w-fit ml-auto">5 days ago</p>
                                     </div>       
                                     <div class="mt-1">
@@ -205,7 +204,7 @@
                                 </div>
                                 <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">   
                                     <div class="flex overflow-hidden">
-                                        <p>Patrick Leonida posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 9th Floor, Male</a></p>
+                                        <p>Patrick Leonida posted a review for <a href="establishment" class="text-secondary">Henry Sy, 9th Floor, Male</a></p>
                                         <p class="w-fit ml-auto">10 days ago</p>
                                     </div>       
                                     <div class="mt-1">
@@ -230,7 +229,7 @@
                                 </div>
                                 <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">
                                     <div class="flex overflow-hidden">
-                                        <p>Mark Abergos posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 2nd Floor, Male</a></p>
+                                        <p>Mark Abergos posted a review for <a href="establishment" class="text-secondary">Henry Sy, 2nd Floor, Male</a></p>
                                         <p class="w-fit ml-auto">12 days ago</p>
                                     </div>    
                                     <div class="mt-1">
@@ -255,7 +254,7 @@
                                 </div>
                                 <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">        
                                     <div class="flex overflow-hidden">
-                                        <p>Mark Abergos posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 7th Floor, Male</a></p>
+                                        <p>Mark Abergos posted a review for <a href="establishment" class="text-secondary">Henry Sy, 7th Floor, Male</a></p>
                                         <p class="w-fit ml-auto">19 days ago</p>
                                     </div>  
                                     <div class="mt-1">
@@ -286,7 +285,7 @@
 
             <div class="footer-col">
               <div class="footer-title">
-                <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
+                <a href="/" class="text-white no-decoration no-margin">Flush Finder</a>
               </div>
               <div class="text-gray">
                 © 2023
@@ -294,21 +293,21 @@
             </div>
             
             <div class="footer-col text-white">
-              <a href="results.html" class="footer-heading">Explore Restrooms</a>
-              <a href="results.html" class="footer-subheading fade-hover">by Building</a>
-              <a href="results.html" class="footer-subheading fade-hover">by Ratings</a>
-              <a href="results.html" class="footer-subheading fade-hover">by Gender</a>
+              <a href="search" class="footer-heading">Explore Restrooms</a>
+              <a href="search" class="footer-subheading fade-hover">by Building</a>
+              <a href="search" class="footer-subheading fade-hover">by Ratings</a>
+              <a href="search" class="footer-subheading fade-hover">by Gender</a>
             </div>
         
             <div class="footer-col">
               <a class="footer-heading">For Students & Faculty</a>
-              <a href="login.html" class="footer-subheading fade-hover">Log In</a>
+              <a href="login" class="footer-subheading fade-hover">Log In</a>
               <a href="signup.html" class="footer-subheading fade-hover">Sign Up</a>
-              <a href="createreview.html" class="footer-subheading fade-hover">Write a Review</a>
+              <a href="create-review" class="footer-subheading fade-hover">Write a Review</a>
             </div>
         
             <div class="footer-col">
-              <a href="business-profile.html" class="footer-heading">For Business</a>
+              <a href="establishment-business" class="footer-heading">For Business</a>
             </div>
         
             <div class="footer-col">

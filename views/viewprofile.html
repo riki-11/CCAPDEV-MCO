@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Profile</title>
-    <link rel="stylesheet" href="output.css">
     <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="tailwind.custom.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body class="bg-primarybg text-white font-primary">
     <!-- NAVBAR -->
     <header class="global-header">
         <div class="header-left">
           <i class="fa-solid fa-toilet fa-2xl text-white"></i>
-          <a href="index.html" class="no-decoration">
+          <a href="/" class="no-decoration">
             <h1 class="header-title font-medium text-4xl text-white">FLUSH FINDER</h1>
           </a>
           <div class="header-search-box text-gray">
-            <a id="search-box-text" href="results.html" class="no-decoration text-gray">
+            <a id="search-box-text" href="search" class="no-decoration text-gray">
               <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
               Search
             </a>
@@ -27,12 +24,12 @@
           </div>
         </div>
         <div class="header-right">
-          <a class="write-review-btn no-decoration text-white" href="searchReview.html">Write a Review</a>
-          <a href="viewprofile.html" class="header-profile-btn">
+          <a class="write-review-btn no-decoration text-white" href="search">Write a Review</a>
+          <a href="profile" class="header-profile-btn">
             <i class="fa-regular fa-user fa-lg"></i>
           </a>
-          <a class="signup-btn no-decoration" href="register.html">Sign Up</a>
-          <a class="login-btn no-decoration" href="login.html">Log In</a>
+          <a class="signup-btn no-decoration" href="register">Sign Up</a>
+          <a class="login-btn no-decoration" href="login">Log In</a>
         </div>
     </header>
     
@@ -41,7 +38,7 @@
         <div class="flex gap-10">
             <div class="flex flex-col justify-center items-center gap-y-5 rounded-[5px] mt-5">
                 <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[5rem] h-[9.5rem] w-[9.5rem]">
-                <a href="editprofile.html" class="border border-white rounded-lg hover:bg-white hover:text-black p-2"><i class="fa-solid fa-pencil fa-sm"></i> Edit Profile</a>
+                <a href="edit-profile" class="border border-white rounded-lg hover:bg-white hover:text-black p-2"><i class="fa-solid fa-pencil fa-sm"></i> Edit Profile</a>
             </div>
             <div class="flex flex-col self-center mt-8">
                 <div>
@@ -62,7 +59,7 @@
                 </div>
                 <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
                     <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 8th Floor, Male</a></p>
+                        <p>Posted a review for <a href="establishment" class="text-secondary">Henry Sy, 8th Floor, Male</a></p>
                         <p class="w-fit ml-auto">5 days ago</p>
                     </div>       
                     <div class="mt-1">
@@ -87,7 +84,7 @@
                 </div>
                 <div class="flex flex-col gap-y-1 text-sm text-neutral-400">   
                     <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 9th Floor, Male</a></p>
+                        <p>Posted a review for <a href="establishment" class="text-secondary">Henry Sy, 9th Floor, Male</a></p>
                         <p class="w-fit ml-auto">10 days ago</p>
                     </div>       
                     <div class="mt-1">
@@ -112,7 +109,7 @@
                 </div>
                 <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
                     <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishmentview.html" class="text-secondary">Velasco, 3rd Floor, Male</a></p>
+                        <p>Posted a review for <a href="establishment" class="text-secondary">Velasco, 3rd Floor, Male</a></p>
                         <p class="w-fit ml-auto">12 days ago</p>
                     </div>    
                     <div class="mt-1">
@@ -137,7 +134,7 @@
                 </div>
                 <div class="flex flex-col gap-y-1 text-sm text-neutral-400">        
                     <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishmentview.html" class="text-secondary">Henry Sy, 7th Floor, Male</a></p>
+                        <p>Posted a review for <a href="establishment" class="text-secondary">Henry Sy, 7th Floor, Male</a></p>
                         <p class="w-fit ml-auto">19 days ago</p>
                     </div>  
                     <div class="mt-1">
@@ -164,7 +161,7 @@
 
         <div class="footer-col">
           <div class="footer-title">
-            <a href="index.html" class="text-white no-decoration no-margin">Flush Finder</a>
+            <a href="/" class="text-white no-decoration no-margin">Flush Finder</a>
           </div>
           <div class="text-gray">
             © 2023
@@ -185,7 +182,7 @@
         </div>
     
         <div class="footer-col">
-          <a href="business-profile.html" class="footer-heading">For Business</a>
+          <a href="establishment-business" class="footer-heading">For Business</a>
         </div>
     
         <div class="footer-col">
