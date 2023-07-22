@@ -15,7 +15,7 @@ export function connectToMongo (callback) {
     })
 }
 
-export function getDb(dbName = process.env.DB_NAME) {
+export function getDb(dbName = cluster0) {
     return client.db(dbName);
 }
 
