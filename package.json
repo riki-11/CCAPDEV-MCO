@@ -2,18 +2,21 @@
   "name": "ccapdev-mco",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "tailwindcss build -i ./src/styles.css -o ./public/css/styles.css --watch",
-    "app": "nodemon ./public/app.js",
+    "app": "nodemon ./app.js",
     "dev": "concurrently \"npm run app\" \"npm run build-css\""
   },
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "handlebars": "^4.7.7",
+    "mongodb": "^5.7.0",
     "mongoose": "^7.3.4",
     "nodemon": "^3.0.1"
   },
