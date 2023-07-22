@@ -1,5 +1,5 @@
-const livereload = require('livereload');
-const chokidar = require('chokidar');
+import livereload from 'livereload';
+import chokidar from 'chokidar';
 
 const server = livereload.createServer();
 server.watch('public');
