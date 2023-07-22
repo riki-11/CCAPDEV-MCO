@@ -15,6 +15,7 @@ export function connectToMongo (callback) {
     })
 }
 
+// create db
 export function getDb(dbName = "bathroom-app") {
     return client.db(dbName);
 }
