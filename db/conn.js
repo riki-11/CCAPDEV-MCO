@@ -1,4 +1,4 @@
-import {MongoClient} from 'mongodb';
+import {MongoClient} from "mongodb";
 
 const mongoURI = 'mongodb+srv://apdev:apdevdb123@cluster0.vjiwwp8.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(mongoURI);
@@ -15,7 +15,7 @@ export function connectToMongo (callback) {
     })
 }
 
-export function getDb(dbName = cluster0) {
+export function getDb(dbName = "bathroom-app") {
     return client.db(dbName);
 }
 
