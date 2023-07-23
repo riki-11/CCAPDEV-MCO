@@ -2,6 +2,7 @@
 import "dotenv/config";
 import db from './db/mongoose.js';
 
+
 // Import equivalent of __dirname
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -108,3 +109,36 @@ app.use((req, res) => {
   const indexPath = path.join(__dirname, './views', '404.html');
   res.sendFile(indexPath);
 })
+
+app.use((req, res) => {
+  const indexPath = path.join(__dirname, './controllers', 'registerController.js');
+  res.sendFile(indexPath);
+})
+
+
+// Database access
+import User from './db/User.js';
+
+// adding data
+
+add()
+async function add() {
+  try {
+    const user = await User.create({firstName: "John", lastName: "Doe", password:"Hello"});
+    console.log(user);
+  } catch (e) {
+    console.log(e.message)
+  }
+}
+
+// querying data
+
+query()
+async function query() {
+  try {
+    const user = await User.findMany({firstName: "John"});
+    console.log(user);
+  } catch (e) {
+    console.log(e.message)
+  }
+}
