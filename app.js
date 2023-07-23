@@ -144,13 +144,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
 app.post('/createreview', reviewController.addReview);
-//app.post()
-//App session middleware
-// app.use(session({
-//   secret: 
-//   cookie: { maxAge: }
-//   saveUnitialized: 
-// }))
+app.post('/updateinfo', userController.updateUser);
 
 // Database access
 import User from './models/User.js';
@@ -167,9 +161,6 @@ app.use((req, res) => {
 
 
 // Database access
-import User from './models/User.js';
-import Building from './models/Building.js';
-import Owner from './models/Owner.js';
 import Restroom from './models/Restroom.js';
 
 
