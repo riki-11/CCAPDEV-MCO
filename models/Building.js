@@ -23,6 +23,9 @@ const buildingSchema = new mongoose.Schema({
     averageRating: {
         type: Number,
         required: true
+    },
+    photo: {
+        type: String
     }
 });
 

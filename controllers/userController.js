@@ -13,7 +13,7 @@ const userController = {
         as defined in `../routes/routes.js`
     */
     updateUser: async function(req, rest) {
-        
+        // Get user data th
     },
 
     
@@ -45,9 +45,12 @@ const userController = {
     },
 
     viewProfile: async function (req, res) {
-        
-    }
 
+    },
+
+    loginUser: async function (req, res) {
+
+    }
 }
 
 export default userController;
