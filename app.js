@@ -2,7 +2,6 @@
 import "dotenv/config";
 import db from './db/mongoose.js';
 
-
 // Import equivalent of __dirname
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -10,33 +9,29 @@ import { dirname } from 'path';
 // Import the express module
 import express from 'express';
 
+// Import handlebars
+import exphbs from 'express-handlebars';
+
 // Import the livereload.js file (make sure to specify the correct path)
 import './livereload.js';
 
 import path from 'path';
 
-
 const port = process.env.PORT;
-
 
 db.connect();
 
-// Require the express module
-//const express = require('express');
-
-// Requires the livereload module
-// Import the livereload.js file
-//require('./livereload');
-
-//const path = require('path');
 
 const app = express();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Set View engine as handlebars
+app.engine("hbs", exphbs.engine({extname: 'hbs'}));
+app.set("view engine", "hbs");
+app.set("views", "./views");
 
-app.use(express.static('public'));  // Assuming the CSS file is in the 'public' directory
+app.use(express.static(__dirname + '/public'));
 
 // listen for requests
 app.listen(port, function () {
@@ -48,6 +43,10 @@ app.listen(port, function () {
 
 
 // all the requests are coming from the perspective of app.js which is why we have to exit the current directory and go to the views directory
+app.get("/", (req, res) => {
+  res.render("index");
+})
+
 app.get('', (req, res) => {
   const indexPath = path.join(__dirname, './views', 'index.html');
   res.sendFile(indexPath);
