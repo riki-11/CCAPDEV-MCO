@@ -7,9 +7,9 @@ body {
 
 .content-container{
     display:flex;
-    justify-content: flex-start;
+    justify-content: flex-start;/* 
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-    box-shadow: 5px 10px 19px -3px rgba(0,0,0,0.27);   
+    box-shadow: 5px 10px 19px -3px rgba(0,0,0,0.27);  */  
 }
 
 
@@ -19,7 +19,8 @@ body {
 
 .left-wrapper{
     position: sticky;
-    top: 10%;
+    top: 20%;
+    margin-bottom: 20%;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -201,7 +202,7 @@ textarea {
     border-radius: 15px;
     color: #212121;
     z-index: 1;
-    background: #e8e8e8;
+    background-color: #F5CB5C;
     position: relative;
     font-weight: 1000;
     font-size: 17px;
@@ -213,7 +214,7 @@ textarea {
    
 .submit:hover {
     color: black;
-    background-color: #F5CB5C;
+    background-color: #ffe49b;
 }  
 .submit:hover::before {
     width: 100%;

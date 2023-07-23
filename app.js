@@ -93,6 +93,11 @@ app.get('/create-review', (req, res) => {
   res.sendFile(indexPath);
 })
 
+app.get('/edit-review', (req, res) => {
+  const indexPath = path.join(__dirname, './views', 'editreview.html');
+  res.sendFile(indexPath);
+})
+
 app.get('/establishment', (req, res) => {
   const indexPath = path.join(__dirname, './views', 'establishmentview.html');
   res.sendFile(indexPath);  

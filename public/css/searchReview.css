@@ -6,12 +6,10 @@ body {
 }
 
 .search-container{
-    position: absolute;
-    width: 100%;
-    height: 110%;
-    top: 0;
-    left: 0;
-    background: #202020;
+  position:inherit;
+  width: 100%;
+  height: 720px;
+  background: #202020;
 }
 .makereview-title{
     position: absolute;
@@ -50,7 +48,7 @@ body {
   width: 50vw;
   height:7vh;
   left: calc(50% - 50vw/2);
-  top: 50%;
+  top: 54%;
 
   display: flex;
   align-items: center;
@@ -98,7 +96,7 @@ body {
 
 
 .reviews-containter{
-  position: absolute;
+  position: inherit;
   width: 100%;
   height: 110%;
   left: 0;
@@ -108,7 +106,7 @@ body {
 
 .reviews-title{
   /* Your reviews */
-  position: absolute;
+  position: inherit;
   left: calc(50% - 75vw/2);
   top: 20vh;
   
@@ -120,7 +118,7 @@ body {
   color: #333533;
 }
 .reviews{
-  position: absolute;
+  position: inherit;
   width: 60%;
   height: 60%;
   top: 30%;

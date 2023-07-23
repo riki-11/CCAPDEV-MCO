@@ -570,6 +570,10 @@ video {
   }
 }
 
+.absolute{
+  position: absolute;
+}
+
 .m-auto{
   margin: auto;
 }
