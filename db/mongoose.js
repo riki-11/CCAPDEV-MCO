@@ -3,9 +3,6 @@ import mongoose from 'mongoose';
 const url = process.env.DB_URL ?? "";
 
 
-// import module `User` from `../models/UserModel.js`
-//const User = require('./UserModel.js');
-
 
 // additional connection options
 const options = {
