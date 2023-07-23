@@ -1,6 +1,6 @@
 // mongoose
 import "dotenv/config";
-import db from './db/mongoose.js';
+import db from './models/mongoose.js';
 
 // Import equivalent of __dirname
 import { fileURLToPath } from 'url';
@@ -8,6 +8,7 @@ import { dirname } from 'path';
 
 // Import the express module
 import express from 'express';
+import bodyParser from 'body-parser';
 
 // Import handlebars
 import exphbs from 'express-handlebars';
@@ -84,10 +85,17 @@ app.get('/results'), (req, res) => {
 }
 
 app.get('/search', (req, res) => {
-  res.render("searchReview", {
+  res.render("select-restroom", {
     title: "Search for a Review",
     forBusiness: false
   });
+})
+
+app.get('/select-restroom', (req, res) => {
+  res.render("select-restroom",  {
+    title: "Select a Restroom To Review",
+    forBusiness: false
+  })
 })
 
 app.get('/create-review', (req, res) => {
@@ -118,7 +126,20 @@ app.get('/establishment-business', (req, res) => {
   });
 })
 
-// 404 page
+
+
+// get form 
+import userController from './controllers/userController.js'; // Import the userController
+
+
+// Use body-parser middleware to parse form data
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Define a route for handling the form submission
+app.post('/usersignup', userController.addUser);
+
+
+// 404 page: THIS SHOULD BE AT THE VERY LAST
 app.use((req, res) => {
   res.render("404", {
     title: "Error 404",
@@ -126,18 +147,16 @@ app.use((req, res) => {
   });
 })
 
-app.use((req, res) => {
-  const indexPath = path.join(__dirname, './controllers', 'registerController.js');
-  res.sendFile(indexPath);
-})
-
 
 // Database access
-import User from './db/User.js';
-import Building from './db/Building.js';
-import Owner from './db/Owner.js';
+import User from './models/User.js';
+import Building from './models/Building.js';
+import Owner from './models/Owner.js';
+
+
 
 //listen to post requests in register.html to save into the db
+/*
 app.post('./register', async (req, res) => {
   try {
     const addUser = new User({
@@ -163,11 +182,11 @@ async function addUser() {
     console.log(e)
   }
 }
-
+*/
 
 // adding data
 
-
+/*
 // add()
 async function add() {
   try {
@@ -205,7 +224,8 @@ async function add() {
   }
 }
 
-
+*/
+/*
 // query()
 async function query() {
   try {
@@ -214,4 +234,4 @@ async function query() {
   } catch (e) {
     console.log(e.message)
   }
-}
+}*/
