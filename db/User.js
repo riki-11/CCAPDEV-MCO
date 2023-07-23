@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-// Defines the schema for collection `users`
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
