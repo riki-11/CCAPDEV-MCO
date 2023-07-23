@@ -20,6 +20,9 @@ module.exports = {
           'success-hover': '#2ea043',
           'grayed': 'rgb(89, 89, 89)',
       },
+      height: {
+        '80-screen': '80vh',
+      },
       minHeight: {
         '300': '300px'
       },

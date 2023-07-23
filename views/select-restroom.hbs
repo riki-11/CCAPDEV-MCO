@@ -3,26 +3,35 @@
 <html>
     <head>
         <title>Search for a Review</title>
-        <link rel="stylesheet" href="css/search-restroom.css">
+        <link rel="stylesheet" href="css/select-restroom.css">
         <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/styles.css">
       </head>
     <body>
-
+        <div class="h-80-screen bg-primarybg">
         <!-- First Section of the Paage -->
-        <div class="search-container">
-            <span class="makereview-title">Make a <span style="color: #F5CB5C;">review</span>, make someone<span style="color: #F5CB5C;"> comfy</span></span>
-            <span class="makereview-subtitle">Stories like yours are what helps flushers have better comfort. Share your experience and help out a fellow flusher!</span>
-            <!-- Search box container -->
-            <a href="create-review"> 
-                <div class="search-box">
-                <form id="search-box-content" class="text-white" action="results.html">
-                    <i class="fa-solid fa-magnifying-glass pointer-hover"></i> 
-                    <input type="text" class="search-box-content" placeholder="What would you like to review?">
-                    <i class="fa-solid fa-microphone push-right pointer-hover"></i>                    
+            <div class="search-container">
+                <span class="makereview-title">Make a <span style="color: #F5CB5C;">review</span>, make someone<span style="color: #F5CB5C;"> comfy</span></span>
+                <span class="makereview-subtitle">Stories like yours are what helps flushers have better comfort. Share your experience and help out a fellow flusher!</span>
+                
+                <!-- Make it a get request -->
+                <form action="#" method="get">
+                    <label for="buildings" class="bg-white">Select a building</label>
+                    <select name="buildings" id="buildings">
+                        <!-- Generate this dynamically -->
+                    </select>
+                    <label for="floors" class="bg-white">Select a floor</label>
+                    <select name="floors" id="floors" >
+                        <!-- generate this dynamically -->
+                    </select>
+                    <label for="genders" class="bg-white">Select a gender</label>
+                    <select name="genders" id="genders">
+                        <!-- Generate this dynamically -->
+                    </select>
+                    <button class="bg-secondary" type="button">Search</button>
                 </form>
-              </div>
-            </a>
+                
+            </div>
         </div>
     </body>
 </html>

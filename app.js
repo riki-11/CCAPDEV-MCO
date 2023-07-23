@@ -47,84 +47,85 @@ app.get("/", (req, res) => {
     title: "Flush Finder",
     forBusiness: false
   });
-})
+});
 
 app.get('/register', (req, res) => {
   res.render("register", {
     title: "Sign Up",
     forBusiness: false
   });
-})
+});
 
 app.get('/login', (req, res) => {
   res.render("login", {
     title: "Login",
     forBusiness: false
   });
-})
+});
 
 app.get('/profile', (req, res) => {
   res.render("viewprofile", {
     title: "Profile",
     forBusiness: false
   });
-})
+});
 
 app.get('/edit-profile', (req, res) => {
   res.render("editprofile", {
     title: "Edit Profile",
     forBusiness: false
   });
-})
+});
 
-app.get('/results'), (req, res) => {
+app.get('/results', (req, res) => {
+
   res.render("results", {
-    title: "Search Results For ...", // complete it
+    title: "Search Results For ...",
     forBusiness: false
   });
-}
+})
 
 app.get('/search', (req, res) => {
   res.render("select-restroom", {
     title: "Search for a Review",
     forBusiness: false
   });
-})
+});
 
 app.get('/select-restroom', (req, res) => {
   res.render("select-restroom",  {
     title: "Select a Restroom To Review",
     forBusiness: false
   })
-})
+});
 
 app.get('/create-review', (req, res) => {
   res.render("createreview", {
     title: "Create a Review",
     forBusiness: false
   });
-})
+});
 
 app.get('/edit-review', (req, res) => {
   res.render("editreview", {
     title: "Edit My Review",
     forBusiness: false
   });
-})
+});
 
 app.get('/establishment', (req, res) => {
   res.render("establishmentview", {
     title: "Establishment", // replace with title of from db
     forBusiness: false
   }); 
-})
+});
 
 app.get('/establishment-business', (req, res) => {
   res.render("business-profile", {
     title: "My Establishment",
     forBusiness: true
   });
-})
+});
 
 
 
@@ -138,6 +139,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
 
+// Database access
+import User from './models/User.js';
+import Building from './models/Building.js';
+import Owner from './models/Owner.js';
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST
 app.use((req, res) => {
@@ -148,10 +153,6 @@ app.use((req, res) => {
 })
 
 
-// Database access
-import User from './models/User.js';
-import Building from './models/Building.js';
-import Owner from './models/Owner.js';
 
 
 
