@@ -6,6 +6,10 @@
     <title>{{title}}</title>
 </head>
 <body>
+    {{> header}} 
     {{{body}}}
+    {{> footer}}
+    <!-- For automatic page reloading upon receiving edits -->
+    <script src="//localhost:35729/livereload.js"></script>
 </body>
 </html>

@@ -39,79 +39,91 @@ app.listen(port, function () {
   console.log(`http://localhost:` + port);
 });
 
-// __dirname = ./public folder
 
-
-// all the requests are coming from the perspective of app.js which is why we have to exit the current directory and go to the views directory
+// ROUTES
 app.get("/", (req, res) => {
-  res.render("index");
-})
-
-app.get('', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'index.html');
-  res.sendFile(indexPath);
+  res.render("index", {
+    title: "Flush Finder",
+    forBusiness: false
+  });
 })
 
 app.get('/register', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'register.html');
-  res.sendFile(indexPath);
+  res.render("register", {
+    title: "Sign Up",
+    forBusiness: false
+  });
 })
 
 app.get('/login', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'login.html');
-  res.sendFile(indexPath);
-})
-
-// DELETE LATER: For testing any bugs
-app.get('/test', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'test.html');
-  res.sendFile(indexPath);
+  res.render("login", {
+    title: "Login",
+    forBusiness: false
+  });
 })
 
 app.get('/profile', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'viewprofile.html');
-  res.sendFile(indexPath);
+  res.render("viewprofile", {
+    title: "Profile",
+    forBusiness: false
+  });
 })
 
 app.get('/edit-profile', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'editprofile.html');
-  res.sendFile(indexPath);
+  res.render("editprofile", {
+    title: "Edit Profile",
+    forBusiness: false
+  });
 })
 
 app.get('/results'), (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'results.html');
-  res.sendFile(indexPath);
+  res.render("results", {
+    title: "Search Results For ...", // complete it
+    forBusiness: false
+  });
 }
 
 app.get('/search', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'searchReview.html');
-  res.sendFile(indexPath);  
+  res.render("searchReview", {
+    title: "Search for a Review",
+    forBusiness: false
+  });
 })
 
 app.get('/create-review', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'createreview.html');
-  res.sendFile(indexPath);
+  res.render("createreview", {
+    title: "Create a Review",
+    forBusiness: false
+  });
 })
 
 app.get('/edit-review', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'editreview.html');
-  res.sendFile(indexPath);
+  res.render("editreview", {
+    title: "Edit My Review",
+    forBusiness: false
+  });
 })
 
 app.get('/establishment', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'establishmentview.html');
-  res.sendFile(indexPath);  
+  res.render("establishmentview", {
+    title: "Establishment", // replace with title of from db
+    forBusiness: false
+  }); 
 })
 
 app.get('/establishment-business', (req, res) => {
-  const indexPath = path.join(__dirname, './views', 'business-profile.html');
-  res.sendFile(indexPath);  
+  res.render("business-profile", {
+    title: "My Establishment",
+    forBusiness: true
+  });
 })
 
 // 404 page
 app.use((req, res) => {
-  const indexPath = path.join(__dirname, './views', '404.html');
-  res.sendFile(indexPath);
+  res.render("404", {
+    title: "Error 404",
+    forBusiness: false
+  });
 })
 
 app.use((req, res) => {
