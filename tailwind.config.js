@@ -3,7 +3,7 @@ module.exports = {
   // IMPORTANT FOR TAILWIND TO APPLY TO ALL OUR HTML FILES (ADD HANDLEBARS FILES HERE EVENTUALLY)
   content: ["./public/**/*.{html,js}", 
             "./src/**/*.{html,js}",
-            "./views/**/*.{html,js}"],
+            "./views/**/*.{html,js,hbs}"],
   theme: {
     extend: {
       fontFamily: {

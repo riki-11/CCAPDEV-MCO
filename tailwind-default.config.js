@@ -2,7 +2,7 @@
 module.exports = {
   content: ["./public/**/*.{html,js}", 
             "./src/**/*.{html,js}",
-            "./views/**/*.{html,js}"],
+            "./views/**/*.{html,js,hbs}"],
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
