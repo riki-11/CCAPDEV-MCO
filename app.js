@@ -10,6 +10,9 @@ import { dirname } from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 
+// Session manager
+import session from 'express-session';
+
 // Import handlebars
 import exphbs from 'express-handlebars';
 
@@ -40,14 +43,17 @@ app.listen(port, function () {
   console.log(`http://localhost:` + port);
 });
 
-
 // ROUTES
 app.get("/", (req, res) => {
   res.render("index", {
     title: "Flush Finder",
     forBusiness: false
   });
-})
+
+  app.get("/", buildingController.getAllBuildings);
+
+});
+
 
 app.get('/register', (req, res) => {
   res.render("register", {
@@ -127,16 +133,24 @@ app.get('/establishment-business', (req, res) => {
 })
 
 
-
 // get form 
-import userController from './controllers/userController.js'; // Import the userController
-
+import userController from './controllers/userController.js'; 
+import reviewController from './controllers/reviewController.js';
+import buildingController from "./controllers/buildingController.js"; 
 
 // Use body-parser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
+app.post('/createreview', reviewController.addReview);
+//app.post()
+//App session middleware
+// app.use(session({
+//   secret: 
+//   cookie: { maxAge: }
+//   saveUnitialized: 
+// }))
 
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST
@@ -152,6 +166,7 @@ app.use((req, res) => {
 import User from './models/User.js';
 import Building from './models/Building.js';
 import Owner from './models/Owner.js';
+import Restroom from './models/Restroom.js';
 
 
 
@@ -187,10 +202,11 @@ async function addUser() {
 // adding data
 
 /*
-// add()
+add()
 async function add() {
   try {
-    const user = await User.create ({
+    // users
+    let user = await User.create ({
       firstName: 'John',
       lastName: 'Doe',
       username: 'johndoe123',
@@ -198,33 +214,152 @@ async function add() {
       email: 'johndoe@example.com',
       birthday: new Date('1990-01-01') // Provide the birthday as a Date object
     });
-    const owner = await Owner.create ({
+
+    // owners
+    await Owner.create ({
       username: 'henrysy',
       password: 'secret123',
-      email: 'henrysy@example.com',
+      email: 'henrysy@gmail.com',
     });
 
-    const foundOwner = await Owner.findOne({ username: 'henrysy' }, '_id');
-    const ownerID = foundOwner._id;
+    await Owner.create ({
+      username: 'miguelhall',
+      password: 'secret456',
+      email: 'miguelhall@gmail.com'
+    });
 
-    const building = await Building.create ({
+    await Owner.create ({
+      username: 'velascohall',
+      password: 'secret789',
+      email: 'velascohall@gmail.com'
+    });
+
+    // buildings
+    let foundOwner = await Owner.findOne({ username: 'henrysy' }, '_id');
+    let ownerID = foundOwner._id;
+
+    await Building.create ({
       name: 'Henry Sy',
+      numOfRestrooms: 24,
+      ownerID: ownerID,
+      description: 'Henry Sy Sr. Hall houses De La Salle University\'s 14-story library. It is named after the generous benefactor, the late Mr. Henry Sy Sr.',
+      averageRating: 5,
+      photo: './public/images/bldg-henry.jpeg'
+    });
+
+    foundOwner = await Owner.findOne({ username: 'miguelhall' }, '_id');
+    ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'St. Miguel Hall',
       numOfRestrooms: 12,
       ownerID: ownerID,
-      description: 'hello world',
-      averageRating: 5,
+      description: 'St. Miguel is De La Salle University\'s College of Liberal Arts.',
+      averageRating: 4,
+      photo: './public/images/bldg-miguel.jpeg'
     });
 
-    console.log(user);
-    console.log(owner);
-    console.log(building);
+    foundOwner = await Owner.findOne({ username: 'velascohall' }, '_id');
+    ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'Velasco Hall',
+      numOfRestrooms: 12,
+      ownerID: ownerID,
+      description: 'Velasco Hall features plenty of laboratories and classrooms that foster innovative learning.',
+      averageRating: 4,
+      photo: './public/images/bldg-velasco.jpeg'
+    });
+
+    // restrooms
+    let currBuilding = await Building.findOne({name: 'Henry Sy'}, '_id');
+    let buildingID = currBuilding._id;
+    await Restroom.create ({
+      floor: 1,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 1,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 2,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 2,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+
+    currBuilding = await Building.findOne({name: 'St. Miguel Hall'}, '_id');
+    buildingID = currBuilding._id;
+    await Restroom.create ({
+      floor: 1,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 1,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 2,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 2,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+
+    currBuilding = await Building.findOne({name: 'Velasco Hall'}, '_id');
+    buildingID = currBuilding._id;
+    await Restroom.create ({
+      floor: 1,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 1,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 2,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 2,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+
 
   } catch (e) {
     console.log(e.message)
   }
 }
-
 */
+
 /*
 // query()
 async function query() {
