@@ -137,11 +137,38 @@ import User from './db/User.js';
 import Building from './db/Building.js';
 import Owner from './db/Owner.js';
 
+//listen to post requests in register.html to save into the db
+app.post('./register', async (req, res) => {
+  try {
+    const addUser = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      username: req.body.username,
+      password: req.body.lastName,
+      email: req.body.email,
+      birthday: req.body.birthday
+    })
+    addUser.save();
+    console.log(addUser)
+  } catch (e) {
+    console.log(e);
+  }
+
+})
+async function addUser() {
+  try {
+    this.req.body
+
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 
 // adding data
 
-add()
+
+// add()
 async function add() {
   try {
     const user = await User.create ({
@@ -179,7 +206,7 @@ async function add() {
 }
 
 
-query()
+// query()
 async function query() {
   try {
     const user = await User.findMany({firstName: "John"});
