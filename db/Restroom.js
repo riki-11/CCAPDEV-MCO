@@ -24,4 +24,7 @@ const restroomSchema = new mongoose.Schema({
     },
 });
 
+restroomSchema.index({ floor: 1, gender: 1, category: 1, buildingID: 1 }, { unique: true });
+
+
 export default mongoose.model("Restroom", restroomSchema);

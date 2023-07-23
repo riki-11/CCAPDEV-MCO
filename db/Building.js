@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const buildingSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     numOfRestrooms: {
         type: Number,
