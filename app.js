@@ -186,6 +186,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
+app.post('/createreview', upload.single('photo'), reviewController.addReview);
+app.post('/updateinfo', userController.updateUser);
+
 const storage = multer.memoryStorage();
 
 const upload = multer({ 
@@ -195,7 +198,6 @@ const upload = multer({
   }
 });
 
-app.post('/createreview', upload.single('photo'), reviewController.addReview);
 //app.post()
 //App session middleware
 // app.use(session({
@@ -205,6 +207,7 @@ app.post('/createreview', upload.single('photo'), reviewController.addReview);
 // }))
 
 
+
 // 404 page: THIS SHOULD BE AT THE VERY LAST
 app.use((req, res) => {
   res.render("404", {
@@ -212,8 +215,6 @@ app.use((req, res) => {
     forBusiness: false
   });
 })
-
-
 
 //listen to post requests in register.html to save into the db
 /*
