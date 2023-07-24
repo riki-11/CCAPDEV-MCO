@@ -69,10 +69,11 @@ body {
 }
 
 /* ESTABLISHMENT DETAILS CONTAINER */
-.establishment-image-container .establishment-image{
-    height: 400px;
-    background-image: url("images/bldg-henry.jpeg");
-    background-size: cover;
+.establishment-image-container{
+    height: 400px; 
+     background-image: url("../images/bldg-henry.jpeg");
+    background-position-y: 40%;
+    background-size:cover;
 }
 
 .establishment-details-container{
@@ -109,7 +110,7 @@ body {
     opacity: .9;
     padding: 5px;
 }
-.left-gotomap-details-container a{
+.left-gotomap-details-container button{
     color: #F5CB5C;
     font-weight: bold;
     text-decoration: none;
@@ -119,7 +120,7 @@ body {
 
 .right-details-container{
     width: 650px;
-    height: 400px;
+    /* height: 400px; */
     justify-content: center;
     display: flex;
     padding: 3%;
@@ -355,3 +356,74 @@ body {
     margin-left:20px;
 }
 
+.left-gotomap-details-container .popup-img .overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.70);
+    top: 0%;
+    left: 0%;
+    z-index: 1;
+    display: none;
+}
+.left-gotomap-details-container .popup-img .content{
+    position: fixed;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    width: 80%;
+    height: 80%;
+    z-index: 2;
+}
+.left-gotomap-details-container .popup-img .closebtn{
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color:#202020;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+}
+.left-gotomap-details-container .popup-img.active .overlay{
+    display: block;
+}
+.left-gotomap-details-container .popup-img.active .content{
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%,-50%) scale(1);
+    
+}
+.replies-container{
+    padding-left: 30%;
+}
+.reply-blocks{
+    padding-left: 5%;
+}
+.reply-form-container{
+    width: 100%;
+    border-radius: 1%;
+    padding: 2% 0 2% 5%;
+    display: none;
+}
+.replies-container h1{
+    display: none;
+}
+.reply-form-container textarea{
+    padding: 1.5%;
+    margin: 1% 1% 1% 0;
+    font-size: .8rem;
+    resize: none;
+}
+.reply-form-container .submit{
+    color:#202020;
+    border: 2px solid black;
+    background-color: #f5cb5c;
+    border-radius: 5%;
+    padding: .5%;
+    right: 5%;
+    font-size: .9rem;
+}
