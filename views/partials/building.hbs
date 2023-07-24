@@ -1,1 +1,20 @@
-<h1>THIS WORKS</h1>
+
+<div class="restroom-container">
+    <div class="restroom-image" >
+
+        <div class="image-container">
+            <div class="image-name">
+                <h4>{{buildingInfo.name}}</h4><br/>
+            </div>
+            <img src="{{buildingInfo.photo}}" alt="Bathroom Image">
+        </div>
+        <p class="image-description" >{{buildingInfo.description}}</p>
+
+    </div>
+    <div class="rating">
+        {{renderRating buildingInfo.averageRating}}
+    </div>
+        <button type="button" class="review-button btn">
+            <a href="establishment">See Restrooms</a> 
+        </button>
+</div>
