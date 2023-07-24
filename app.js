@@ -27,6 +27,7 @@ import path from 'path';
 import userController from './controllers/userController.js'; 
 import reviewController from './controllers/reviewController.js';
 import buildingController from "./controllers/buildingController.js"; 
+import restroomController from "./controllers/restroomController.js";
 
 // Database access
 import User from './models/User.js';
@@ -112,20 +113,39 @@ app.get('/search', (req, res) => {
 
 app.get('/select-restroom', (req, res) => {
   
+  // Get all the buildings from the database
   buildingController.getAllBuildings().then(buildings => {
+    
+    
     var buildingNames = [];
+    var buildingFloors = [];
     buildings.forEach(building => {
+      // Grab the names of all the buildings
       buildingNames.push(building.name);
+
+      // Grab the number of floors per building
+      buildingFloors.push(building.numOfFloors);
     })
+
     console.log(buildingNames);
+
+
     res.render("select-restroom",  {
       title: "Select a Restroom To Review",
       forBusiness: false, 
       buildingNames: buildingNames,
+      buildingFloors: buildingFloors
     })
   });
+});
 
+app.get('/find-restroom', (req, res) => {
+  restroomController.getRestroomByInfo(req, res).then(restroomBuilding => {
+    console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
+  });
 
+  // After selecting a restroom to review, it should redirect to create-review
+  res.redirect("/create-review")
 });
 
 app.get('/create-review', (req, res) => {
@@ -174,6 +194,7 @@ const upload = multer({
     fileSize: 10 * 1024 * 1024 // 10 MB
   }
 });
+
 app.post('/createreview', upload.single('photo'), reviewController.addReview);
 //app.post()
 //App session middleware

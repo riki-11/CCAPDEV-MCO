@@ -15,21 +15,23 @@
                 <span class="makereview-subtitle">Stories like yours are what helps flushers have better comfort. Share your experience and help out a fellow flusher!</span>
                 <h1>{{test.name}}</h1>
 
-                <!-- Make it a get request -->
                 <form action="/find-restroom" method="get">
-                    <label for="buildings" class="bg-white">Select a building</label>
-                    <select name="buildings" id="buildings">
+                    <label for="building" class="bg-white">Select a building</label>
+                    <select name="building" id="building">
                         <!-- Generate this dynamically -->
                         {{#each buildingNames}}
                             <option value="{{this}}">{{this}}</option>
                         {{/each}}
                     </select>
-                    <label for="floors" class="bg-white">Select a floor</label>
-                    <select name="floors" id="floors" >
+                    <label for="floor" class="bg-white">Select a floor</label>
+                    <select name="floor" id="floor" >
                         <!-- generate this dynamically -->
+                        {{#each buildingFloors}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
                     </select>
-                    <label for="genders" class="bg-white">Select a gender</label>
-                    <select name="genders" id="genders">
+                    <label for="gender" class="bg-white">Select a gender</label>
+                    <select name="gender" id="gender">
                         <!-- Generate this dynamically -->
                     </select>
                     <button class="bg-secondary" type="submit">Search</button>
