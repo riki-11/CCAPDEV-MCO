@@ -26,7 +26,7 @@
             <hr class="line">
             <!-- RIGHT CONTAINER -->
             <div class="right-container">
-                <form  action="/createreview" method="post">
+                <form  action="/createreview" method="post" enctype="multipart/form-data">
                     <!-- RATING -->
                     <span class="label">Rate your overall experience</span> <br>
                     <div class="ratings">
@@ -45,12 +45,6 @@
                         <label for="star5" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i></label>
                     </div>
                     
-                    <!-- Gender -->
-                    <span class="label">For what gender is your cubicle?</span> <br>
-                    <input type="radio" name="form-gender" value="Male">
-                        <label for="Male">Male</label>
-                    <input type="radio" name="form-gender" value="Female">
-                        <label for="Female">Female</label><br>
                     <!-- Check Boxes -->
                     <span class="label">Amenities:</span> <br>
                     <input type="checkbox" name="form-chkbx" value="Bidet">
@@ -78,16 +72,11 @@
                     <span class="label-limit">0/200 characters</span>
                     <br>
 
-                    <span class="label">Add some Photos</span> <br>
+                    <span class="label">Add some Photos</span> 
                     <span class="label-detail">Keep it clean! Literally.</span>
+                    <input type="file" name="photo" accept="image/*">
 
-                    <div class="form-img-container">
-                        <div class="form-img-wrapper">
-                            <span class="drag-text">Click to Add Photos<br>or drag and drop</span>
-                        </div>                        
-
-                    </div>
-
+                    <br>
                     <br>
                     <input type="submit" class="submit" value="Submit Review">
                 </form>
