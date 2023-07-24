@@ -1,9 +1,15 @@
 import db from '../models/mongoose.js';
+import multer from 'multer';
 
 import Review from '../models/Review.js';
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
 const reviewController = {
     addReview: async function(req, res) {
+      const photoData = req.file;
+
       // Extract form data from req.body
       const { rate, 'form-chkbx': amenities, 'form-date': date, 'form-review-title': title, 'form-review': content } = req.body;
 
@@ -20,6 +26,10 @@ const reviewController = {
           date,
           title,
           content,
+          photo: {
+            data: photoData.buffer,
+            contentType: photoData.mimetype
+          },
           //user: req.user._id  Assuming you have user authentication and req.user contains the logged-in user's details
       });
 
