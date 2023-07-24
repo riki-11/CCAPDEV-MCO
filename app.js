@@ -1,6 +1,8 @@
 // mongoose
 import "dotenv/config";
 import db from './models/mongoose.js';
+import multer from 'multer';
+
 
 // Import equivalent of __dirname
 import { fileURLToPath } from 'url';
@@ -20,6 +22,19 @@ import exphbs from 'express-handlebars';
 import './livereload.js';
 
 import path from 'path';
+
+// Controller Imports
+import userController from './controllers/userController.js'; 
+import reviewController from './controllers/reviewController.js';
+import buildingController from "./controllers/buildingController.js"; 
+import restroomController from "./controllers/restroomController.js";
+
+// Database access
+import User from './models/User.js';
+import Building from './models/Building.js';
+import Owner from './models/Owner.js';
+import Restroom from './models/Restroom.js';
+
 
 const port = process.env.PORT;
 
@@ -49,7 +64,6 @@ app.get("/", (req, res) => {
     title: "Flush Finder",
     forBusiness: false
   });
-  app.get("/", buildingController.getAllBuildings);
 
 });
 
@@ -98,10 +112,40 @@ app.get('/search', (req, res) => {
 });
 
 app.get('/select-restroom', (req, res) => {
-  res.render("select-restroom",  {
-    title: "Select a Restroom To Review",
-    forBusiness: false
-  })
+  
+  // Get all the buildings from the database
+  buildingController.getAllBuildings().then(buildings => {
+    
+    
+    var buildingNames = [];
+    var buildingFloors = [];
+    buildings.forEach(building => {
+      // Grab the names of all the buildings
+      buildingNames.push(building.name);
+
+      // Grab the number of floors per building
+      buildingFloors.push(building.numOfFloors);
+    })
+
+    console.log(buildingNames);
+
+
+    res.render("select-restroom",  {
+      title: "Select a Restroom To Review",
+      forBusiness: false, 
+      buildingNames: buildingNames,
+      buildingFloors: buildingFloors
+    })
+  });
+});
+
+app.get('/find-restroom', (req, res) => {
+  restroomController.getRestroomByInfo(req, res).then(restroomBuilding => {
+    console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
+  });
+
+  // After selecting a restroom to review, it should redirect to create-review
+  res.redirect("/create-review")
 });
 
 app.get('/create-review', (req, res) => {
@@ -132,24 +176,37 @@ app.get('/establishment-business', (req, res) => {
   });
 });
 
+// CONTROLLER METHODS
 
 // get form 
-import userController from './controllers/userController.js'; 
-import reviewController from './controllers/reviewController.js';
-import buildingController from "./controllers/buildingController.js"; 
+
 
 // Use body-parser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
-app.post('/createreview', reviewController.addReview);
+app.post('/createreview', upload.single('photo'), reviewController.addReview);
 app.post('/updateinfo', userController.updateUser);
 
-// Database access
-import User from './models/User.js';
-import Building from './models/Building.js';
-import Owner from './models/Owner.js';
+const storage = multer.memoryStorage();
+
+const upload = multer({ 
+  storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10 MB
+  }
+});
+
+//app.post()
+//App session middleware
+// app.use(session({
+//   secret: 
+//   cookie: { maxAge: }
+//   saveUnitialized: 
+// }))
+
+
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST
 app.use((req, res) => {
@@ -158,13 +215,6 @@ app.use((req, res) => {
     forBusiness: false
   });
 })
-
-
-// Database access
-import Restroom from './models/Restroom.js';
-
-
-
 
 //listen to post requests in register.html to save into the db
 /*
@@ -196,19 +246,59 @@ async function addUser() {
 */
 
 // adding data
-
 /*
+
 add()
 async function add() {
   try {
     // users
-    let user = await User.create ({
-      firstName: 'John',
-      lastName: 'Doe',
-      username: 'johndoe123',
-      password: 'secret123',
-      email: 'johndoe@example.com',
-      birthday: new Date('1990-01-01') // Provide the birthday as a Date object
+    await User.create({
+      firstName: 'William',
+      lastName: 'Anderson',
+      username: 'wanderson',
+      password: 'password123',
+      email: 'william.anderson@example.com',
+      birthday: new Date('1982-03-17')
+    });
+
+    await User.create({
+      firstName: 'Emily',
+      lastName: 'Brown',
+      username: 'emilyb',
+      password: '12345678',
+      email: 'emily.brown@example.com',
+      birthday: new Date('1993-09-08')
+    });
+
+    await User.create({
+      firstName: 'Michael',
+      lastName: 'Johnson',
+      username: 'michaelj',
+      password: 'securepw',
+      email: 'michael.johnson@example.com',
+      birthday: new Date('1988-11-25')
+    });
+
+    await User.create({
+      firstName: 'Jane',
+      lastName: 'Smith',
+      username: 'janesmith456',
+      password: 'pass123',
+      email: 'jane.smith@example.com',
+      birthday: new Date('1985-05-12')
+    });
+
+    // owners
+    await Owner.create ({
+      username: 'andrewgonzalez',
+      password: 'password123',
+      email: 'andrewgonzalez@gmail.com',
+    });
+
+    await Owner.create ({
+      username: 'goks',
+      password: 'password456',
+      email: 'goks@gmail.com'
     });
 
     // owners
@@ -267,8 +357,34 @@ async function add() {
       photo: './public/images/bldg-velasco.jpeg'
     });
 
+    // buildings
+    let foundOwner = await Owner.findOne({ username: 'andrewgonzalez' }, '_id');
+    let ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'Br. Andrew Gonzalez',
+      numOfRestrooms: 88,
+      ownerID: ownerID,
+      description: 'Br. Andrew Gonzalez is the tallest higher education building in the Philippines, boasting 21 stories.',
+      averageRating: 4,
+      photo: './public/images/bldg-andrew.jpg'
+    });
+
+    foundOwner = await Owner.findOne({ username: 'goks' }, '_id');
+    ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'Gokongwei Hall',
+      numOfRestrooms: 12,
+      ownerID: ownerID,
+      description: 'Gokongwei Hall is DLSU\'s college of Engineering, and it also contains several laboratories for computer science.',
+      averageRating: 1,
+      photo: './public/images/bldg-goks.jpeg'
+    });
+
+
     // restrooms
-    let currBuilding = await Building.findOne({name: 'Henry Sy'}, '_id');
+    let currBuilding = await Building.findOne({name: 'Br. Andrew Gonzalez'}, '_id');
     let buildingID = currBuilding._id;
     await Restroom.create ({
       floor: 1,
@@ -295,34 +411,7 @@ async function add() {
       buildingID: buildingID
     });
 
-    currBuilding = await Building.findOne({name: 'St. Miguel Hall'}, '_id');
-    buildingID = currBuilding._id;
-    await Restroom.create ({
-      floor: 1,
-      gender: 'MALE',
-      category: 'STUDENT',
-      buildingID: buildingID
-    });
-    await Restroom.create ({
-      floor: 1,
-      gender: 'FEMALE',
-      category: 'STUDENT',
-      buildingID: buildingID
-    });
-    await Restroom.create ({
-      floor: 2,
-      gender: 'MALE',
-      category: 'STUDENT',
-      buildingID: buildingID
-    });
-    await Restroom.create ({
-      floor: 2,
-      gender: 'FEMALE',
-      category: 'STUDENT',
-      buildingID: buildingID
-    });
-
-    currBuilding = await Building.findOne({name: 'Velasco Hall'}, '_id');
+    currBuilding = await Building.findOne({name: 'Gokongwei Hall'}, '_id');
     buildingID = currBuilding._id;
     await Restroom.create ({
       floor: 1,
@@ -354,8 +443,8 @@ async function add() {
     console.log(e.message)
   }
 }
-*/
 
+*/
 /*
 // query()
 async function query() {
