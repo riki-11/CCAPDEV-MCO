@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 
@@ -20,7 +21,8 @@ const reviewSchema = new mongoose.Schema({
     required: true
   },
   photo: {
-    type: Buffer
+    data: Buffer, 
+    contentType: String 
   },
   amenities: {
     type: [String],
@@ -49,6 +51,7 @@ const reviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    default: '64bd405a83eecd81b5a069e1'
     //required: true
   }
 

@@ -5,7 +5,6 @@
         <title>Search for a Review</title>
         <link rel="stylesheet" href="css/select-restroom.css">
         <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/styles.css">
       </head>
     <body>
         <div class="h-80-screen bg-primarybg">
@@ -15,27 +14,32 @@
                 <span class="makereview-subtitle">Stories like yours are what helps flushers have better comfort. Share your experience and help out a fellow flusher!</span>
                 <h1>{{test.name}}</h1>
 
-                <!-- Make it a get request -->
                 <form action="/find-restroom" method="get">
-                    <label for="buildings" class="bg-white">Select a building</label>
-                    <select name="buildings" id="buildings">
+                    <label for="building" class="bg-white">Select a building</label>
+                    <select name="building" id="building">
                         <!-- Generate this dynamically -->
                         {{#each buildingNames}}
                             <option value="{{this}}">{{this}}</option>
                         {{/each}}
                     </select>
-                    <label for="floors" class="bg-white">Select a floor</label>
-                    <select name="floors" id="floors" >
+                    <label for="floor" class="bg-white">Select a floor</label>
+                    <select name="floor" id="floor" >
                         <!-- generate this dynamically -->
+                        {{#each buildingFloors}}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
                     </select>
-                    <label for="genders" class="bg-white">Select a gender</label>
-                    <select name="genders" id="genders">
+                    <label for="gender" class="bg-white">Select a gender</label>
+                    <select name="gender" id="gender">
                         <!-- Generate this dynamically -->
+                        <option value="FEMALE">Female</option>
+                        <option value="MALE">Male</option>
                     </select>
                     <button class="bg-secondary" type="submit">Search</button>
                 </form>
                 
             </div>
         </div>
+        <script src="js/select-restroom.js"></script>
     </body>
 </html>
