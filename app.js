@@ -141,7 +141,7 @@ app.get('/select-restroom', (req, res) => {
 
 app.get('/find-restroom', (req, res) => {
   restroomController.getRestroomByInfo(req, res).then(restroomBuilding => {
-    console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
+    //console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
   });
 
   // After selecting a restroom to review, it should redirect to create-review
@@ -184,19 +184,20 @@ app.get('/establishment-business', (req, res) => {
 // Use body-parser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Define a route for handling the form submission
-app.post('/usersignup', userController.addUser);
-app.post('/createreview', upload.single('photo'), reviewController.addReview);
-app.post('/updateinfo', userController.updateUser);
-
 const storage = multer.memoryStorage();
-
 const upload = multer({ 
   storage,
   limits: {
     fileSize: 10 * 1024 * 1024 // 10 MB
   }
 });
+
+// Define a route for handling the form submission
+app.post('/usersignup', userController.addUser);
+app.post('/createreview', upload.single('photo'), reviewController.addReview);
+app.post('/updateinfo', userController.updateUser);
+
+
 
 //app.post()
 //App session middleware

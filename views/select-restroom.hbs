@@ -20,7 +20,7 @@
                     <select name="building" id="building">
                         <!-- Generate this dynamically -->
                         {{#each buildingNames}}
-                            <option value="{{this}}">{{this}}</option>
+                            <option value="{{this.objectId}}">{{this}}</option>
                         {{/each}}
                     </select>
                     <label for="floor" class="bg-white">Select a floor</label>
