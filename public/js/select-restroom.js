@@ -24,8 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const bldgDropdown = document.getElementById('building');
   const floorDropdown = document.getElementById('floor');
 
+  console.log(bldgDropdown);
+
   // Call changFloorNums upon loading the page as well
   changeFloorNums();
+  console.log('IM HERE!');
 
   // Dynamically changes the no. of floor options per building
   bldgDropdown.addEventListener('change', changeFloorNums);

@@ -142,17 +142,18 @@ app.get('/select-restroom', (req, res) => {
 app.get('/find-restroom', (req, res) => {
   restroomController.getRestroomByInfo(req, res).then(restroomBuilding => {
     //console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
+    console.log('cool');
   });
 
   // After selecting a restroom to review, it should redirect to create-review
-  res.redirect("/create-review")
+  res.redirect("/create-review");
 });
 
 // Asynchronous request to get the data of a SPECIFIC building in the database
 app.get('/get-building-data', async (req, res) => {
   const allBldgs = await buildingController.getAllBuildings();
   const selectedBldg = req.query.building;
-  const matchedBldg = allBldgs.find(building => building.name === selectedBldg)
+  const matchedBldg = allBldgs.find(building => building.name === selectedBldg);
 
   // If we successfully found the right bldg in the database, send a response
   if (matchedBldg) {
