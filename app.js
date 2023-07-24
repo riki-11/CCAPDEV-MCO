@@ -140,8 +140,8 @@ app.get('/select-restroom', (req, res) => {
 });
 
 app.get('/find-restroom', (req, res) => {
-  restroomController.getRestroomByInfo(req, res).then(query => {
-    console.log(`QUERY: ${JSON.stringify(query, null, 2)}`);
+  restroomController.getRestroomByInfo(req, res).then(restroomBuilding => {
+    //console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
   });
 
   // After selecting a restroom to review, it should redirect to create-review
@@ -200,9 +200,7 @@ app.get('/establishment-business', (req, res) => {
 // Use body-parser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 const storage = multer.memoryStorage();
-
 const upload = multer({ 
   storage,
   limits: {
