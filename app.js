@@ -34,6 +34,7 @@ import User from './models/User.js';
 import Building from './models/Building.js';
 import Owner from './models/Owner.js';
 import Restroom from './models/Restroom.js';
+import { match } from "assert";
 
 
 const port = process.env.PORT;
@@ -111,12 +112,13 @@ app.get('/search', (req, res) => {
   });
 });
 
+/* ROUTES FOR /select-restroom */
+
+// Upon visiting /select-restroom page
 app.get('/select-restroom', (req, res) => {
   
   // Get all the buildings from the database
   buildingController.getAllBuildings().then(buildings => {
-    
-    
     var buildingNames = [];
     var buildingFloors = [];
     buildings.forEach(building => {
@@ -127,12 +129,10 @@ app.get('/select-restroom', (req, res) => {
       buildingFloors.push(building.numOfFloors);
     })
 
-    console.log(buildingNames);
-
-
     res.render("select-restroom",  {
       title: "Select a Restroom To Review",
       forBusiness: false, 
+      buildings: buildings,
       buildingNames: buildingNames,
       buildingFloors: buildingFloors
     })
@@ -140,13 +140,29 @@ app.get('/select-restroom', (req, res) => {
 });
 
 app.get('/find-restroom', (req, res) => {
-  restroomController.getRestroomByInfo(req, res).then(restroomBuilding => {
-    console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
+  restroomController.getRestroomByInfo(req, res).then(query => {
+    console.log(`QUERY: ${JSON.stringify(query, null, 2)}`);
   });
 
   // After selecting a restroom to review, it should redirect to create-review
   res.redirect("/create-review")
 });
+
+// Asynchronous request to get the data of a SPECIFIC building in the database
+app.get('/get-building-data', async (req, res) => {
+  const allBldgs = await buildingController.getAllBuildings();
+  const selectedBldg = req.query.building;
+  const matchedBldg = allBldgs.find(building => building.name === selectedBldg)
+
+  // If we successfully found the right bldg in the database, send a response
+  if (matchedBldg) {
+    res.json(matchedBldg);
+  } else {
+    res.status(404).send('Building not found');
+  }
+});
+
+/* END OF ROUTES FOR /select-restroom */
 
 app.get('/create-review', (req, res) => {
   res.render("createreview", {
@@ -184,10 +200,6 @@ app.get('/establishment-business', (req, res) => {
 // Use body-parser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Define a route for handling the form submission
-app.post('/usersignup', userController.addUser);
-app.post('/createreview', upload.single('photo'), reviewController.addReview);
-app.post('/updateinfo', userController.updateUser);
 
 const storage = multer.memoryStorage();
 
@@ -197,6 +209,11 @@ const upload = multer({
     fileSize: 10 * 1024 * 1024 // 10 MB
   }
 });
+
+// Define a route for handling the form submission
+app.post('/usersignup', userController.addUser);
+app.post('/createreview', upload.single('photo'), reviewController.addReview);
+app.post('/updateinfo', userController.updateUser);
 
 //app.post()
 //App session middleware
