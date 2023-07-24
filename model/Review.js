@@ -20,8 +20,17 @@ const reviewSchema = new mongoose.Schema({
     required: true
   },
   photo: {
-    type: Buffer
-  },
+    data: {
+        type: Buffer,
+        default: Buffer.from([]), 
+      },
+      contentType: {
+        type: String,
+        default: 'image/jpeg', 
+      },
+    required: true
+},
+
   amenities: {
     type: [String],
     default: [] 
