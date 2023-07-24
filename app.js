@@ -188,15 +188,7 @@ app.get('/select-restroom', (req, res) => {
   });
 });
 
-app.get('/find-restroom', (req, res) => {
-  restroomController.getRestroomByInfo(req, res).then(restroomBuilding => {
-    //console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
-    console.log('cool');
-  });
-
-  // After selecting a restroom to review, it should redirect to create-review
-  res.redirect("/create-review");
-});
+app.get('/find-restroom', restroomController.getRestroomByInfo);
 
 // Asynchronous request to get the data of a SPECIFIC building in the database
 app.get('/get-building-data', async (req, res) => {
@@ -214,11 +206,17 @@ app.get('/get-building-data', async (req, res) => {
 
 /* END OF ROUTES FOR /select-restroom */
 
+
 app.get('/create-review', (req, res) => {
-  res.render("createreview", {
-    title: "Create a Review",
-    forBusiness: false
-  });
+  const { name, floor, gender, restroomId } = req.query;
+  const dataToSend = {
+    name: name,
+    floor: floor,
+    gender: gender,
+    restroomId: restroomId
+  };
+
+  res.render('createreview', { data: dataToSend });
 });
 
 app.get('/edit-review', (req, res) => {

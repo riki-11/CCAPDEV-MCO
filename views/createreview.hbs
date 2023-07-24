@@ -73,8 +73,8 @@
 
                     <span class="label">Add some Photos</span> 
                     <span class="label-detail">Keep it clean! Literally.</span>
-                    <input type="file" name="photo" accept="image/*">
-
+                    <input type="file" name="photo" accept="image/*" required>
+                    <input type="hidden" name="restroomId" id='restroomId'>
                     <br>
                     <br>
                     <input type="submit" class="submit" value="Submit Review">
@@ -84,5 +84,6 @@
 
         <script src="https://kit.fontawesome.com/3db8d82098.js" crossorigin="anonymous"></script>
         <script src="//localhost:35729/livereload.js"></script>
+        <script src="js/create-review.js"></script>
     </body>
 </html>
