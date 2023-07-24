@@ -17,35 +17,40 @@
             </div>
             <div class="flex flex-col self-center mt-8">
                 <div>
-                    <span class="text-4xl font-extrabold">Juan Dela Cruz</span>
+                    <span class="text-4xl font-extrabold">{{user.firstName}} {{user.lastName}}</span>
                 </div>
                 <div>
-                    <span class="font-extralight text-sm text-gray-400">@user1011</span>
+                    <span class="font-extralight text-sm text-gray-400">@{{user.username}}</span>
                 </div>
+
             </div>
         </div>
         <div class="mt-11">
-            <h2 class="border-b-2 border-secondary leading-[.01rem]"><span class="ml-[6rem] bg-primarybg px-[10px] text-[30px]">My Reviews: 4</span></h2>
+            <h2 class="border-b-2 border-secondary leading-[.01rem]"><span class="ml-[6rem] bg-primarybg px-[10px] text-[30px]">My Reviews: {{reviews.length}}</span></h2>
         </div>
         <div class="w-full overflow-auto mb-10"> <!--Revie0w Container-->
+            {{!-- Loop through each review in the reviews array --}}
+            {{#each reviews}}
             <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
                 <div class="min-w-fit">
                     <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
                 </div>
                 <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
                     <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishment" class="text-secondary">Henry Sy, 8th Floor, Male</a></p>
-                        <p class="w-fit ml-auto">5 days ago</p>
+                        <p>Posted a review for <a href="establishment" class="text-secondary">{{this.restroomID.name}}</a></p>
+                        <p class="w-fit ml-auto">{{this.dateCreated}}</p>
                     </div>       
+                    <div class="text-white mt-1">
+                        {{this.title}}
+                    </div>
                     <div class="mt-1">
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                        {{!-- Display toilet paper icons based on the rating --}}
+                        {{#times this.rating}}
+                            <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+                        {{/times}}
                     </div>
                     <div class="text-white mt-1">
-                        Sobrang linis at maayos yung restroom na 'to, promise! Parang bago lang siya. Walang amoy na hindi maganda, kahit na madaming tao ang gumagamit.
+                        {{this.content}}
                     </div>
                     <div class="flex mt-1 gap-x-5">
                         <a href="edit-review" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
@@ -53,81 +58,8 @@
                     </div>
                 </div>  
             </div>
-            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
-                <div class="min-w-fit">
-                    <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
-                </div>
-                <div class="flex flex-col gap-y-1 text-sm text-neutral-400">   
-                    <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishment" class="text-secondary">Henry Sy, 9th Floor, Male</a></p>
-                        <p class="w-fit ml-auto">10 days ago</p>
-                    </div>       
-                    <div class="mt-1">
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                    </div>
-                    <div class="text-white mt-1">
-                        Ay grabe, ang baho ng CR na 'to! Parang hindi na nalinis ng matagal. Nakakasuka talaga. Sana mas maalagaan nila nang maayos, kasi nakaka-turn off talaga ang amoy.
-                    </div>
-                    <div class="flex mt-1 gap-x-5">
-                        <a href="edit-review" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
-                        <a href="delete-review" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
-                    </div>
-                </div>  
-            </div>
-            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
-                <div class="min-w-fit">
-                    <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
-                </div>
-                <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
-                    <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishment" class="text-secondary">Velasco, 3rd Floor, Male</a></p>
-                        <p class="w-fit ml-auto">12 days ago</p>
-                    </div>    
-                    <div class="mt-1">
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                    </div>
-                    <div class="text-white mt-1">
-                        Nakakainis talaga ang restroom na 'to! Hindi lang mabaho, kundi sobrang dumi rin. Parang hindi pinupunasan o nililinis ng maayos. Hindi rin consistently refilled ung sabon dito 
-                    </div>
-                    <div class="flex mt-1 gap-x-5">
-                        <a href="edit-review" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
-                        <a href="delete-review" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
-                    </div>
-                </div>  
-            </div>
-            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
-                <div class="min-w-fit">
-                    <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
-                </div>
-                <div class="flex flex-col gap-y-1 text-sm text-neutral-400">        
-                    <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishment" class="text-secondary">Henry Sy, 7th Floor, Male</a></p>
-                        <p class="w-fit ml-auto">19 days ago</p>
-                    </div>  
-                    <div class="mt-1">
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                    </div>
-                    <div class="text-white mt-1">
-                        Okay naman yung restroom na 'to, pero medyo kulang sa kasilyas at tissue. Hindi siya masyadong maayos ma-maintain. Pero hindi naman ganun kalala. Medyo average lang siya.
-                    </div>
-                    <div class="flex mt-1 gap-x-5">
-                        <a href="edit-review" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
-                        <a href="delete-review" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
-                    </div>
-                </div>  
-            </div>
+            {{/each}}
+
         </div>
     </div>
 </body>
