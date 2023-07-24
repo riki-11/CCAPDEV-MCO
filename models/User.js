@@ -24,9 +24,15 @@ const userSchema = new mongoose.Schema({
         unique: true,
         match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     },
-    birthday: {
-        type: Date,
-        default: Date.now
+    photo: {
+        data: {
+            type: Buffer,
+            default: Buffer.from([]), 
+          },
+          contentType: {
+            type: String,
+            default: 'image/jpeg', 
+          },
     }
 });
 
