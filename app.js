@@ -21,6 +21,18 @@ import './livereload.js';
 
 import path from 'path';
 
+// Controller Imports
+import userController from './controllers/userController.js'; 
+import reviewController from './controllers/reviewController.js';
+import buildingController from "./controllers/buildingController.js"; 
+
+// Database access
+import User from './models/User.js';
+import Building from './models/Building.js';
+import Owner from './models/Owner.js';
+import Restroom from './models/Restroom.js';
+
+
 const port = process.env.PORT;
 
 db.connect();
@@ -49,7 +61,6 @@ app.get("/", (req, res) => {
     title: "Flush Finder",
     forBusiness: false
   });
-  app.get("/", buildingController.getAllBuildings);
 
 });
 
@@ -98,10 +109,21 @@ app.get('/search', (req, res) => {
 });
 
 app.get('/select-restroom', (req, res) => {
-  res.render("select-restroom",  {
-    title: "Select a Restroom To Review",
-    forBusiness: false
-  })
+  
+  buildingController.getAllBuildings().then(buildings => {
+    var buildingNames = [];
+    buildings.forEach(building => {
+      buildingNames.push(building.name);
+    })
+    console.log(buildingNames);
+    res.render("select-restroom",  {
+      title: "Select a Restroom To Review",
+      forBusiness: false, 
+      buildingNames: buildingNames,
+    })
+  });
+
+
 });
 
 app.get('/create-review', (req, res) => {
@@ -132,11 +154,10 @@ app.get('/establishment-business', (req, res) => {
   });
 });
 
+// CONTROLLER METHODS
 
 // get form 
-import userController from './controllers/userController.js'; 
-import reviewController from './controllers/reviewController.js';
-import buildingController from "./controllers/buildingController.js"; 
+
 
 // Use body-parser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -152,10 +173,6 @@ app.post('/createreview', reviewController.addReview);
 //   saveUnitialized: 
 // }))
 
-// Database access
-import User from './models/User.js';
-import Building from './models/Building.js';
-import Owner from './models/Owner.js';
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST
 app.use((req, res) => {
@@ -167,10 +184,8 @@ app.use((req, res) => {
 
 
 // Database access
-import User from './models/User.js';
-import Building from './models/Building.js';
-import Owner from './models/Owner.js';
-import Restroom from './models/Restroom.js';
+
+
 
 
 
