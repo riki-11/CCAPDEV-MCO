@@ -12,6 +12,10 @@ const buildingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    numOfFloors: {
+        type: Number,
+        required: true
+    },
     ownerID: {
         type: Schema.Types.ObjectId,
         ref: 'Owner',
