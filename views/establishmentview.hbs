@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="css/establishmentview.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="stylesheet" href="css/styles.css">
+        
     </head>
     <body>  
         <div class="w-full px-10">
@@ -13,9 +14,7 @@
                     <!-- DETAILS CONTAINER -->
                     <div class="establishment-details-content-container">
                         <!-- Image --> 
-                        <div class="establishment-image-container">
-                            <div class="establishment-image"></div>                
-                        </div>
+                        <div class="establishment-image-container"></div>
                         
                         <div class="establishment-details-text-content-container">
                             <!-- CONTENT CONTAINER -->
@@ -39,7 +38,14 @@
                                     </span>
                                 </div>
                                 <div class="left-gotomap-details-container"> <br>
-                                    <a href="images/campus-map-large.jpg" >Go To DLSU Map ></a>
+                                    <div class="popup-img" id="popup-1">
+                                        <div class="overlay"></div>
+                                        <div class="content">
+                                            <div class="closebtn" {{!-- onclick="toggleppopupclose()" --}}>&times;</div>
+                                            <img src="images/campus-map-large.jpg" alt="DLSU Map">
+                                        </div>
+                                    </div>
+                                    <button id="mapbtn"{{!--  onclick="togglepopup()" --}}>Go To DLSU Map</button>
                                 </div>
                             </div>
                             <div class="right-details-container">
@@ -172,8 +178,38 @@
                                     <div class="flex mt-1 gap-x-5">
                                         <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
                                         <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                        <button class="hover:opacity-80" id="replytocomment1"><i class="fa-solid fa-reply" ></i> Reply</button>
+                                        
                                     </div>
                                 </div>  
+                            </div>
+                            <div class="replies-container">
+                                <p  class="text-secondary" >Replies</p>
+                                <div class="reply-blocks"> <!--reply Blocks-->
+                                    <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">
+                                        <div class="flex overflow-hidden">
+                                            <p>Jose Dela Cruz <a href="establishment" class="text-secondary">owner</a> replied to a comment</p>
+                                            <p class="w-fit ml-auto">2 days ago</p>
+                                        </div>
+                                        <div class="text-white mt-1">
+                                            Thank you for taking the time to share your valuable feedback with us about our establishment
+                                        </div>
+                                        <div class="flex mt-1 gap-x-5">
+                                            <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
+                                            <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                                                                
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="reply-form-container" id="reply-form-container1">
+                                    <form action="" id="reply-textarea">                                     
+                                        <span class="text-secondary">Write a reply</span> <br>
+                                        <textarea class="text-black" name="form-review" id="form-review" cols="70" rows="3" placeholder="your reply here.."></textarea>
+                                        <br>
+                                        
+                                        <input type="submit" class="submit"  value="Submit Review">
+                                    </form>
+                                </div>
                             </div>
                             <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
                                 <div class="w-1/4">
@@ -197,9 +233,22 @@
                                     <div class="flex mt-1 gap-x-5">
                                         <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
                                         <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                        <button class="hover:opacity-80"id="replytocomment2"><i class="fa-solid fa-reply"></i> Reply</button>
                                     </div>
-                                </div>  
+                                </div> 
                             </div>
+                            <div class="replies-container">                
+                                    <h1 class="text-secondary" id="reply-caption-container2">Replies</h1>
+                                    <div class="reply-form-container" id="reply-form-container2">
+                                        <form action="" id="reply-textarea">                                     
+                                            <span class="text-secondary">Write a reply</span> <br>
+                                            <textarea class="text-black" name="form-review" id="form-review" cols="70" rows="3" placeholder="your reply here.."></textarea>
+                                            <br>
+                                            
+                                            <input type="submit" class="submit"  value="Submit Review">
+                                        </form>
+                                    </div>                                    
+                                </div>
                             <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
                                 <div class="w-1/4">
                                     <img src="./images/bldg-henry.jpeg" alt="Building Image" class=" rounded-sm h-auto w-auto">
@@ -222,9 +271,22 @@
                                     <div class="flex mt-1 gap-x-5">
                                         <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
                                         <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                        <button class="hover:opacity-80" id="replytocomment3"><i class="fa-solid fa-reply"></i> Reply</button>
                                     </div>
-                                </div>  
+                                </div> 
                             </div>
+                            <div class="replies-container">             
+                                    <h1  class="text-secondary" id="reply-caption-container3">Replies</h1>
+                                    <div class="reply-form-container" id="reply-form-container3">   
+                                    <form action="" id="reply-textarea">                                     
+                                        <span class="text-secondary">Write a reply</span> <br>
+                                        <textarea class="text-black" name="form-review" id="form-review" cols="70" rows="3" placeholder="your reply here.."></textarea>
+                                        <br>
+                                        
+                                        <input type="submit" class="submit"  value="Submit Review">
+                                    </form>
+                                    </div>
+                            </div> 
                             <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
                                 <div class="w-1/4">
                                     <img src="./images/bldg-henry.jpeg" alt="Building Image" class="rounded-sm h-auto w-auto">
@@ -247,16 +309,111 @@
                                     <div class="flex mt-1 gap-x-5">
                                         <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
                                         <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
+                                        <button class="hover:opacity-80"id="replytocomment4"><i class="fa-solid fa-reply"></i> Reply</button>
                                     </div>
-                                </div>  
+                                </div> 
+                            </div>
+                            <div class="replies-container">                                
+                                    <h1  class="text-secondary"id="reply-caption-container4">Replies</h1>
+                                    <div class="reply-form-container" id="reply-form-container4">    
+                                        <form action="" id="reply-textarea">                                     
+                                            <span class="text-secondary">Write a reply</span> <br>
+                                            <textarea class="text-black" name="form-review" id="form-review" cols="70" rows="3" placeholder="your reply here.."></textarea>
+                                            <br>
+                                            
+                                            <input type="submit" class="submit"  value="Submit Review">
+                                        </form>
+                                    </div> 
                             </div>
                         </div>
                     </div>
-
-
-                </div>
-                    
+                </div>                    
             </div>
         </div>
+        <script> 
+            
+            //DLSU MAP FUNCTION
+            function togglepopup(){
+                document.getElementById("popup-1").classList.toggle("active");
+            }
+            
+            document.addEventListener("DOMContentLoaded", function() {
+            var mapButton = document.getElementById("mapbtn");
+            mapButton.addEventListener("click", togglepopup);
+            });
+            
+            //REPLY BUTTON FUNCTION (for comment 1)
+            function togglereply1(){
+                var x = document.getElementById("reply-form-container1");
+                
+                if(x.style.display == "none"){
+                    x.style.display = "block";
+                }
+                else{
+                    x.style.display = "none";
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+            var reply = document.getElementById("replytocomment1");
+            reply.addEventListener("click", togglereply1);
+            });
+            
+            //REPLY BUTTON FUNCTION (for comment 2)
+            function togglereply2(){
+                var x = document.getElementById("reply-form-container2");
+                var y = document.getElementById("reply-caption-container2");
+                
+                if(x.style.display == "none"){
+                    x.style.display = "block";
+                    y.style.display = "block";
+                }
+                else{
+                    x.style.display = "none";
+                    y.style.display = "none";
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+            var reply = document.getElementById("replytocomment2");
+            reply.addEventListener("click", togglereply2);
+            });
+
+            //REPLY BUTTON FUNCTION (for comment 3)
+            function togglereply3(){
+                var x = document.getElementById("reply-form-container3");
+                var y = document.getElementById("reply-caption-container3");
+                
+                if(x.style.display == "none"){
+                    x.style.display = "block";
+                    y.style.display = "block";
+                }
+                else{
+                    x.style.display = "none";
+                    y.style.display = "none";
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+            var reply = document.getElementById("replytocomment3");
+            reply.addEventListener("click", togglereply3);
+            });
+
+            //REPLY BUTTON FUNCTION (for comment 4)
+            function togglereply4(){
+                var x = document.getElementById("reply-form-container4");
+                var y = document.getElementById("reply-caption-container4");
+                
+                if(x.style.display == "none"){
+                    x.style.display = "block";
+                    y.style.display = "block";
+                }
+                else{
+                    x.style.display = "none";
+                    y.style.display = "none";
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+            var reply = document.getElementById("replytocomment4");
+            reply.addEventListener("click", togglereply4);
+            });
+        </script>
     </body>
 </html>
