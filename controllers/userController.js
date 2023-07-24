@@ -38,10 +38,12 @@ const userController = {
     */
     updateUser: async function(req, res) {
         // get user ID, find it in database, then update the database
+
         const photoData = req.file;
 
         const { firstname, lastname, username, email, password } = req.body;
         const sampleUserID = new mongoose.Types.ObjectId('64bd2ba04e2c41c0fa918e4f'); 
+
         try {
             const updatedUser = await User.findById(sampleUserID); //userID should be obtained from session
             if (!updatedUser) {
@@ -62,6 +64,7 @@ const userController = {
             await updatedUser.save();
             console.log(updatedUser);
 
+            console.log('User updated')
             res.redirect('http://localhost:3000/profile');
         } catch (e) {
             console.error('Error updating user ', e);
