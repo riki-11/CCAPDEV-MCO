@@ -12,18 +12,8 @@ const restroomController = {
 
     try {
       // Get building id 
-      const buildingobj = await Building.findOne({name: building}, (err, document) => {
-        if (err){
-          console.log('Error in query', err); 
-        } else {
-          if (document) {
-            console.log('Object id: ', document._id);
-          } else {
-            console.log('Document not found');
-          }
-        }
-      });
-
+      const buildingobj = await Building.findOne({name: building});
+      //console.log(buildingobj._id);
       //build query
       const query = {
         floor: floor,
@@ -32,16 +22,14 @@ const restroomController = {
       }
 
       //get restroom id
-      const restroom = await Restroom.findOne(query, err => {
-        if (err) return err; 
+      const restroom = await Restroom.findOne(query);
+      //console.log(restroom._id)
+      //res.send(restroom)
+      const dataToSend = { name: building, floor: floor, gender: gender, restroomId: restroom._id};
+      const queryString = new URLSearchParams(dataToSend).toString();
+      res.redirect(`http://localhost:3000/create-review?${queryString}`);
+      //res.redirect('http://localhost:3000/create-review');
 
-        console.log('Restroom found');
-      })
-      
-      res.send(restroom)
-      res.redirect('http://localhost:3000/create-review');
-      // const restroomBuilding = req.query.building;
-      // return restroomBuilding;
     } catch (error) {
       console.error('Error fetching restrooms:', error);
       res.status(500).send('Server error');

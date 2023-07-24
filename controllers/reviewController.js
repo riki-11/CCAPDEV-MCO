@@ -8,10 +8,11 @@ const upload = multer({ storage });
 
 const reviewController = {
     addReview: async function(req, res) {
+      //console.log(req.body.restroomId);
       const photoData = req.file;
 
       // Extract form data from req.body
-      const { rate, 'form-chkbx': amenities, 'form-date': date, 'form-review-title': title, 'form-review': content } = req.body;
+      const { rate, 'form-chkbx': amenities, 'form-date': date, 'form-review-title': title, 'form-review': content} = req.body;
 
       // Convert the rate from string to a number
       const rating = parseInt(rate);
@@ -26,6 +27,7 @@ const reviewController = {
           date,
           title,
           content,
+          restroomID: req.body.restroomId,
           photo: {
             data: photoData.buffer,
             contentType: photoData.mimetype

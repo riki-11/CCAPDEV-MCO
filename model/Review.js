@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 const Schema = mongoose.Schema;
 
 
@@ -21,9 +20,17 @@ const reviewSchema = new mongoose.Schema({
     required: true
   },
   photo: {
-    data: Buffer, 
-    contentType: String 
-  },
+    data: {
+        type: Buffer,
+        default: Buffer.from([]), 
+      },
+      contentType: {
+        type: String,
+        default: 'image/jpeg', 
+      },
+    required: true
+},
+
   amenities: {
     type: [String],
     default: [] 
@@ -32,7 +39,7 @@ const reviewSchema = new mongoose.Schema({
   restroomID: {    
     type: Schema.Types.ObjectId,
     ref: 'Restroom',
-    //required: true
+    required: true
   },
 
   isClean: {
@@ -51,13 +58,7 @@ const reviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-<<<<<<< HEAD
-    default: '64bd2ba04e2c41c0fa918e4f'
-    //required: true
-=======
-    default: '64bd2ba04e2c41c0fa918e4f',
     required: true
->>>>>>> main
   }
 
 });

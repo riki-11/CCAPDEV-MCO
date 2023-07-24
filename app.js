@@ -2,6 +2,8 @@
 import "dotenv/config";
 import db from './models/mongoose.js';
 import multer from 'multer';
+import mongoose from 'mongoose';
+
 
 
 // Import equivalent of __dirname
@@ -95,6 +97,16 @@ app.get('/building', async (req, res) => {
 
 });
 
+// Register the 'times' helper
+const handlebars = exphbs.create({});
+handlebars.handlebars.registerHelper('times', function(n, block) {
+  let accum = '';
+  for (let i = 0; i < n; ++i) {
+    accum += block.fn(i);
+  }
+  return accum;
+});
+
 
 app.get('/register', (req, res) => {
   res.render("register", {
@@ -110,18 +122,55 @@ app.get('/login', (req, res) => {
   });
 });
 
-app.get('/profile', (req, res) => {
-  res.render("viewprofile", {
-    title: "Profile",
-    forBusiness: false
-  });
+
+app.get('/profile', async (req, res) => {
+  const userID = '64bd2ba04e2c41c0fa918e4f';
+
+  try {
+
+    // Fetch user data
+    const user = await User.findById(userID).lean();
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Fetch reviews data using the getReviewsByUserID function
+    const reviews = await userController.getReviewsByUserID();
+
+    // Render the "viewprofile" template with both user and reviews data
+    res.render("viewprofile", {
+      title: "Profile",
+      forBusiness: false,
+      user: user,
+      reviews: reviews,
+    });
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).send('Server error');
+  }
 });
 
-app.get('/edit-profile', (req, res) => {
-  res.render("editprofile", {
-    title: "Edit Profile",
-    forBusiness: false
-  });
+app.get('/edit-profile', async (req, res) => {
+  const userID = '64bd2ba04e2c41c0fa918e4f'; 
+
+  try {
+    // Fetch the user data from the database
+    const user = await User.findById(userID).lean();
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    res.render('editprofile', { 
+      title: 'Edit Profile',
+      forBusiness: false,
+      user: user // Pass the user data to the template
+    });
+
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).send('Server error');
+  }
 });
 
 app.get('/results', (req, res) => {
@@ -166,15 +215,7 @@ app.get('/select-restroom', (req, res) => {
   });
 });
 
-app.get('/find-restroom', (req, res) => {
-  restroomController.getRestroomByInfo(req, res).then(restroomBuilding => {
-    //console.log(`RESTROOM BUILDING HERE: ${restroomBuilding}`);
-    console.log('cool');
-  });
-
-  // After selecting a restroom to review, it should redirect to create-review
-  res.redirect("/create-review");
-});
+app.get('/find-restroom', restroomController.getRestroomByInfo);
 
 // Asynchronous request to get the data of a SPECIFIC building in the database
 app.get('/get-building-data', async (req, res) => {
@@ -192,11 +233,17 @@ app.get('/get-building-data', async (req, res) => {
 
 /* END OF ROUTES FOR /select-restroom */
 
+
 app.get('/create-review', (req, res) => {
-  res.render("createreview", {
-    title: "Create a Review",
-    forBusiness: false
-  });
+  const { name, floor, gender, restroomId } = req.query;
+  const dataToSend = {
+    name: name,
+    floor: floor,
+    gender: gender,
+    restroomId: restroomId
+  };
+
+  res.render('createreview', { data: dataToSend });
 });
 
 app.get('/edit-review', (req, res) => {
@@ -225,6 +272,7 @@ app.get('/establishment-business', (req, res) => {
 // Use body-parser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 const storage = multer.memoryStorage();
 const upload = multer({ 
   storage,
@@ -232,6 +280,7 @@ const upload = multer({
     fileSize: 10 * 1024 * 1024 // 10 MB
   }
 });
+
 
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
