@@ -663,4 +663,36 @@ p {
 }
 
 /* End of CSS for business-profile.html */
-  
+
+
+/* CLASSES FOR ALL BUILDING IMAGE BACKGROUNDS */
+
+.henry-bg {
+  background-image: url("/images/bldg-henry.jpeg");
+}
+
+.andrew-bg {
+  background-image: url("/images/bldg-andrew.jpg");
+}
+
+.gokongwei-bg {
+  background-image: url("/images/bldg-goks.jpeg");
+}
+
+.miguel-bg {
+  background-image: url("/images/bldg-miguel.jpg");
+}
+
+.velasco-bg {
+  background-image: url("/images/bldg-velasco.jpeg");
+}
+
+.razon-bg {
+  background-image: url("/images/bldg-razon.jpeg");
+}
+
+.st-lasalle-bg {
+  background-image: url("/images/bldg-stlasalle.jpeg")
+}
+
+/* add more building classes as necessary */

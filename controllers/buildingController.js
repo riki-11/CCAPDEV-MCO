@@ -17,15 +17,23 @@ const buildingController = {
 
     getBuildingByName: async function (buildingName) {
       try {
-        const building = await Building.find({name: buildingName});
+        const building = await Building.findOne({name: buildingName}).lean();
         return building;
       } catch (error) {
         console.error('Error fetching buildings:', error);
         res.status(500).send('Server error');
       }
+    },
+
+    getBuildingCode: async function(buildingName) {
+      try {
+        const building = await Building.findOne({name: buildingName}).lean();
+        return building.code;
+      } catch (error) {
+        console.error('Error fetching building code: ', error);
+        res.status(500).send('Server Error');
+      }
     }
-
-
 }
 
 export default buildingController;

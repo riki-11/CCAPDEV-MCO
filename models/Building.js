@@ -8,6 +8,13 @@ const buildingSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    // single-word building code for identification in code and css.
+    // example: Henry Sy -> henry, Br. Andrew Gonzalez -> andrew
+    code: {
+        type: String,
+        required: true,
+        unique: true
+    },
     numOfRestrooms: {
         type: Number,
         required: true

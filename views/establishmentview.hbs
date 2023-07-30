@@ -3,6 +3,7 @@
     <head>
         <title></title>
         <link rel="stylesheet" href="css/establishmentview.css">
+        <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
     <body>  
@@ -12,13 +13,13 @@
                     <!-- DETAILS CONTAINER -->
                     <div class="establishment-details-content-container">
                         <!-- Image --> 
-                        <div class="establishment-image-container"></div>
+                        <div id="establishment-banner" class="establishment-banner"></div>
                         
                         <div class="establishment-details-text-content-container">
                             <!-- CONTENT CONTAINER -->
                             <div class="left-details-container">
                                 <div class="left-title-details-container">
-                                    <span class="title">HENRY SY</span>
+                                    <span class="title">{{building.name}}</span>
                                     <div class="establishment-rating">
                                         <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
                                         <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
@@ -30,9 +31,7 @@
                                 
                                 <div class="left-captions-details-container">
                                     <span>
-                                        Built on the concept of a habitable tree, the DLSU Henry Sy, Sr. Hall commemorates the University’s centenary and illustrates its growing role in Philippine education as well as its commitment to environmental responsibility. 
-                                        <br><br>
-                                        The Hall has 14 floors of eco-friendly learning spaces and function areas where the academic community can gather for relaxation, interaction with one another, and official university activities. Interior areas of the building are named after various parts of a life-giving and nurturing tree
+                                        {{building.description}}
                                     </span>
                                 </div>
                                 <div class="left-gotomap-details-container"> <br>
@@ -328,6 +327,6 @@
                 </div>                    
             </div>
         </div>
-
+    <script src="js/establishment-view.js"></script>
     </body>
 </html>

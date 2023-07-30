@@ -90,11 +90,6 @@ app.get("/", async (req, res) => {
     forBusiness: false,
     allBldgs: allBldgs
   });
-
-app.get('/building', async (req, res) => {
-
-});
-
 });
 
 // Register the 'times' helper
@@ -218,19 +213,25 @@ app.get('/select-restroom', (req, res) => {
 app.get('/find-restroom', restroomController.getRestroomByInfo);
 
 // Asynchronous request to get the data of a SPECIFIC building in the database
-app.get('/get-building-data', async (req, res) => {
-  const allBldgs = await buildingController.getAllBuildings();
-  const selectedBldg = req.query.building;
-  const matchedBldg = allBldgs.find(building => building.name === selectedBldg);
-
+app.get('/get-building-data',  async (req, res) => {
+  const building = await buildingController.getBuildingByName(req.query.building);
   // If we successfully found the right bldg in the database, send a response
-  if (matchedBldg) {
-    res.json(matchedBldg);
+  if (building) {
+    res.json(building);
   } else {
     res.status(404).send('Building not found');
   }
 });
 
+// Asynchronous request go get a building's specific code
+app.get('/get-building-code', async (req, res) => {
+  const buildingCode = await buildingController.getBuildingCode(req.query.building);
+  if (buildingCode) {
+    res.json(buildingCode);
+  } else {
+    res.status(404).send('Building not found');
+  }
+})
 /* END OF ROUTES FOR /select-restroom */
 
 
@@ -254,10 +255,26 @@ app.get('/edit-review', (req, res) => {
 });
 
 app.get('/establishment', async (req, res) => {
-  res.render("establishmentview", {
-    title: "Establishment", // replace with title of from db
-    forBusiness: false,
-  }); 
+
+  try {
+    const buildingName = req.query.building;
+    const building = await buildingController.getBuildingByName(buildingName);
+    console.log(building);
+
+    if (!building) {
+      res.redirect('/404');
+    }
+
+    res.render("establishmentview", {
+      title: buildingName, // replace with title of from db
+      forBusiness: false,
+      building: building
+    }); 
+
+  } catch (error) {
+    res.status.send('Server error');
+  }
+
 });
 
 app.get('/establishment-business', (req, res) => {
@@ -290,7 +307,7 @@ app.post('/updateinfo', userController.updateUser);
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST
 app.use((req, res) => {
-  res.render("404", {
+  res.status(404).render("404", {
     title: "Error 404",
     forBusiness: false
   });
