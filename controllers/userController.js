@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import User from '../models/User.js';
 import Review from '../models/Review.js';
 
-
+// For image processing
 import multer from 'multer';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
