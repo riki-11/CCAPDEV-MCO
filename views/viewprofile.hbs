@@ -12,7 +12,7 @@
     <div class="w-7/12 m-auto overflow-hidden mt-16 ">
         <div class="flex gap-10">
             <div class="flex flex-col justify-center items-center gap-y-5 rounded-[5px] mt-5">
-                <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[5rem] h-[9.5rem] w-[9.5rem]">
+                <img src="{{imageSrc}}" alt="Profile Picture" class="rounded-[5rem] h-[9.5rem] w-[9.5rem]">
                 <a href="edit-profile" class="border border-white rounded-lg hover:bg-white hover:text-black p-2"><i class="fa-solid fa-pencil fa-sm"></i> Edit Profile</a>
             </div>
             <div class="flex flex-col self-center mt-8">
@@ -31,34 +31,9 @@
         <div class="w-full overflow-auto mb-10"> <!--Revie0w Container-->
             {{!-- Loop through each review in the reviews array --}}
             {{#each reviews}}
-            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
-                <div class="min-w-fit">
-                    <img src="./images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
-                </div>
-                <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
-                    <div class="flex overflow-hidden">
-                        <p>Posted a review for <a href="establishment" class="text-secondary">{{this.restroomID.name}}</a></p>
-                        <p class="w-fit ml-auto">{{this.dateCreated}}</p>
-                    </div>       
-                    <div class="text-white mt-1">
-                        {{this.title}}
-                    </div>
-                    <div class="mt-1">
-                        {{!-- Display toilet paper icons based on the rating --}}
-                        {{#times this.rating}}
-                            <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                        {{/times}}
-                    </div>
-                    <div class="text-white mt-1">
-                        {{this.content}}
-                    </div>
-                    <div class="flex mt-1 gap-x-5">
-                        <a href="edit-review" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
-                        <a href="delete-review" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
-                    </div>
-                </div>  
-            </div>
+                {{> review-block user=user imageSrc=imageSrc}}
             {{/each}}
+
 
         </div>
     </div>

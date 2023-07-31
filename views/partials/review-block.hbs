@@ -1,0 +1,27 @@
+<div class="mt-8 gap-4 flex justify-center"> 
+    <div class="min-w-fit">
+        <img src="{{imageSrc}}" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
+    </div>
+    <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
+        <div class="flex overflow-hidden">
+            <p>{{user.firstName}} posted a review for {{this.restroomID.buildingID.name}} <a href="establishment" class="text-secondary">{{this.restroomID.name}}</a></p>
+            <p class="w-fit ml-auto">{{this.dateCreated}}</p>
+        </div>       
+        <div class="text-white mt-1">
+            {{this.title}}
+        </div>
+        <div class="mt-1">
+            {{!-- Display toilet paper icons based on the rating --}}
+            {{#times this.rating}}
+                <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
+            {{/times}}
+        </div>
+        <div class="text-white mt-1">
+            {{this.content}}
+        </div>
+        <div class="flex mt-1 gap-x-5">
+            <a href="edit-review" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
+            <a href="delete-review" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
+        </div>
+    </div>  
+</div>

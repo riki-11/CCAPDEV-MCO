@@ -51,17 +51,24 @@ const userController = {
                 return res.status(404).send('User not found');
             }
 
-            console.log(lastname);
+            if (photoData) {
 
-            updatedUser.firstName = firstname;
-            updatedUser.lastName = lastname;
-            updatedUser.username = username;
-            updatedUser.email = email;
-            updatedUser.password = password;
-            updatedUser.photo = {
-                data: photoData.buffer,
-                contentType: photoData.mimetype,
-              };
+                updatedUser.firstName = firstname;
+                updatedUser.lastName = lastname;
+                updatedUser.username = username;
+                updatedUser.email = email;
+                updatedUser.password = password;
+                updatedUser.photo = {
+                    data: photoData.buffer,
+                    contentType: photoData.mimetype,
+                  };
+            } else {
+                updatedUser.firstName = firstname;
+                updatedUser.lastName = lastname;
+                updatedUser.username = username;
+                updatedUser.email = email;
+                updatedUser.password = password;
+            }
             await updatedUser.save();
             console.log(updatedUser);
 

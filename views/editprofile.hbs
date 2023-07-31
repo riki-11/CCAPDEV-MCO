@@ -12,15 +12,15 @@
     <!-- START OF MAIN CONTENT -->
     <div class="w-[60%] flex h-screen justify-center gap-10 m-auto overflow-auto mt-28">
         <div class="justify center mt-5 w-48 text-center">
-            <div class="justify-center  bg-cover h-[9.5rem] w-[9.5rem] bg-center m-auto rounded-[5rem]" style="background-image:url('./images/henry_sy-bg.jpg');">
-            </div>
+            <img src="{{imageSrc}}" alt="Profile Picture" class="justify-center h-[9.5rem] w-[9.5rem] m-auto rounded-[5rem]">
+
             
         </div>
         <div class="justify-self">
             <form method="post" action="/updateinfo" enctype="multipart/form-data">
                 <div>
                     <span class="label">Change profile picture</span> <br>
-                    <input type="file" name="photo" accept="image/*" required>
+                    <input type="file" name="photo" accept="image/*">
 
                     <div>
                     <label for="firstname" class="font-extralight">First Name</label><br>

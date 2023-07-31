@@ -37,6 +37,7 @@ import User from './models/User.js';
 import Building from './models/Building.js';
 import Owner from './models/Owner.js';
 import Restroom from './models/Restroom.js';
+import Review from './models/Review.js';
 import { match } from "assert";
 
 
@@ -47,6 +48,8 @@ db.connect();
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+
 
 // Set View engine as handlebars
 app.engine("hbs", exphbs.engine({extname: 'hbs'}));
@@ -129,16 +132,28 @@ app.get('/profile', async (req, res) => {
       return res.status(404).send('User not found');
     }
 
-    // Fetch reviews data using the getReviewsByUserID function
-    const reviews = await userController.getReviewsByUserID();
+    const reviews = await Review.find({ user: userID })
+      .populate({
+        path: 'restroomID',
+        select: 'buildingID.name', // Select only the name property of the buildingID
+      })
+      .lean();
 
-    // Render the "viewprofile" template with both user and reviews data
-    res.render("viewprofile", {
-      title: "Profile",
+    
+    console.log(reviews[0]);
+
+    console.log("fetch user");
+    const imageSrc = `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}`;
+    res.render('viewprofile', { 
+      title: 'Profile',
       forBusiness: false,
       user: user,
-      reviews: reviews,
-    });
+      imageSrc: imageSrc,
+      reviews:reviews
+    }); // Pass the user data and imageSrc to the HBS template
+    
+    
+
   } catch (error) {
     console.error('Error fetching user data:', error);
     res.status(500).send('Server error');
@@ -156,11 +171,15 @@ app.get('/edit-profile', async (req, res) => {
       return res.status(404).send('User not found');
     }
 
+    const imageSrc = `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}`;
     res.render('editprofile', { 
       title: 'Edit Profile',
       forBusiness: false,
-      user: user // Pass the user data to the template
+      user: user,
+      imageSrc: imageSrc,
     });
+
+
 
   } catch (error) {
     console.error('Error fetching user data:', error);
@@ -302,7 +321,7 @@ const upload = multer({
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
 app.post('/createreview', upload.single('photo'), reviewController.addReview);
-app.post('/updateinfo', userController.updateUser);
+app.post('/updateinfo',  upload.single('photo'), userController.updateUser);
 
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST
