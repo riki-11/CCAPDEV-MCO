@@ -134,8 +134,11 @@ app.get('/profile', async (req, res) => {
 
     const reviews = await Review.find({ user: userID })
       .populate({
-        path: 'restroomID',
-        select: 'buildingID.name', // Select only the name property of the buildingID
+        path: 'restroomID', // Populate the restroomID field
+        populate: {
+          path: 'buildingID', // Populate the buildingID field of the nested Restroom model
+          select: 'name', // Select only the name property of the buildingID
+        },
       })
       .lean();
 
@@ -149,7 +152,11 @@ app.get('/profile', async (req, res) => {
       forBusiness: false,
       user: user,
       imageSrc: imageSrc,
-      reviews:reviews
+      reviews: reviews.map(review => ({
+        ...review,
+        user: user,       // Pass the user object to each review
+        imageSrc: imageSrc // Pass the imageSrc to each review
+      }))    
     }); // Pass the user data and imageSrc to the HBS template
     
     
