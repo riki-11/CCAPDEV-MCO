@@ -32,7 +32,7 @@ const reviewSchema = new mongoose.Schema({
   restroomID: {    
     type: Schema.Types.ObjectId,
     ref: 'Restroom',
-    //required: true
+    required: true
   },
 
   isClean: {

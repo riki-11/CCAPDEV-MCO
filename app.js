@@ -167,6 +167,26 @@ app.get('/profile', async (req, res) => {
   }
 });
 
+app.delete('/deleteReviews', async (req, res) => {
+  console.log("app delete");
+  const reviewId = req.query.reviewId;
+
+
+  try {
+    // Find the review in the database by its ID
+    const result = await Review.deleteOne({_id: reviewId}).exec();
+
+    console.log(result);
+
+
+    res.json({ message: 'Review deleted successfully.' });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
+
 app.get('/edit-profile', async (req, res) => {
   const userID = '64bd2ba04e2c41c0fa918e4f'; 
 
