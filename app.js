@@ -294,16 +294,20 @@ app.get('/create-review', (req, res) => {
   res.render('createreview', { data: dataToSend });
 });
 
-app.get('/edit-review/:reviewId', async (req, res) => {
-  const reviewId = req.params.reviewId;
-  const review = await Review.findById(reviewId).lean();
+app.get('/edit-review', async (req, res) => {
 
-
-  res.render("editreview", {
-    title: "Edit My Review",
-    forBusiness: false,
-    review: review
-  });
+  try {
+    const reviewId = req.query.reviewId;
+    const review = await Review.findById(reviewId).lean();
+  
+    res.render("editreview", {
+      title: "Edit My Review",
+      forBusiness: false,
+      review: review
+    });
+  } catch (error) {
+    res.status.send('Server error');
+  }
 });
 
 app.get('/establishment', async (req, res) => {

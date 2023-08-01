@@ -937,7 +937,7 @@ video {
   background-color: inherit;
 }
 
-.bg-primarybg{
+.bg-primary{
   --tw-bg-opacity: 1;
   background-color: rgb(32 32 32 / var(--tw-bg-opacity));
 }
@@ -1139,6 +1139,11 @@ video {
 .text-neutral-400{
   --tw-text-opacity: 1;
   color: rgb(163 163 163 / var(--tw-text-opacity));
+}
+
+.text-primary{
+  --tw-text-opacity: 1;
+  color: rgb(32 32 32 / var(--tw-text-opacity));
 }
 
 .text-secondary{
