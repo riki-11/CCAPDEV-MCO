@@ -21,7 +21,10 @@
         </div>
         <div class="flex mt-1 gap-x-5">
             <a href="edit-review" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
-            <a href="delete-review" class="hover:opacity-80"><i class="fa-solid fa-trash-can"></i> Delete Review</a>
-        </div>
+                
+        <button class="hover:opacity-80 delete" data-review-id="{{this._id}}">
+                    <i class="fa-solid fa-trash-can"></i> Delete Review
+                </button>   
+         </div>
     </div>  
 </div>
