@@ -10,7 +10,7 @@ const reviewSchema = new mongoose.Schema({
   },
   dateCreated: {
     type: Date,
-    default: Date.now
+    default: Date.now, // Set the default value to the current date
   },
   rating: {
     type: Number,
@@ -21,8 +21,12 @@ const reviewSchema = new mongoose.Schema({
     required: true
   },
   photo: {
-    data: Buffer, 
-    contentType: String 
+    data: {
+        type: Buffer,
+      },
+      contentType: {
+        type: String,
+      },
   },
   amenities: {
     type: [String],
@@ -35,13 +39,13 @@ const reviewSchema = new mongoose.Schema({
     required: true
   },
 
-  isClean: {
-    type: Boolean,
-    default: false
-  }, 
-  isDeleted: {
-    type: Boolean,
-    default: false
+  cleanCount: {
+    type: Number,
+    default: 0
+  },
+  disgustingCount: {
+    type: Number, 
+    default: 0
   }, 
   isEdited: {
     type: Boolean,
@@ -57,6 +61,8 @@ const reviewSchema = new mongoose.Schema({
   }
 
 });
+
+
 
 export default mongoose.model("Review", reviewSchema);
 

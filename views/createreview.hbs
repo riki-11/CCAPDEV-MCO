@@ -3,7 +3,6 @@
 <html>
     <head>
         <title>Write a Review</title>
-        <script src="https://css/styles.csscss.com"></script>
         <link rel="stylesheet" href="css/review.css"> 
     </head>
     <body>
@@ -61,7 +60,7 @@
                     <input class="input-date" type="date" name="form-date"> <br>
                     
                     <span class="label">Title of your Review</span> <br>
-                    <textarea class="text-black" name="form-review-title" id="form-review-title" cols="20" rows="20" placeholder="Awesome cubicle!"></textarea>
+                    <textarea class="text-black" name="form-review-title" id="form-review-title" cols="20" rows="20" placeholder="{{review.title}}" value=""></textarea>
                     <br>
                     <span class="label-limit">0/50 characters</span>
                     <br>                    
@@ -73,7 +72,7 @@
 
                     <span class="label">Add some Photos</span> 
                     <span class="label-detail">Keep it clean! Literally.</span>
-                    <input type="file" name="photo" accept="image/*" required>
+                    <input type="file" name="photo" accept="image/*">
                     <input type="hidden" name="restroomId" id='restroomId'>
                     <br>
                     <br>

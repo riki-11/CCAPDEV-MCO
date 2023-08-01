@@ -20,20 +20,36 @@ const reviewController = {
       // Convert the amenities from a string or an array of strings
       const amenitiesArray = Array.isArray(amenities) ? amenities : [amenities];
 
+      let newReview;
       // Create a new Review document based on the Review schema
-      const newReview = new Review({
+      if (photoData == undefined){
+        newReview = new Review({
           rating,
           amenities: amenitiesArray,
           date,
           title,
           content,
           restroomID: req.body.restroomId,
-          photo: {
-            data: photoData.buffer,
-            contentType: photoData.mimetype
-          },
+
+        });
+
+      } else {
+
+        newReview = new Review({
+            rating,
+            amenities: amenitiesArray,
+            date,
+            title,
+            content,
+            restroomID: req.body.restroomId,
+            photo: {
+              data: photoData.buffer,
+              contentType: photoData.mimetype
+            },
+          });
+      }
           //user: req.user._id  Assuming you have user authentication and req.user contains the logged-in user's details
-      });
+      
 
       try {
           // Save the new review to the database
@@ -41,7 +57,7 @@ const reviewController = {
           console.log('Review created:', newReview);
 
           // Redirect to a success page or send a success response
-          res.redirect('http://localhost:3000/establishment'); // Replace with the appropriate URL for the success page
+          res.redirect('http://localhost:3000/profile'); // Replace with the appropriate URL for the success page
       } catch (error) {
           console.error('Error creating review:', error);
           res.status(500).send('Server error');

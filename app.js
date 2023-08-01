@@ -142,22 +142,23 @@ app.get('/profile', async (req, res) => {
       })
       .lean();
 
-    
-    console.log(reviews[0]);
-
-    console.log("fetch user");
-    const imageSrc = `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}`;
+    const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
     res.render('viewprofile', { 
       title: 'Profile',
       forBusiness: false,
       user: user,
-      imageSrc: imageSrc,
+      profImgSrc: profImgSrc,
       reviews: reviews.map(review => ({
         ...review,
         user: user,       // Pass the user object to each review
-        imageSrc: imageSrc // Pass the imageSrc to each review
-      }))    
-    }); // Pass the user data and imageSrc to the HBS template
+        profImgSrc: profImgSrc, // Pass the imageSrc to each review
+        photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
+    }); 
+   
+    
+    
+
+   
     
     
 
@@ -293,10 +294,15 @@ app.get('/create-review', (req, res) => {
   res.render('createreview', { data: dataToSend });
 });
 
-app.get('/edit-review', (req, res) => {
+app.get('/edit-review/:reviewId', async (req, res) => {
+  const reviewId = req.params.reviewId;
+  const review = await Review.findById(reviewId).lean();
+
+
   res.render("editreview", {
     title: "Edit My Review",
-    forBusiness: false
+    forBusiness: false,
+    review: review
   });
 });
 
