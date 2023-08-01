@@ -1,6 +1,10 @@
 <div class="mt-8 gap-4 flex justify-center"> 
     <div class="min-w-fit">
-        <img src="{{imageSrc}}" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
+        {{#if this.profImgSrc}}
+            <img src="{{profImgSrc}}" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
+        {{else}}
+            <img src="../images/profile-icon.png" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
+        {{/if}}
     </div>
     <div class="flex flex-col gap-y-1 text-sm text-neutral-400">
         <div class="flex overflow-hidden">
@@ -19,8 +23,24 @@
         <div class="text-white mt-1">
             {{this.content}}
         </div>
+        {{!--Image --}}
+        {{#if this.photoSrc}}
+            <div>
+                <img src="{{this.photoSrc}}" alt="Review Photo" class="w-24 h-24 rounded-lg mt-4">
+            </div>
+        {{/if}}
+
+        {{#if this.isEdited}}
+            <p>Review Edited</p>
+        {{/if}}
+
+         <div class="flex mt-1 gap-x-5">
+                <a><i class="fa-regular fa-thumbs-up"></i> {{this.cleanCount}}</a>
+                <a><i class="fa-regular fa-thumbs-down"></i> {{this.disgustingCount}}</a>
+        </div>
+
         <div class="flex mt-1 gap-x-5">
-            <a href="edit-review" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
+            <a href="edit-review/{{this._id}}" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
                 
         <button class="hover:opacity-80 delete" data-review-id="{{this._id}}">
                     <i class="fa-solid fa-trash-can"></i> Delete Review
