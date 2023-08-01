@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import User from '../models/User.js';
 import Review from '../models/Review.js';
 
+// For session management
+import passport from 'passport'; 
+
 // For image processing
 import multer from 'multer';
 const storage = multer.memoryStorage();
@@ -92,15 +95,25 @@ const userController = {
                  lastName: lastname,
                  username: username,
                  email: email,
-                 password: password,
+                 password: password // REMOVE IN FINAL BUILD BECAUSE OF PASSPORT
              });
 
-            // Save the new user to the database
-            await newUser.save();
-            console.log(newUser);
+            // Save the new user to the database using passport-local-mongoose
+            User.register(newUser, password, (err, user) => {
+                if (err) {
+                    console.error('Error registering user:', err);
+                    return res.redirect('/register'); // Redirect back to registration page on error
+                }
 
+                passport.authenticate('local')(req, res, () => {
+                    res.redirect('/'); // Redirect to dashboard or any other page on successful registration
+                });
+            })
+            // await newUser.save();
+            console.log(newUser);
+            
             // Redirect to a success page or send a success response
-            res.redirect('http://localhost:3000/profile'); // Replace with the appropriate URL for the success page
+            // res.redirect('http://localhost:3000/profile'); // Replace with the appropriate URL for the success page
         
         } catch (error) {
             console.error('Error creating user:', error);
@@ -119,6 +132,18 @@ const userController = {
           res.status(500).send('Server error');
         }
       },
+
+    loginUser: passport.authenticate('local', {
+        successRedirect: 'http://localhost:3000',
+        failureRedirect: '/login', 
+    }),
+
+    verifyLogin: function (req, res, next) { // Used to verify if the user is logged in to access pages
+        if (req.isAuthenticated()) {
+          return next();
+        }
+        res.redirect('/login'); // Redirect to login page if user is not authenticated
+      }
 
 }
 

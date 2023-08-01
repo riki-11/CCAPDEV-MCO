@@ -19,12 +19,11 @@ const userSchema = new mongoose.Schema({
     },
     // passport-local-mongoose makes it so that passwords are not stored locally, 
     // and user documents would instead have hashes and salts.
-    /*
-        password: {
-            type: String,
-            required: true
-        },
-    */
+    password: {
+        type: String,
+        required: true
+    }, //DELETE IN FINAL BUILD SINCE PASSPORT DEALS WITH THIS NA
+
     email: {
         type: String,
         required: true,

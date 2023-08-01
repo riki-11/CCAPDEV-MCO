@@ -16,6 +16,7 @@ import bodyParser from 'body-parser';
 
 // Session manager
 import session from 'express-session';
+import passport from 'passport';
 
 // Import handlebars
 import exphbs from 'express-handlebars';
@@ -63,6 +64,20 @@ app.listen(port, function () {
   console.log(`Server is running at:`);
   console.log(`http://localhost:` + port);
 });
+
+/* Setup session manager and request authentication middleware */ 
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+}))
+// initialize passport and make it deal with session
+app.use(passport.initialize());
+app.use(passport.session());
+// Configure passport-local-mongoose
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 Handlebars.registerHelper('renderRating', function (averageRating) {
@@ -330,6 +345,11 @@ app.get('/establishment-business', (req, res) => {
   });
 });
 
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/login'); // Redirect to login page after logout
+});
+
 // CONTROLLER METHODS
 
 // Use body-parser middleware to parse form data
@@ -349,6 +369,11 @@ const upload = multer({
 app.post('/usersignup', userController.addUser);
 app.post('/createreview', upload.single('photo'), reviewController.addReview);
 app.post('/updateinfo',  upload.single('photo'), userController.updateUser);
+app.post('/userlogin', userController.loginUser);
+// app.post('/userlogin', passport.authenticate('local', {
+//   successRedirect: 'http://localhost:3000',
+//   failureRedirect: '/login'
+// }));
 
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST

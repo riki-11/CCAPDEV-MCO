@@ -38,7 +38,7 @@ const reviewController = {
       try {
           // Save the new review to the database
           await newReview.save();
-          console.log('Review created:', newReview);
+          //console.log('Review created:', newReview);
 
           // Redirect to a success page or send a success response
           res.redirect('http://localhost:3000/establishment'); // Replace with the appropriate URL for the success page
