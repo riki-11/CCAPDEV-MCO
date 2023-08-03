@@ -249,7 +249,6 @@ textarea {
     box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     transition: all 250ms;
     overflow: hidden;
-    margin-left:  5%;
 }
 
 .edit:hover {
@@ -266,4 +265,8 @@ textarea {
 }
 .submit:hover::before {
     width: 100%;
+}
+
+.curr-date {
+    font-size: 20px;
 }

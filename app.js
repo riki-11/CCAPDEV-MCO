@@ -199,13 +199,22 @@ app.get('/edit-profile', async (req, res) => {
       return res.status(404).send('User not found');
     }
 
-    const imageSrc = `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}`;
-    res.render('editprofile', { 
-      title: 'Edit Profile',
-      forBusiness: false,
-      user: user,
-      imageSrc: imageSrc,
-    });
+    if (user.photo && user.photo.contentType) {
+      const imageSrc = `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}`;
+      res.render('editprofile', { 
+        title: 'Edit Profile',
+        forBusiness: false,
+        user: user,
+        imageSrc: imageSrc,
+      });
+
+    } else {
+      res.render('editprofile', { 
+        title: 'Edit Profile',
+        forBusiness: false,
+        user: user
+      });
+    }
 
 
 
@@ -299,14 +308,56 @@ app.get('/edit-review', async (req, res) => {
   try {
     const reviewId = req.query.reviewId;
     const review = await Review.findById(reviewId).lean();
-  
+    const restroom = await Restroom.findById(review.restroomID).lean();
+    const building = await Building.findById(restroom.buildingID).lean();
+
+    // for the boolean conditions in editreview
+    const hasBidet = review.amenities.includes("bidet");
+    const hasFaucet = review.amenities.includes("faucet");
+    const hasFlush = review.amenities.includes("flush");
+    const hasTissue = review.amenities.includes("tissue");
+    const hasHanddryer = review.amenities.includes("handdryer");
+
+    const rated1 = (review.rating == 1);
+    const rated2 = (review.rating == 2);
+    const rated3 = (review.rating == 3);
+    const rated4 = (review.rating == 4);
+    const rated5 = (review.rating == 5);
+
+    const dateCreated = new Date(review.dateCreated).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+
+    
     res.render("editreview", {
       title: "Edit My Review",
       forBusiness: false,
-      review: review
+      review: review,
+      building: building,
+      restroom: restroom,
+      date: dateCreated,
+      amenities: {
+        bidet: hasBidet,
+        faucet: hasFaucet,
+        flush: hasFlush,
+        tissue: hasTissue,
+        handdryer: hasHanddryer
+      },
+      ratings: {
+        rated1: rated1,
+        rated2: rated2,
+        rated3: rated3,
+        rated4: rated4,
+        rated5: rated5
+      },
+      photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null, 
+
     });
   } catch (error) {
-    res.status.send('Server error');
+    console.error('Error fetching user data:', error);
+    res.status(500).send('Server error');  
   }
 });
 
@@ -359,6 +410,7 @@ const upload = multer({
 app.post('/usersignup', userController.addUser);
 app.post('/createreview', upload.single('photo'), reviewController.addReview);
 app.post('/updateinfo',  upload.single('photo'), userController.updateUser);
+app.post('/updatereview', upload.single('photo'), reviewController.updateReview);
 
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST

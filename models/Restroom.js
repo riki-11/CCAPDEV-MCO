@@ -9,8 +9,8 @@ const restroomSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ['MALE', 'FEMALE', 'OTHER'],
-        default: 'OTHER'
+        enum: ['MALE', 'FEMALE'],
+        default: 'MALE'
     },
     category: {
         type: String,
