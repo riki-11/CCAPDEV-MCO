@@ -2,6 +2,7 @@ import db from '../models/mongoose.js';
 import multer from 'multer';
 
 import Review from '../models/Review.js';
+import User from '../models/User.js';
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -22,6 +23,9 @@ const reviewController = {
       // Convert the amenities from a string or an array of strings
       const amenitiesArray = Array.isArray(amenities) ? amenities : [amenities];
 
+      // Get user from database
+      // const user = await User.findOne({'username': req.session.username}).exec();
+
 
       const dateCreated = date.toString();
       let newReview;
@@ -34,7 +38,7 @@ const reviewController = {
           title,
           content,
           restroomID: req.body.restroomId,
-
+          user: req.user
         });
 
       } else {
@@ -50,6 +54,7 @@ const reviewController = {
               data: photoData.buffer,
               contentType: photoData.mimetype
             },
+            user: req.user//Mongoose.contentTypereq.session.username
           });
       }
           //user: req.user._id  Assuming you have user authentication and req.user contains the logged-in user's details

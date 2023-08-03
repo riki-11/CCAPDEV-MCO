@@ -69,7 +69,10 @@ app.listen(port, function () {
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 // 1hr
+  }
 }))
 // initialize passport and make it deal with session
 app.use(passport.initialize());
@@ -136,18 +139,20 @@ app.get('/login', (req, res) => {
 });
 
 
-app.get('/profile', async (req, res) => {
-  const userID = '64bd2ba04e2c41c0fa918e4f';
+app.get('/profile', loggedIn, async (req, res) => {
+  // const userID = '64bd2ba04e2c41c0fa918e4f';
 
   try {
 
     // Fetch user data
-    const user = await User.findById(userID).lean();
+    // const user = await User.findById(userID).lean();
+    const user = req.user
     if (!user) {
+      console.log(req.user);
       return res.status(404).send('User not found');
     }
-
-    const reviews = await Review.find({ user: userID })
+    //console.log(user);
+    const reviews = await Review.find({ 'user' : user })
       .populate({
         path: 'restroomID', // Populate the restroomID field
         populate: {
@@ -156,12 +161,18 @@ app.get('/profile', async (req, res) => {
         },
       })
       .lean();
+    
+      const senduser = {
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        username: req.user.username
+      }
 
     const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
     res.render('viewprofile', { 
       title: 'Profile',
       forBusiness: false,
-      user: user,
+      user: senduser,
       profImgSrc: profImgSrc,
       reviews: reviews.map(review => ({
         ...review,
@@ -203,12 +214,13 @@ app.delete('/deleteReviews', async (req, res) => {
 });
 
 
-app.get('/edit-profile', async (req, res) => {
-  const userID = '64bd2ba04e2c41c0fa918e4f'; 
+app.get('/edit-profile', loggedIn, async (req, res) => {
+  //const userID = '64bd2ba04e2c41c0fa918e4f'; 
 
   try {
     // Fetch the user data from the database
-    const user = await User.findById(userID).lean();
+    // const user = await User.findById(userID).lean();
+    const user = req.user.lean();
 
     if (!user) {
       return res.status(404).send('User not found');
@@ -425,17 +437,21 @@ const upload = multer({
   }
 });
 
+// Function for user authentication. When a user is logged in (authenticated) then req.user should not be empty
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
 
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
-app.post('/createreview', upload.single('photo'), reviewController.addReview);
-app.post('/updateinfo',  upload.single('photo'), userController.updateUser);
-app.post('/userlogin', userController.loginUser);
-// app.post('/userlogin', passport.authenticate('local', {
-//   successRedirect: 'http://localhost:3000',
-//   failureRedirect: '/login'
-// }));
-app.post('/updatereview', upload.single('photo'), reviewController.updateReview);
+app.post('/createreview', loggedIn, upload.single('photo'), reviewController.addReview);
+app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.updateUser);
+app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login' }), userController.loginUser);
+app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
 
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST

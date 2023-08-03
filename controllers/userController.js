@@ -21,12 +21,15 @@ const userController = {
 
     viewProfile: async function (req, res) {
         try {
-          // Assuming you have the user ID from the session or request
-          const userId = '64bd2ba04e2c41c0fa918e4f'; // Replace with the actual user ID
-    
+            
+        // Assuming you have the user ID from the session or request
+        // const userId = '64bd2ba04e2c41c0fa918e4f'; // Replace with the actual user ID
+        // User.find({'username': req.session.username}).exec();
+
           // Fetch the user's data from the database
-          const user = await User.findById(userId);
-    
+          //const user = await User.findById(userId);
+          const user = await User.findbyId(req.user._id).exec();
+          
           // Render the template and pass the user's data
           res.render('profile', { user });
         } catch (error) {
@@ -46,10 +49,10 @@ const userController = {
         const photoData = req.file;
 
         const { firstname, lastname, username, email, password } = req.body;
-        const sampleUserID = new mongoose.Types.ObjectId('64bd2ba04e2c41c0fa918e4f'); 
+        // const sampleUserID = new mongoose.Types.ObjectId('64bd2ba04e2c41c0fa918e4f'); 
 
         try {
-            const updatedUser = await User.findById(sampleUserID); //userID should be obtained from session
+            const updatedUser = await User.findbyId(req.user._id).exec(); //userID should be obtained from session
             if (!updatedUser) {
                 return res.status(404).send('User not found');
             }
@@ -123,9 +126,10 @@ const userController = {
 
     getReviewsByUserID: async function (req, res) {
         const userID = '64bd2ba04e2c41c0fa918e4f'; // Replace with the actual userID
-    
+        
         try {
-            const reviews = await Review.find({ user: new mongoose.Types.ObjectId(userID) }).lean();          
+            // const reviews = await Review.find({ user: new mongoose.Types.ObjectId(userID) }).lean();          
+            const reviews = await Review.findbyId(req.session._id).lean();
             return reviews;
         } catch (error) {
           console.error('Error fetching reviews:', error);
@@ -133,10 +137,11 @@ const userController = {
         }
       },
 
-    loginUser: passport.authenticate('local', {
-        successRedirect: 'http://localhost:3000',
-        failureRedirect: '/login', 
-    }),
+    loginUser: function(req, res) {
+        req.session.username = req.user.username;
+        //console.log(req.user)
+        res.redirect('/');
+    },
 
     verifyLogin: function (req, res, next) { // Used to verify if the user is logged in to access pages
         if (req.isAuthenticated()) {
