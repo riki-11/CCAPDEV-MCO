@@ -3,6 +3,7 @@
 <html>
     <head>
         <title>Write a Review</title>
+        <script src="https://css/styles.csscss.com"></script>
         <link rel="stylesheet" href="css/review.css"> 
         <link rel ="stylesheet" href="css/styles.css">
     </head>
@@ -17,7 +18,7 @@
                     <div class="establishment-container">
                         <img src="images\bldg-henry.jpeg" class="img-shadow" alt="">
                         <span class="establishment-name">{{data.name}}</span><br>
-                        <span class="establishment-floor">{{data.floor}}</span><br>
+                        <span class="establishment-floor">Floor {{data.floor}}</span><br>
                         <span class="establishment-details">Students, {{data.gender}}</span>
                     </div>
                 </div>
@@ -45,9 +46,8 @@
                     </div>
                     
                     <!-- Check Boxes -->
-                    <!--
-                    <span class="label text-white">Amenities:</span> <br>
-                    <input type="checkbox" name="form-chkbx" value="Bidet">
+                    <span class="label">Amenities:</span> <br>
+                    <input type="checkbox" name="form-chkbx" value="bidet">
                         <label for="Bidet">Bidet</label><br>
                     <input type="checkbox" name="form-chkbx" value="flush">
                         <label for="flush">Flush</label><br>
@@ -62,14 +62,15 @@
                     <span class="label text-white">Date of visit</span> <br>
                     <input class="input-date" type="date" name="form-date"> <br>
                     
-                    <span class="label text-white">Title of your Review</span> <br>
-                    <textarea class="text-black" name="form-review-title" id="form-review-title" cols="20" rows="20" placeholder="{{review.title}}" value=""></textarea>
+                    <span class="label">Title of your Review</span> <br>
+                    <textarea class="text-black" name="form-review-title" id="form-review-title" cols="20" rows="20" placeholder="Awesome cubicle!" required></textarea>
                     <br>
                     <br>                    
-                    <span class="label text-white">Write a Review</span> <br>
-                    <textarea class="text-black" name="form-review" id="form-review" cols="10" rows="10" placeholder="I experienced the best bidet of my life..."></textarea>
+                    <span class="label">Write a Review</span> <br>
+                    <textarea class="text-black" name="form-review" id="form-review" cols="10" rows="10" placeholder="I experienced the best bidet of my life..." required></textarea>
                     <br>
                     <br>
+
 
                     <span class="label text-white">Add some Photos</span> 
                     <span class="label-detail text-white">Keep it clean! Literally.</span>
