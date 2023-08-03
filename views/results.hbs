@@ -18,10 +18,13 @@
         <div class="col-md-6 search-bar">
             <!-- Search Bar -->
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-btn">
-                    <button class="btn search-button" type="button">Search</button>
-                </span>
+                <form class="resform" id="searchForm" action="/search-results" method="get">
+                    <input type="text" class="form-control searchbar" placeholder="Search">
+                    <span class="input-group-btn">
+                        <button class="btn search-button" type="submit">Search</button>
+                    </span>
+
+                </form>
             </div>
         </div>
         <div class="col-sm-6">
@@ -39,191 +42,37 @@
         </div>
     </div>
     
-    <p class="search-text">Showing all results matching "Female Student"</p>
+    <p class="search-text">Showing all results matching "{{searchQuery}}"</p>
 
     <h2 class="search-line"></h2>
 
-    <!--First Search Result-->
-    <div class="restroom-search">
-        <a href="#" class="search-res">
-            <div class="search-image">
-                
-                <div class="image-container">
-                    <img src="images/bldg-henry.jpeg" alt="Bathroom Image">
-                </div>
-            </div>
-        </a>
-        
-        <div class="search-description">
-            <a href="#" class="search-res">
-                <div class="search-title">
-                    <h4>HENRY SY</h4>
-                    <h3>6th Floor, Student, Female</h3>
-                </div>
-                
-            </a>
-            <div class="rating-rev-container">
-                <div class="rating-search">
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                                
-                </div>
-                <a href="#" class="search-res"><p class="review-num">452 reviews</p>   </a>
-            </div>
-            <div class="search-amenities">
-                <span class="badge">Bidet</span>
-                <span class="badge">Aircon</span>
-                <span class="badge">Signal</span>
-                <span class="badge">Tissue</span>
-                <span class="badge">Soap</span>
-            </div>
-
-            <div class="review-sample">
-                <i class="fa-regular fa-comment fa-xl" style="color: #ffffff;"></i>
-                <p>“Henry Sy 6th floor is the best restroom in DLSU. It is air conditioned and always clean. Abot pa wifi para makatext habang...” <a href="#" class="see-more">see more</a></p>
-            </div>
-        </div>
-    </div>
+    {{#if searchResults}} 
+        {{#each searchResults}}
+            {{> searchres}}
+        {{/each}}
+    {{else}}
+        <p class="search-text">No results found.</p>
+    {{/if}}
     
-    <h2 class="search-res-line"></h2>
-
-    <!--Second Search Result-->
-    <div class="restroom-search">
-        <a href="#" class="search-res">
-            <div class="search-image">
-                
-                <div class="image-container">
-                    <img src="images/bldg-velasco.jpeg" alt="Bathroom Image">
-                </div>
-            </div>
-        </a>
-        
-        <div class="search-description">
-            <a href="#" class="search-res">
-                <div class="search-title">
-                    <h4>VELASCO HALL</h4>
-                    <h3>2nd Floor, Student, Female</h3>
-                </div>
-                
-            </a>
-            <div class="rating-rev-container">
-                <div class="rating-search">
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> 
-                                
-                </div>
-                <a href="#" class="search-res"><p class="review-num">127 reviews</p>   </a>
-            </div>
-            <div class="search-amenities">
-                <span class="badge">Tissue</span>
-                <span class="badge">Soap</span>
-            </div>
-
-            <div class="review-sample">
-                <i class="fa-regular fa-comment fa-xl" style="color: #ffffff;"></i>
-                <p>“Malinis naman pero... sobrang liit hahaha ang hirap gumalaw, promise.” <a href="#" class="see-more">see more</a></p>
-            </div>
-        </div>
-    </div>
-
-    <h2 class="search-res-line"></h2>
-    
-    <!--Third Search Result-->
-    <div class="restroom-search">
-        <a href="#" class="search-res">
-            <div class="search-image">
-                
-                <div class="image-container">
-                    <img src="images/bldg-andrew.jpg" alt="Bathroom Image">
-                </div>
-            </div>
-        </a>
-        
-        <div class="search-description">
-            <a href="#" class="search-res">
-                <div class="search-title">
-                    <h4>Br. Andrew Gonzalez</h4>
-                    <h3>11th Floor, Student, Female</h3>
-                </div>
-                
-            </a>
-            <div class="rating-rev-container">
-                <div class="rating-search">
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> 
-                                
-                </div>
-                <a href="#" class="search-res"><p class="review-num">142 reviews</p>   </a>
-            </div>
-            <div class="search-amenities">
-                <span class="badge">Tissue</span>
-                <span class="badge">Signal</span>
-                <span class="badge">Soap</span>
-
-            </div>
-
-            <div class="review-sample">
-                <i class="fa-regular fa-comment fa-xl" style="color: #ffffff;"></i>
-                <p>"Ang ingay ng ventilation, medyo nakakadistract. Pero overall ok naman, may sabon tsaka gumagana ang flush...” <a href="#" class="see-more">see more</a></p>
-            </div>
-        </div>
-    </div>
-
-
-    <h2 class="search-res-line"></h2>
-    <!--Fourth Search Result-->
-    <div class="restroom-search">
-        <a href="#" class="search-res">
-            <div class="search-image">
-                
-                <div class="image-container">
-                    <img src="images/bldg-goks.jpeg" alt="Bathroom Image">
-                </div>
-            </div>
-        </a>
-        
-        <div class="search-description">
-            <a href="#" class="search-res">
-                <div class="search-title">
-                    <h4>Gokongwei Hall</h4>
-                    <h3>3rd Floor, Student, Female</h3>
-                </div>
-                
-            </a>
-            <div class="rating-rev-container">
-                <div class="rating-search">
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> 
-                    <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> 
-                                
-                </div>
-                <a href="#" class="search-res"><p class="review-num">351 reviews</p>   </a>
-            </div>
-            <div class="search-amenities">
-                <span class="badge">Flush</span>
-            </div>
-
-            <div class="review-sample">
-                <i class="fa-regular fa-comment fa-xl" style="color: #ffffff;"></i>
-                <p>"Minsan walang sabon o tissue. Tas may times pa na basa ung sahig.” <a href="#" class="see-more">see more</a></p>
-            </div>
-        </div>
-    </div>
-  
   </div>
 
   <script src="https://kit.fontawesome.com/3db8d82098.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script>
+    // Add an event listener to the form submit event instead of the "Search" button click event
+    const searchForm = document.getElementById('searchForm');
+    searchForm.addEventListener('submit', handleSearch);
+    console.log("Form")
+
+    function handleSearch(event) {
+        event.preventDefault();
+       
+        // Get the search input value from the form
+        const searchInput = document.querySelector('.form-control.searchbar').value;
+        console.log(searchInput);
+        // Redirect the user to the search results page with the search query as a query parameter
+        window.location.href = `/search-results?q=${encodeURIComponent(searchInput)}`;
+    }
+    </script>
 </body>
 </html>
