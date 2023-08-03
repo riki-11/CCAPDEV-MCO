@@ -2,96 +2,111 @@
 <html lang="en">
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit Review</title>
-        <script src="https://css/styles.csscss.com"></script>
-        <link rel="stylesheet" href="css/review.css"> 
+        <link rel="stylesheet" type="text/css" href="css/review.css"> 
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
     <body>
-        <div class="content-container">
+        <div class="content-container bg-primary">
             <!-- LEFT CONTAINER -->
             <div class="left-container">
                 <div class="left-wrapper">      
                     <div class="caption-container">
-                        <span class="left-caption">Tell us, how was your flush?</span>
+                        <span class="left-caption text-white">Tell us, how was your flush?</span>
                     </div>
-                    <div class="establishment-container">
+                    <div class="establishment-container text-primary">
                         <img src="images\bldg-henry.jpeg" class="img-shadow" alt="">
-                        <span class="establishment-name">Henry Sy</span><br>
-                        <span class="establishment-floor">9th floor</span><br>
-                        <span class="establishment-details">Students, Male</span>
+                        <span class="establishment-name">{{building.name}}</span><br>
+                        <span class="establishment-floor">Floor {{restroom.floor}}</span><br>
+                        <span class="establishment-details">{{restroom.category}}, {{restroom.gender}}</span>
                     </div>
                 </div>
             </div>
             <hr class="line">
             <!-- RIGHT CONTAINER -->
             <div class="right-container">
-                <form action="">
+                <form action="/updatereview" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="reviewId" value="{{review._id}}">
+
                      <!-- RATING -->
-                     <span class="label">Rate your overall experience</span> <br>
+                     <span class="label text-white">Rate your overall experience</span> <br>
                      <div class="ratings">
-                         <input type="radio" id="star1" name="rate" value="1">
+                        
+                         <input type="radio" id="star1" name="rate" value="1" {{#if ratings.rated1}}checked{{/if}}>
                          <label for="star1" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i> 
                          </label>
-                         <input type="radio" id="star2" name="rate" value="2">
-                         <label for="star2" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i> 
+                         <input type="radio" id="star2" name="rate" value="2" {{#if ratings.rated2}}checked{{/if}}>
+                         <label for="star2" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i>
                          </label>
-                         <input type="radio" id="star3" name="rate" value="3">
-                         <label for="star3" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i> 
+                         <input type="radio" id="star3" name="rate" value="3" {{#if ratings.rated3}}checked{{/if}}>
+                         <label for="star3" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i>
                          </label>
-                         <input type="radio" id="star4" name="rate" value="4">
-                         <label for="star4" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i></label>
-                         <input checked="" type="radio" id="star5" name="rate" value="5">
-                         <label for="star5" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i></label>
+                         <input type="radio" id="star4" name="rate" value="4" {{#if ratings.rated4}}checked{{/if}}>
+                         <label for="star4" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i>
+                         </label>
+                         <input type="radio" id="star5" name="rate" value="5" {{#if ratings.rated5}}checked{{/if}}>
+                         <label for="star5" title="text"><i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl"></i>
+                         </label>
                      </div>
                     
                     
                     <!-- Gender -->
-                    <span class="label">For what gender is your cubicle?</span> <br>
-                    <input type="radio" name="form-gender" value="Male">
-                        <label for="Male">Male</label>
-                    <input type="radio" name="form-gender" value="Female">
-                        <label for="Female">Female</label><br>
-                    <!-- Check Boxes -->
-                    <span class="label">Amenities:</span> <br>
-                    <input type="checkbox" name="form-chkbx" value="Bidet">
-                        <label for="Bidet">Bidet</label><br>
-                    <input type="checkbox" name="form-chkbx" value="flush">
-                        <label for="flush">Flush</label><br>
-                    <input type="checkbox" name="form-chkbx" value="tissue">
-                        <label for="tissue">Tissue</label><br>
-                    <input type="checkbox" name="form-chkbx" value="faucet">
-                        <label for="faucet">Faucet</label><br>
-                    <input type="checkbox" name="form-chkbx" value="handdryer">
-                        <label for="handdryer">Hand Dryer</label><br>
+                    <div class="text-white">
+ 
+                        <!-- Check Boxes -->
+                            <span class="label">Amenities:</span> <br>
+                            <input type="checkbox" name="form-chkbx" value="bidet" {{#if amenities.bidet}}checked{{/if}}>
+                            <label for="Bidet">Bidet</label><br>
+                            <input type="checkbox" name="form-chkbx" value="flush" {{#if amenities.flush}}checked{{/if}}>
+                            <label for="flush">Flush</label><br>
+                            <input type="checkbox" name="form-chkbx" value="tissue" {{#if amenities.tissue}}checked{{/if}}>
+                            <label for="tissue">Tissue</label><br>
+                            <input type="checkbox" name="form-chkbx" value="faucet" {{#if amenities.faucet}}checked{{/if}}>
+                            <label for="faucet">Faucet</label><br>
+                            <input type="checkbox" name="form-chkbx" value="handdryer" {{#if amenities.handdryer}}checked{{/if}}>
+                            <label for="handdryer">Hand Dryer</label><br>
+                    </div>
                         
-                    <span class="label">Date of visit</span> <br>
-                    <input class="input-date" type="date" name="form-date"> <br>
+                    <span class="label text-white">Date of visit</span> <br>
+                    <h1 class="text-white curr-date">Current Date: {{date}}</h1>
+                    <label for="date" class="text-white">New Date (optional):</label><br>
+                    <input class="input-date" type="date" name="form-date" value="{{date}}"> <br>
                     
-                    <span class="label">Title of your Review</span> <br>
-                    <textarea name="form-review-title" id="form-review-title" cols="20" rows="20" placeholder="Awesome cubicle!"></textarea>
+                    <span class="label text-white">Edit Your Title</span> <br>
+                    <textarea name="form-review-title" id="form-review-title" cols="20" rows="20">{{review.title}}</textarea>
                     <br>
                     <span class="label-limit">0/50 characters</span>
                     <br>                    
-                    <span class="label">Write a Review</span> <br>
-                    <textarea name="form-review" id="form-review" cols="10" rows="10" placeholder="I experienced the best bidet of my life..."></textarea>
+                    <span class="label text-white">Edit Your Review</span> <br>
+                    <textarea name="form-review" id="form-review" cols="10" rows="10" placeholder="I experienced the best bidet of my life...">{{review.content}}</textarea>
                     <br>
-                    <span class="label-limit">0/200 characters</span>
-                    <br>
-
-                    <span class="label">Add some Photos</span> <br>
-                    <span class="label-detail">Keep it clean! Literally.</span>
-
-                    <div class="form-img-container">
-                        <div class="form-img-wrapper">
-                            <span class="drag-text">Click to Add Photos<br>or drag and drop</span>
-                        </div>                        
-
+                    {{#if photoSrc}}
+                     <div>
+                        <span class="label text-white">Current Image</span><br>
+                        <img src="{{photoSrc}}" alt="Current Image" style="max-width: 300px; max-height: 300px;">
                     </div>
 
+                    <!-- Image Upload -->
+                    <div>
+                        <span class="label text-white">Replace Image (optional)</span><br>
+                        <input type="file" name="form-image" accept="image/*"><br>
+                    </div>
+                    
+                    {{else}}
+                     <div>
+                        <span class="label text-white">Add Image (optional)</span><br>
+                        <input type="file" name="photo" accept="image/*"><br>
+                    </div>
+                    
+                    {{/if}}
+                
                     <br>
+
+
                     <div class="submit-container">
-                        <input type="submit" class="delete" value="Delete Review">
-                        <input type="submit" class="edit" value="Update Review">
+                        <input type="submit" class="edit bg-white" value="Update Review">
                     </div>
                 </form>
             </div>

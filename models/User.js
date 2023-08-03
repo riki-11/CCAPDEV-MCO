@@ -33,11 +33,9 @@ const userSchema = new mongoose.Schema({
     photo: {
         data: {
             type: Buffer,
-            default: Buffer.from([]), 
           },
           contentType: {
             type: String,
-            default: 'image/jpeg', 
           },
     }
 });

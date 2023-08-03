@@ -11,8 +11,8 @@ module.exports = {
           'secondary': ['Crimson-Pro', 'serif']
       },
       colors:  {
+          'primary':'#202020',
           'secondary': '#F5CB5C',
-          'primarybg':'#202020',
           'gold': '#F5CB5C',
           'silver': '#797979',
           'success':'#238636',

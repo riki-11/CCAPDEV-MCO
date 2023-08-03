@@ -7,12 +7,16 @@
     <script src="https://kit.fontawesome.com/defd36cc33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-<body class="bg-primarybg text-white font-primary">
+<body class="bg-primary text-white font-primary">
     <!-- START OF MAIN CONTENT -->
     <div class="w-7/12 m-auto overflow-hidden mt-16 ">
         <div class="flex gap-10">
             <div class="flex flex-col justify-center items-center gap-y-5 rounded-[5px] mt-5">
-                <img src="{{imageSrc}}" alt="Profile Picture" class="rounded-[5rem] h-[9.5rem] w-[9.5rem]">
+                {{#if this.profImgSrc}}
+                    <img src="{{profImgSrc}}" alt="Profile Picture" class="rounded-[5rem] h-[9.5rem] w-[9.5rem]">
+                {{else}}
+                    <img src="../images/profile-icon.png" alt="Profile Picture" class="rounded-[5rem] h-[9.5rem] w-[9.5rem]">
+                {{/if}}
                 <a href="edit-profile" class="border border-white rounded-lg hover:bg-white hover:text-black p-2"><i class="fa-solid fa-pencil fa-sm"></i> Edit Profile</a>
             </div>
             <div class="flex flex-col self-center mt-8">
@@ -26,12 +30,12 @@
             </div>
         </div>
         <div class="mt-11">
-            <h2 class="border-b-2 border-secondary leading-[.01rem]"><span class="ml-[6rem] bg-primarybg px-[10px] text-[30px]">My Reviews: {{reviews.length}}</span></h2>
+            <h2 class="border-b-2 border-secondary leading-[.01rem]"><span class="ml-[6rem] bg-primary px-[10px] text-[30px]">My Reviews: {{reviews.length}}</span></h2>
         </div>
         <div class="w-full overflow-auto mb-10" id="reviewDiv"> <!--Review Container-->
             {{!-- Loop through each review in the reviews array --}}
             {{#each reviews}}
-                {{> review-block user=user imageSrc=imageSrc}}
+                {{> review-block user=user profImgSrc=profImgSrc photoSrc=photoSrc}}
             {{/each}}
 
 
