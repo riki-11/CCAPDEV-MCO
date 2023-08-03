@@ -52,7 +52,7 @@ const userController = {
         // const sampleUserID = new mongoose.Types.ObjectId('64bd2ba04e2c41c0fa918e4f'); 
 
         try {
-            const updatedUser = await User.findbyId(req.user._id).exec(); //userID should be obtained from session
+            const updatedUser = req.user; //userID should be obtained from session
             if (!updatedUser) {
                 return res.status(404).send('User not found');
             }

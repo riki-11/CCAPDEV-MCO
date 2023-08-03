@@ -220,9 +220,16 @@ app.get('/edit-profile', loggedIn, async (req, res) => {
   try {
     // Fetch the user data from the database
     // const user = await User.findById(userID).lean();
-    const user = req.user.lean();
+    const user = req.user
+    const userinfo = {
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      username: req.user.username,
+      email: req.user.email,
+      password: req.user.password
+    }
 
-    if (!user) {
+    if (!req.user) {
       return res.status(404).send('User not found');
     }
 
@@ -231,7 +238,7 @@ app.get('/edit-profile', loggedIn, async (req, res) => {
       res.render('editprofile', { 
         title: 'Edit Profile',
         forBusiness: false,
-        user: user,
+        user: userinfo,
         imageSrc: imageSrc,
       });
 
