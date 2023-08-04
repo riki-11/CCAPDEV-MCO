@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // GET request parameter to find out which building the user selected
   const buildingName = new URLSearchParams(window.location.search).get('building');
   
+  
+
   // Fetch request to get that building's data
   fetch(`/get-building-code?building=${buildingName}`)
     .then(response => response.json())
@@ -10,11 +12,4 @@ document.addEventListener('DOMContentLoaded', () => {
       banner.classList.add(`${code}-bg`);
     })
 
-    /*
-  fetch(`/get-building-reviews?building=${buildingName}`)
-  .then(response => response.json())
-  .then(reviews => {
-    console.log(reviews);
-  });
-  */
 });

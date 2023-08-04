@@ -86,8 +86,8 @@ Handlebars.registerHelper('renderRating', function (averageRating) {
 // Upon loading the homepage, grab the list of all the buildings
 app.get("/", async (req, res) => {
   const allBldgs = await buildingController.getAllBuildings();
-
-
+  // Update the ratings per building
+  
   res.render("index", {
     title: "Flush Finder",
     forBusiness: false,
@@ -383,8 +383,11 @@ app.get('/establishment', async (req, res) => {
 
   try {
     const buildingName = req.query.building;
-    const building = await buildingController.getBuildingByName(buildingName);
     const reviews = await reviewController.getReviewsByBuilding(buildingName);
+    const rating = await buildingController.getBuildingRating(buildingName);
+    const building = await buildingController.getBuildingByName(buildingName);
+
+    console.log(`OVERALL RATING IS: ${rating}`);
 
     if (!building) {
       res.redirect('/404');
@@ -394,7 +397,8 @@ app.get('/establishment', async (req, res) => {
       title: buildingName,
       forBusiness: false,
       building: building,
-      reviews: reviews
+      reviews: reviews,
+      rating: rating
     }); 
 
   } catch (error) {
