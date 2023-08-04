@@ -77,6 +77,12 @@ const userController = {
                 updatedUser.password = password;
                 updatedUser.description = description;
             }
+            
+            // (IN FINAL BUILD) If they have a value inputted for password, it sets it to reflect to the db
+            if (password) {
+                await updatedUser.setPassword(password);
+            }
+            
             await updatedUser.save();
             console.log(updatedUser);
 

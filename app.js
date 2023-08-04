@@ -87,11 +87,25 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next) => {
   res.locals.loggedIn = function() {
     if (req.user) {
+      // console.log('loggedIn');
       return true;
     } else {
       return false;
     }
   }
+
+  // Checks if current user is logged in and is an owner
+  res.locals.isOwner = function() {
+    if (req.user && req.user.isOwner) {
+      // console.log('isOwner executed');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // console.log(res.locals.isOwner);
+  // console.log(res.locals.loggedIn);
   next();
 })
 
@@ -151,12 +165,9 @@ app.get('/login', (req, res) => {
 
 
 app.get('/profile', loggedIn, async (req, res) => {
-  // const userID = '64bd2ba04e2c41c0fa918e4f';
-
   try {
 
     // Fetch user data
-    // const user = await User.findById(userID).lean();
     const user = req.user
     if (!user) {
       console.log(req.user);
@@ -176,7 +187,9 @@ app.get('/profile', loggedIn, async (req, res) => {
       const senduser = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
-        username: req.user.username
+        username: req.user.username,
+        isOwner: res.locals.isOwner,
+        loggedIn: loggedIn
       }
 
     const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;

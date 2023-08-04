@@ -17,13 +17,16 @@
 
     </div>
     <div class="header-right">
+            {{!--If logged in and is not an owner--}}
             {{#if loggedIn}}
-                <a class="write-review-btn no-decoration text-white" href="select-restroom">Write a Review</a>
+                {{#unless isOwner}}
+                    <a class="write-review-btn no-decoration text-white" href="select-restroom">Write a Review</a>
+                {{/unless}}    
+            {{/if}}
+            {{#if loggedIn}}
                 <a href="profile" class="header-profile-btn">
                     <i class="fa-regular fa-user fa-lg"></i>
                 </a>
-            {{/if}}
-            {{#if loggedIn}}
                 <a class="login-btn no-decoration" href="logout">Log Out</a>
             {{else}}
                 <a class="signup-btn no-decoration" href="register">Sign Up</a>

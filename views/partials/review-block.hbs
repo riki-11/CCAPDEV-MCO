@@ -46,10 +46,16 @@
         </div>
 
         <div class="flex mt-1 gap-x-5">
-            <a href="edit-review?reviewId={{this._id}}" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
-            <button class="hover:opacity-80 delete" data-review-id="{{this._id}}">
-                <i class="fa-solid fa-trash-can"></i> Delete Review
-            </button>   
+            {{#if loggedIn}}
+                {{#if isOwner}}
+                    <button class="hover:opacity-80" id="replytocomment1"><i class="fa-solid fa-reply" ></i> Reply</button>
+                {{else}}
+                    <a href="edit-review?reviewId={{this._id}}" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
+                    <button class="hover:opacity-80 delete" data-review-id="{{this._id}}">
+                        <i class="fa-solid fa-trash-can"></i> Delete Review
+                    </button>   
+                {{/if}}
+            {{/if}}
         </div>
     </div>  
 </div>
