@@ -55,7 +55,7 @@ const reviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    default: '64bd2ba04e2c41c0fa918e4f'
+    // default: '64bd2ba04e2c41c0fa918e4f'
     //required: true
 
   }
