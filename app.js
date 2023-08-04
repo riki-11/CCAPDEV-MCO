@@ -176,7 +176,7 @@ app.get('/profile', loggedIn, async (req, res) => {
       profImgSrc: profImgSrc,
       reviews: reviews.map(review => ({
         ...review,
-        user: user,       // Pass the user object to each review
+        user: senduser,       // Pass the user object to each review
         profImgSrc: profImgSrc, // Pass the imageSrc to each review
         photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
     }); 
