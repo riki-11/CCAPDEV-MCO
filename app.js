@@ -83,10 +83,22 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
+// Configure middleware to verify login (for logout button)
+app.use((req,res,next) => {
+  res.locals.loggedIn = function() {
+    if (req.user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  next();
+})
+
 Handlebars.registerHelper('renderRating', function (averageRating) {
   const maxRating = 5; // Assuming the maximum rating is 5
   let html = '';
-
+  
   for (let i = 1; i <= maxRating; i++) {
     if (i <= averageRating) {
       html += '<i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i>';
@@ -94,7 +106,7 @@ Handlebars.registerHelper('renderRating', function (averageRating) {
       html += '<i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl no-rating"></i>';
     }
   }
-
+  
   return new Handlebars.SafeString(html);
 });
 
@@ -105,11 +117,10 @@ Handlebars.registerHelper('renderRating', function (averageRating) {
 app.get("/", async (req, res) => {
   const allBldgs = await buildingController.getAllBuildings();
 
-
   res.render("index", {
     title: "Flush Finder",
     forBusiness: false,
-    allBldgs: allBldgs
+    allBldgs: allBldgs,
   });
 });
 
@@ -300,7 +311,7 @@ app.get('/select-restroom', (req, res) => {
   });
 });
 
-app.get('/find-restroom', restroomController.getRestroomByInfo);
+app.get('/find-restroom', loggedIn, restroomController.getRestroomByInfo);
 
 // Asynchronous request to get the data of a SPECIFIC building in the database
 app.get('/get-building-data',  async (req, res) => {
@@ -447,7 +458,7 @@ app.get('/search-results', async (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-  req.logout();
+  req.logout(() => {});
   res.redirect('/login'); // Redirect to login page after logout
 });
 
@@ -476,7 +487,7 @@ function loggedIn(req, res, next) {
 
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
-app.post('/createreview', loggedIn, upload.single('photo'), reviewController.addReview);
+app.post('/createreview', upload.single('photo'), reviewController.addReview);
 app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.updateUser);
 app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login' }), userController.loginUser);
 app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);

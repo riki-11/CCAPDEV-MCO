@@ -24,11 +24,6 @@ const userSchema = new mongoose.Schema({
         required: true
     }, //DELETE IN FINAL BUILD SINCE PASSPORT DEALS WITH THIS NA
 
-    // description: {
-    //     type: String, 
-    //     required: false
-    // },
-
     email: {
         type: String,
         required: true,
