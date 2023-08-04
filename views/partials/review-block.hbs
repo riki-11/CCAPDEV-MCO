@@ -1,5 +1,6 @@
 <div class="mt-8 gap-4 flex justify-center w-full"> 
     <div class="min-w-fit">
+        <!--  -->
         {{#if this.profImgSrc}}
             <img src="{{profImgSrc}}" alt="Profile Icon" class="rounded-[2rem] h-12 w-12">
         {{else}}
@@ -8,7 +9,13 @@
     </div>
     <div class="flex flex-col gap-y-1 text-sm text-neutral-400 w-full">
         <div class="flex overflow-hidden">
-            <p>{{user.firstName}} posted a review for {{this.restroomID.buildingID.name}} <a href="establishment" class="text-secondary">{{this.restroomID.name}}</a></p>
+            <p>{{user.username}} posted a review for
+                <a href="establishment?building={{this.restroomID.buildingID.name}}" class="text-secondary">
+                    {{this.restroomID.buildingID.name}}, 
+                    Floor {{this.restroomID.floor}},
+                    {{this.restroomID.gender}}
+                </a>
+            </p>
             <p class="w-fit ml-auto">{{this.dateCreated}}</p>
         </div>       
         <div class="text-white mt-1">
@@ -45,11 +52,13 @@
                 <a><i class="fa-regular fa-thumbs-down"></i> {{this.disgustingCount}}</a>
         </div>
 
-        <div class="flex mt-1 gap-x-5">
-            <a href="edit-review?reviewId={{this._id}}" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
-            <button class="hover:opacity-80 delete" data-review-id="{{this._id}}">
-                <i class="fa-solid fa-trash-can"></i> Delete Review
-            </button>   
-        </div>
+        {{#if modifiable}}
+            <div class="flex mt-1 gap-x-5">
+                <a href="edit-review?reviewId={{this._id}}" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
+                <button class="hover:opacity-80 delete" data-review-id="{{this._id}}">
+                    <i class="fa-solid fa-trash-can"></i> Delete Review
+                </button>   
+            </div>
+        {{/if}}
     </div>  
 </div>

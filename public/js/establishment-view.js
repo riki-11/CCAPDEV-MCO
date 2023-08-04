@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
       banner.classList.add(`${code}-bg`);
     })
 
-
-
+    /*
+  fetch(`/get-building-reviews?building=${buildingName}`)
+  .then(response => response.json())
+  .then(reviews => {
+    console.log(reviews);
+  });
+  */
 });

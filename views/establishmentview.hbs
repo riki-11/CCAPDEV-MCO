@@ -45,6 +45,7 @@
                                     <!--<button id="mapbtn"{{!--  onclick="togglepopup()" --}}>Go To DLSU Map</button>-->
                                 </div>
                             </div>
+                            <!--
                             <div class="right-details-container">
                                 <div class="right-details">
                                     <h1 class="right-details-amenities">Property Amenities</h1>
@@ -62,6 +63,7 @@
                                     <br><i class="fa-solid fa-soap"></i><span> Hand Soap</span>
                                 </div>
                             </div>
+                            -->
                         </div>
                         <!-- 
                         IMAGES 
@@ -75,64 +77,7 @@
 
                 
                 <div class="flex w-full m-auto overflow-hidden p-10">
-                    <div class="flex flex-col w-1/4 space-y-4 mt-[2.5rem]">
-                        <!-- Gender Filter -->
-                        <h2 class="filter-font">Filters</h2>
-                        <div>
-                        <label for="gender" class="font-bold">Gender</label>
-                            <div>
-                                <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox" name="gender" value="male">
-                                <span class="ml-2">Male</span>
-                                </label>
-                                <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox" name="gender" value="female">
-                                <span class="ml-2">Female</span>
-                                </label>
-                                <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox" name="gender" value="all">
-                                <span class="ml-2">All</span>
-                                </label>
-                            </div>
-                        </div>
-                        <hr class="filter-line">
-                    
-                        <!-- Category Filter -->
-                        <div>
-                        <label for="category" class="font-bold">Category</label>
-                        <div>
-                            <label class="flex items-center">
-                            <input type="checkbox" class="form-checkbox" name="category" value="student">
-                            <span class="ml-2">Student</span>
-                            </label>
-                            <label class="flex items-center">
-                            <input type="checkbox" class="form-checkbox" name="category" value="faculty">
-                            <span class="ml-2">Faculty</span>
-                            </label>
-                            <label class="flex items-center">
-                            <input type="checkbox" class="form-checkbox" name="category" value="all">
-                            <span class="ml-2">All</span>
-                            </label>
-                        </div>
-                        </div>
-                        <hr class="filter-line">
-                        <!-- Floor Number Filter -->
-                        <div>
-                        <label for="floor" class="font-bold">Floor Number: </label>
-                        <select name="floor" class="form-select text-black">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="3">4</option>
-                            <option value="3">5</option>
-                            <option value="3">6</option>
-                        </select>
-                        </div>
-                        <div class="mt-auto"> 
-                            <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Apply Filters</button>
-                        </div>
-                    </div>
-                    <div class="w-3/4">
+                    <div class="w-full">
                         <div class="flex items-center gap-x-5 header">
                             <h1 class="review-header">Reviews</h1>
                             <div class="review-search-box text-gray">
@@ -153,176 +98,14 @@
                         <h2 class="search-line"></h2>
                         
                         <div class="w-full overflow-auto mb-10"> <!--Review Container-->
-                            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
-                                <div class="w-1/4">
-                                    <img src="./images/bldg-henry.jpeg" alt="Building Image" class="rounded-sm h-auto w-auto">
-                                </div>
-                                <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">
-                                    <div class="flex overflow-hidden">
-                                        <p>Enrique Lejano posted a review for <a href="establishment" class="text-secondary">Henry Sy, 8th Floor, Male</a></p>
-                                        <p class="w-fit ml-auto">5 days ago</p>
-                                    </div>       
-                                    <div class="mt-1">
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                    </div>
-                                    <div class="text-white mt-1">
-                                        Sobrang linis at maayos yung restroom na 'to, promise! Parang bago lang siya. Walang amoy na hindi maganda, kahit na madaming tao ang gumagamit.
-                                    </div>
-                                    <div class="flex mt-1 gap-x-5">
-                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
-                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
-                                        <button class="hover:opacity-80" id="replytocomment1"><i class="fa-solid fa-reply" ></i> Reply</button>
-                                        
-                                    </div>
-                                </div>  
-                            </div>
-                            <div class="replies-container">
-                                <p  class="text-secondary" >Replies</p>
-                                <div class="reply-blocks"> <!--reply Blocks-->
-                                    <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">
-                                        <div class="flex overflow-hidden">
-                                            <p>Jose Dela Cruz <a href="establishment" class="text-secondary">owner</a> replied to a comment</p>
-                                            <p class="w-fit ml-auto">2 days ago</p>
-                                        </div>
-                                        <div class="text-white mt-1">
-                                            Thank you for taking the time to share your valuable feedback with us about our establishment
-                                        </div>
-                                        <div class="flex mt-1 gap-x-5">
-                                            <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
-                                            <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
-                                                                                
-                                        </div>
-                                    </div>  
-                                </div>
-                                <div class="reply-form-container" id="reply-form-container1">
-                                    <form action="" id="reply-textarea">                                     
-                                        <span class="text-secondary">Write a reply</span> <br>
-                                        <textarea class="text-black" name="form-review" id="form-review" cols="70" rows="3" placeholder="your reply here.."></textarea>
-                                        <br>
-                                        
-                                        <input type="submit" class="submit"  value="Submit Review">
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
-                                <div class="w-1/4">
-                                    <img src="./images/bldg-henry.jpeg" alt="Building Image" class="rounded-sm h-auto w-auto">
-                                </div>
-                                <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">   
-                                    <div class="flex overflow-hidden">
-                                        <p>Patrick Leonida posted a review for <a href="establishment" class="text-secondary">Henry Sy, 9th Floor, Male</a></p>
-                                        <p class="w-fit ml-auto">10 days ago</p>
-                                    </div>       
-                                    <div class="mt-1">
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                                    </div>
-                                    <div class="text-white mt-1">
-                                        Ay grabe, ang baho ng CR na 'to! Parang hindi na nalinis ng matagal. Nakakasuka talaga. Sana mas maalagaan nila nang maayos, kasi nakaka-turn off talaga ang amoy.
-                                    </div>
-                                    <div class="flex mt-1 gap-x-5">
-                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
-                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
-                                        <button class="hover:opacity-80"id="replytocomment2"><i class="fa-solid fa-reply"></i> Reply</button>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="replies-container">                
-                                    <h1 class="text-secondary" id="reply-caption-container2">Replies</h1>
-                                    <div class="reply-form-container" id="reply-form-container2">
-                                        <form action="" id="reply-textarea">                                     
-                                            <span class="text-secondary">Write a reply</span> <br>
-                                            <textarea class="text-black" name="form-review" id="form-review" cols="70" rows="3" placeholder="your reply here.."></textarea>
-                                            <br>
-                                            
-                                            <input type="submit" class="submit"  value="Submit Review">
-                                        </form>
-                                    </div>                                    
-                                </div>
-                            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
-                                <div class="w-1/4">
-                                    <img src="./images/bldg-henry.jpeg" alt="Building Image" class=" rounded-sm h-auto w-auto">
-                                </div>
-                                <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">
-                                    <div class="flex overflow-hidden">
-                                        <p>Mark Abergos posted a review for <a href="establishment" class="text-secondary">Henry Sy, 2nd Floor, Male</a></p>
-                                        <p class="w-fit ml-auto">12 days ago</p>
-                                    </div>    
-                                    <div class="mt-1">
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                                    </div>
-                                    <div class="text-white mt-1">
-                                        <p>Nakakainis talaga ang restroom na 'to! Hindi lang mabaho, kundi sobrang dumi rin. Parang hindi pinupunasan o nililinis ng maayos.</p>
-                                    </div>
-                                    <div class="flex mt-1 gap-x-5">
-                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
-                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
-                                        <button class="hover:opacity-80" id="replytocomment3"><i class="fa-solid fa-reply"></i> Reply</button>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="replies-container">             
-                                    <h1  class="text-secondary" id="reply-caption-container3">Replies</h1>
-                                    <div class="reply-form-container" id="reply-form-container3">   
-                                    <form action="" id="reply-textarea">                                     
-                                        <span class="text-secondary">Write a reply</span> <br>
-                                        <textarea class="text-black" name="form-review" id="form-review" cols="70" rows="3" placeholder="your reply here.."></textarea>
-                                        <br>
-                                        
-                                        <input type="submit" class="submit"  value="Submit Review">
-                                    </form>
-                                    </div>
-                            </div> 
-                            <div class="mt-8 gap-4 flex justify-center"> <!--Review Blocks-->
-                                <div class="w-1/4">
-                                    <img src="./images/bldg-henry.jpeg" alt="Building Image" class="rounded-sm h-auto w-auto">
-                                </div>
-                                <div class="flex flex-col w-3/4 gap-y-1 text-sm text-neutral-400">        
-                                    <div class="flex overflow-hidden">
-                                        <p>Mark Abergos posted a review for <a href="establishment" class="text-secondary">Henry Sy, 7th Floor, Male</a></p>
-                                        <p class="w-fit ml-auto">19 days ago</p>
-                                    </div>  
-                                    <div class="mt-1">
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #f5cb5c;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                                        <i class="fa-solid fa-toilet-paper fa-rotate-270" style="color: #a3a3a3;"></i>
-                                    </div>
-                                    <div class="text-white mt-1">
-                                        Okay naman yung restroom na 'to, pero medyo kulang sa kasilyas at tissue. Hindi siya masyadong maayos ma-maintain. Pero hindi naman ganun kalala. Medyo average lang siya.
-                                    </div>
-                                    <div class="flex mt-1 gap-x-5">
-                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-up"></i> Clean</a>
-                                        <a class="hover:opacity-80"><i class="fa-regular fa-thumbs-down"></i> Disgusting</a>
-                                        <button class="hover:opacity-80"id="replytocomment4"><i class="fa-solid fa-reply"></i> Reply</button>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="replies-container">                                
-                                    <h1  class="text-secondary"id="reply-caption-container4">Replies</h1>
-                                    <div class="reply-form-container" id="reply-form-container4">    
-                                        <form action="" id="reply-textarea">                                     
-                                            <span class="text-secondary">Write a reply</span> <br>
-                                            <textarea class="text-black" name="form-review" id="form-review" cols="70" rows="3" placeholder="your reply here.."></textarea>
-                                            <br>
-                                            
-                                            <input type="submit" class="submit"  value="Submit Review">
-                                        </form>
-                                    </div> 
-                            </div>
+                        {{#each reviews}}
+                            {{> review-block modifiable=false}}
+                        {{/each}}
+
+
                         </div>
+
+                        
                     </div>
                 </div>                    
             </div>

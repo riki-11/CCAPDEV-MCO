@@ -43,7 +43,7 @@ import { match } from "assert";
 
 const port = process.env.PORT;
 
-db.connect();
+await db.connect();
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -121,8 +121,9 @@ app.get('/login', (req, res) => {
 });
 
 
+
 app.get('/profile', async (req, res) => {
-  const userID = '64bd2ba04e2c41c0fa918e4f';
+  const userID = '64bd2ba04e2c41c0fa918e4f'; // still hard coded
 
   try {
 
@@ -143,6 +144,7 @@ app.get('/profile', async (req, res) => {
       .lean();
 
     const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
+
     res.render('viewprofile', { 
       title: 'Profile',
       forBusiness: false,
@@ -155,37 +157,12 @@ app.get('/profile', async (req, res) => {
         photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
     }); 
    
-    
-    
-
-   
-    
-    
-
   } catch (error) {
     console.error('Error fetching user data:', error);
     res.status(500).send('Server error');
   }
 });
 
-app.delete('/deleteReviews', async (req, res) => {
-  console.log("app delete");
-  const reviewId = req.query.reviewId;
-
-
-  try {
-    // Find the review in the database by its ID
-    const result = await Review.deleteOne({_id: reviewId}).exec();
-
-    console.log(result);
-
-
-    res.json({ message: 'Review deleted successfully.' });
-  } catch (error) {
-    console.error('Error occurred:', error);
-    res.status(500).json({ message: 'Internal server error.' });
-  }
-});
 
 
 app.get('/edit-profile', async (req, res) => {
@@ -268,6 +245,31 @@ app.get('/select-restroom', (req, res) => {
 
 app.get('/find-restroom', restroomController.getRestroomByInfo);
 
+// Gets all the reviews for a building
+app.get('/get-building-reviews', async (req, res) => {
+  const buildingName = req.query.building;
+  const reviews = await reviewController.getReviewsByBuilding(buildingName);
+
+  if (reviews) {
+    res.json(reviews);
+  } else {
+    res.status(500).send('Reviews not found');
+  }
+});
+
+
+// Asynchronous request to get all restrooms in a building
+app.get('/get-building-restrooms', async (req, res) => {
+  const buildingName = req.query.building;
+  const restrooms = await restroomController.getRestroomsByBuilding(buildingName);
+
+  if (restrooms) {
+    res.json(restrooms);
+  } else {
+    res.status(500).send('Restrooms not found');
+  }
+});
+
 // Asynchronous request to get the data of a SPECIFIC building in the database
 app.get('/get-building-data',  async (req, res) => {
   const building = await buildingController.getBuildingByName(req.query.building);
@@ -275,7 +277,7 @@ app.get('/get-building-data',  async (req, res) => {
   if (building) {
     res.json(building);
   } else {
-    res.status(404).send('Building not found');
+    res.status(500).send('Building not found');
   }
 });
 
@@ -361,21 +363,38 @@ app.get('/edit-review', async (req, res) => {
   }
 });
 
+app.delete('/deleteReviews', async (req, res) => {
+  console.log("app delete");
+  const reviewId = req.query.reviewId;
+
+
+  try {
+    // Find the review in the database by its ID
+    const result = await Review.deleteOne({_id: reviewId}).exec();
+    console.log(result);
+    res.json({ message: 'Review deleted successfully.' });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
 app.get('/establishment', async (req, res) => {
 
   try {
     const buildingName = req.query.building;
     const building = await buildingController.getBuildingByName(buildingName);
-    console.log(building);
+    const reviews = await reviewController.getReviewsByBuilding(buildingName);
 
     if (!building) {
       res.redirect('/404');
     }
 
     res.render("establishmentview", {
-      title: buildingName, // replace with title of from db
+      title: buildingName,
       forBusiness: false,
-      building: building
+      building: building,
+      reviews: reviews
     }); 
 
   } catch (error) {
