@@ -425,6 +425,27 @@ app.get('/establishment-business', (req, res) => {
   });
 });
 
+app.get('/search-results', async (req, res) => {
+  try {
+    const searchQuery = req.query.q;
+    console.log(searchQuery);
+    const searchResults = await buildingController.searchBuildings(searchQuery);
+    console.log(searchResults);
+
+    res.render("results", {
+      title: "Search Results",
+      forBusiness: false,
+      searchResults: searchResults,
+      searchQuery: searchQuery
+    })
+
+} catch (error) {
+    // Handle any errors that occurred during the search
+    console.error("Error occurred during search:", error);
+    res.status(500).json({ error: "An error occurred during the search" });
+}
+});
+
 app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/login'); // Redirect to login page after logout

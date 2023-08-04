@@ -33,6 +33,22 @@ const buildingController = {
         console.error('Error fetching building code: ', error);
         res.status(500).send('Server Error');
       }
+    },
+
+    searchBuildings: async function(searchQuery) {
+      try {
+        const regexQuery = new RegExp(searchQuery, 'i');
+        const buildings = await Building.find({
+            $or: [
+                { name: regexQuery },
+                { description: regexQuery }
+            ]
+        }).lean();
+        return buildings;
+      } catch (error) {
+        console.error('Error fetching buildings:', error);
+        res.status(500).send('Server error');
+      }
     }
 }
 

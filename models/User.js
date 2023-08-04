@@ -35,6 +35,16 @@ const userSchema = new mongoose.Schema({
         unique: true,
         match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     },
+
+    description: {
+        type: String
+    },
+
+    isOwner: {
+        type: Boolean,
+        default: false
+    },
+
     photo: {
         data: {
             type: Buffer,
