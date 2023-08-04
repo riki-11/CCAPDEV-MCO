@@ -1523,7 +1523,6 @@ p {
 
 .search-description {
   color:white;
-  margin-top:5px;
   margin-left:10px;
   display: flex;
   flex-direction: column;
@@ -1543,7 +1542,6 @@ p {
 
 .search-description p {
   font-size:1rem;
-  margin-left:15px;
 }
 
 .see-more {
@@ -1858,6 +1856,14 @@ p {
 
 .st-lasalle-bg {
   background-image: url("/images/bldg-stlasalle.jpeg")
+}
+
+.resform {
+  display: flex;
+}
+
+.searchbar {
+  width:520px;
 }
 
 /* add more building classes as necessary */
