@@ -257,7 +257,7 @@ app.get('/edit-profile', loggedIn, async (req, res) => {
       res.render('editprofile', { 
         title: 'Edit Profile',
         forBusiness: false,
-        user: user
+        user: userinfo
       });
     }
 
