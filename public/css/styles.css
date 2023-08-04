@@ -761,6 +761,10 @@ video {
   min-width: fit-content;
 }
 
+.resize-none{
+  resize: none;
+}
+
 .flex-col{
   flex-direction: column;
 }

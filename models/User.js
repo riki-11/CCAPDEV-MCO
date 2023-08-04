@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     }, //DELETE IN FINAL BUILD SINCE PASSPORT DEALS WITH THIS NA
-
+    
     email: {
         type: String,
         required: true,
@@ -32,7 +32,8 @@ const userSchema = new mongoose.Schema({
     },
 
     description: {
-        type: String
+        type: String,
+        default: ""
     },
 
     isOwner: {

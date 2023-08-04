@@ -48,7 +48,7 @@ const userController = {
 
         const photoData = req.file;
 
-        const { firstname, lastname, username, email, password } = req.body;
+        const { firstname, lastname, username, email, password, description } = req.body;
         // const sampleUserID = new mongoose.Types.ObjectId('64bd2ba04e2c41c0fa918e4f'); 
 
         try {
@@ -64,6 +64,7 @@ const userController = {
                 updatedUser.username = username;
                 updatedUser.email = email;
                 updatedUser.password = password;
+                updatedUser.description = description;
                 updatedUser.photo = {
                     data: photoData.buffer,
                     contentType: photoData.mimetype,
@@ -74,6 +75,7 @@ const userController = {
                 updatedUser.username = username;
                 updatedUser.email = email;
                 updatedUser.password = password;
+                updatedUser.description = description;
             }
             await updatedUser.save();
             console.log(updatedUser);
@@ -125,7 +127,6 @@ const userController = {
     },
 
     getReviewsByUserID: async function (req, res) {
-        const userID = '64bd2ba04e2c41c0fa918e4f'; // Replace with the actual userID
         
         try {
             // const reviews = await Review.find({ user: new mongoose.Types.ObjectId(userID) }).lean();          
