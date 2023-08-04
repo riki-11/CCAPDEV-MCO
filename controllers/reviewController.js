@@ -66,7 +66,7 @@ const reviewController = {
           //console.log('Review created:', newReview);
 
           // Redirect to a success page or send a success response
-          res.redirect('http://localhost:3000/profile'); // Replace with the appropriate URL for the success page
+          res.redirect('/profile'); // Replace with the appropriate URL for the success page
       } catch (error) {
           console.error('Error creating review:', error);
           res.status(500).send('Server error');
@@ -113,7 +113,7 @@ const reviewController = {
       await review.save();
   
       // Redirect or send a response as appropriate
-      res.redirect('http://localhost:3000/profile'); 
+      res.redirect('/profile'); 
     } catch (err) {
       // Handle errors
       console.error(err);

@@ -27,7 +27,7 @@ const restroomController = {
       //res.send(restroom)
       const dataToSend = { name: building, floor: floor, gender: gender, restroomId: restroom._id};
       const queryString = new URLSearchParams(dataToSend).toString();
-      res.redirect(`http://localhost:3000/create-review?${queryString}`);
+      res.redirect(`create-review?${queryString}`);
       //res.redirect('http://localhost:3000/create-review');
 
     } catch (error) {

@@ -134,6 +134,12 @@ handlebars.handlebars.registerHelper('times', function(n, block) {
   return accum;
 });
 
+app.get('/about', (req, res) => {
+  res.render("about", {
+    title: "About Us",
+    forBusiness: false
+  });
+});
 
 app.get('/register', (req, res) => {
   res.render("register", {
@@ -176,7 +182,8 @@ app.get('/profile', loggedIn, async (req, res) => {
       const senduser = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
-        username: req.user.username
+        username: req.user.username,
+        description: req.user.description
       }
 
     const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
@@ -237,7 +244,8 @@ app.get('/edit-profile', loggedIn, async (req, res) => {
       lastName: req.user.lastName,
       username: req.user.username,
       email: req.user.email,
-      password: req.user.password
+      password: req.user.password,
+      description: req.user.description
     }
 
     if (!req.user) {

@@ -10,6 +10,7 @@ const reviewSchema = new mongoose.Schema({
   },
   dateCreated: {
     type: String,
+    required: true,
     // Set the default value to the current date
   },
   rating: {

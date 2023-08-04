@@ -15,22 +15,22 @@
                 <h1>{{test.name}}</h1>
 
                 <form action="/find-restroom" method="get">
-                    <label for="building" class="bg-white">Select a building</label>
-                    <select name="building" id="building">
+                    <label for="building" class="text-white font-semibold">Building:</label>
+                    <select name="building" id="building" class="mr-4">
                         <!-- Generate this dynamically -->
                         {{#each buildingNames}}
                             <option value="{{this}}">{{this}}</option>
                         {{/each}}
                     </select>
-                    <label for="floor" class="bg-white">Select a floor</label>
-                    <select name="floor" id="floor" >
+                    <label for="floor" class="text-white font-semibold">Floor:</label>
+                    <select name="floor" id="floor" class="mr-4">
                         <!-- generate this dynamically -->
                         {{#each buildingFloors}}
                         <option value="{{this}}">{{this}}</option>
                         {{/each}}
                     </select>
-                    <label for="gender" class="bg-white">Select a gender</label>
-                    <select name="gender" id="gender">
+                    <label for="gender" class="text-white font-semibold">Gender:</label>
+                    <select name="gender" id="gender" class="mr-4">
                         <!-- Generate this dynamically -->
                         <option value="FEMALE">Female</option>
                         <option value="MALE">Male</option>

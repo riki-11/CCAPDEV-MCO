@@ -81,10 +81,10 @@ const userController = {
             console.log(updatedUser);
 
             console.log('User updated')
-            res.redirect('http://localhost:3000/profile');
+            res.redirect('/profile');
         } catch (e) {
             console.error('Error updating user ', e);
-            res.redirect('http://localhost:3000/edit-profile');
+            res.redirect('/edit-profile');
         }
 
     },
