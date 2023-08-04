@@ -16,6 +16,7 @@ import bodyParser from 'body-parser';
 
 // Session manager
 import session from 'express-session';
+import passport from 'passport';
 
 // Import handlebars
 import exphbs from 'express-handlebars';
@@ -64,11 +65,40 @@ app.listen(port, function () {
   console.log(`http://localhost:` + port);
 });
 
+/* Setup session manager and request authentication middleware */ 
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 10// 1hr
+  }
+}))
+// initialize passport and make it deal with session
+app.use(passport.initialize());
+app.use(passport.session());
+// Configure passport-local-mongoose
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+// Configure middleware to verify login (for logout button)
+app.use((req,res,next) => {
+  res.locals.loggedIn = function() {
+    if (req.user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  next();
+})
 
 Handlebars.registerHelper('renderRating', function (averageRating) {
   const maxRating = 5; // Assuming the maximum rating is 5
   let html = '';
-
+  
   for (let i = 1; i <= maxRating; i++) {
     if (i <= averageRating) {
       html += '<i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i>';
@@ -76,7 +106,7 @@ Handlebars.registerHelper('renderRating', function (averageRating) {
       html += '<i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl no-rating"></i>';
     }
   }
-
+  
   return new Handlebars.SafeString(html);
 });
 
@@ -87,11 +117,10 @@ Handlebars.registerHelper('renderRating', function (averageRating) {
 app.get("/", async (req, res) => {
   const allBldgs = await buildingController.getAllBuildings();
 
-
   res.render("index", {
     title: "Flush Finder",
     forBusiness: false,
-    allBldgs: allBldgs
+    allBldgs: allBldgs,
   });
 });
 
@@ -121,18 +150,20 @@ app.get('/login', (req, res) => {
 });
 
 
-app.get('/profile', async (req, res) => {
-  const userID = '64bd2ba04e2c41c0fa918e4f';
+app.get('/profile', loggedIn, async (req, res) => {
+  // const userID = '64bd2ba04e2c41c0fa918e4f';
 
   try {
 
     // Fetch user data
-    const user = await User.findById(userID).lean();
+    // const user = await User.findById(userID).lean();
+    const user = req.user
     if (!user) {
+      console.log(req.user);
       return res.status(404).send('User not found');
     }
-
-    const reviews = await Review.find({ user: userID })
+    //console.log(user);
+    const reviews = await Review.find({ 'user' : user })
       .populate({
         path: 'restroomID', // Populate the restroomID field
         populate: {
@@ -141,16 +172,22 @@ app.get('/profile', async (req, res) => {
         },
       })
       .lean();
+    
+      const senduser = {
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        username: req.user.username
+      }
 
     const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
     res.render('viewprofile', { 
       title: 'Profile',
       forBusiness: false,
-      user: user,
+      user: senduser,
       profImgSrc: profImgSrc,
       reviews: reviews.map(review => ({
         ...review,
-        user: user,       // Pass the user object to each review
+        user: senduser,       // Pass the user object to each review
         profImgSrc: profImgSrc, // Pass the imageSrc to each review
         photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
     }); 
@@ -188,14 +225,22 @@ app.delete('/deleteReviews', async (req, res) => {
 });
 
 
-app.get('/edit-profile', async (req, res) => {
-  const userID = '64bd2ba04e2c41c0fa918e4f'; 
+app.get('/edit-profile', loggedIn, async (req, res) => {
+  //const userID = '64bd2ba04e2c41c0fa918e4f'; 
 
   try {
     // Fetch the user data from the database
-    const user = await User.findById(userID).lean();
+    // const user = await User.findById(userID).lean();
+    const user = req.user
+    const userinfo = {
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      username: req.user.username,
+      email: req.user.email,
+      password: req.user.password
+    }
 
-    if (!user) {
+    if (!req.user) {
       return res.status(404).send('User not found');
     }
 
@@ -204,7 +249,7 @@ app.get('/edit-profile', async (req, res) => {
       res.render('editprofile', { 
         title: 'Edit Profile',
         forBusiness: false,
-        user: user,
+        user: userinfo,
         imageSrc: imageSrc,
       });
 
@@ -266,7 +311,7 @@ app.get('/select-restroom', (req, res) => {
   });
 });
 
-app.get('/find-restroom', restroomController.getRestroomByInfo);
+app.get('/find-restroom', loggedIn, restroomController.getRestroomByInfo);
 
 // Asynchronous request to get the data of a SPECIFIC building in the database
 app.get('/get-building-data',  async (req, res) => {
@@ -412,6 +457,11 @@ app.get('/search-results', async (req, res) => {
 }
 });
 
+app.get('/logout', (req, res) => {
+  req.logout(() => {});
+  res.redirect('/login'); // Redirect to login page after logout
+});
+
 // CONTROLLER METHODS
 
 // Use body-parser middleware to parse form data
@@ -426,12 +476,21 @@ const upload = multer({
   }
 });
 
+// Function for user authentication. When a user is logged in (authenticated) then req.user should not be empty
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
 
 // Define a route for handling the form submission
 app.post('/usersignup', userController.addUser);
 app.post('/createreview', upload.single('photo'), reviewController.addReview);
-app.post('/updateinfo',  upload.single('photo'), userController.updateUser);
-app.post('/updatereview', upload.single('photo'), reviewController.updateReview);
+app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.updateUser);
+app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login' }), userController.loginUser);
+app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
 
 
 // 404 page: THIS SHOULD BE AT THE VERY LAST
