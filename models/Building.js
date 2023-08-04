@@ -25,7 +25,7 @@ const buildingSchema = new mongoose.Schema({
     },
     ownerID: {
         type: Schema.Types.ObjectId,
-        ref: 'Owner',
+        ref: 'User',
         required: true
     },
     description: {

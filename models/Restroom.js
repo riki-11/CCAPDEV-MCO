@@ -14,7 +14,7 @@ const restroomSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['STUDENT', 'FACULTY'],
+        enum: ['STUDENT'],
         default: 'STUDENT'
       },
     buildingID: {

@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
 
+// For session management
+import passportLocalMongoose from 'passport-local-mongoose';
+
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -14,16 +17,30 @@ const userSchema = new mongoose.Schema({
         required:true,
         unique: true
     },
+    // passport-local-mongoose makes it so that passwords are not stored locally, 
+    // and user documents would instead have hashes and salts.
     password: {
         type: String,
         required: true
-    },
+    }, //DELETE IN FINAL BUILD SINCE PASSPORT DEALS WITH THIS NA
+    
     email: {
         type: String,
         required: true,
         unique: true,
         match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     },
+
+    description: {
+        type: String,
+        default: ""
+    },
+
+    isOwner: {
+        type: Boolean,
+        default: false
+    },
+
     photo: {
         data: {
             type: Buffer,
@@ -33,5 +50,7 @@ const userSchema = new mongoose.Schema({
           },
     }
 });
+
+userSchema.plugin(passportLocalMongoose);
 
 export default mongoose.model("User", userSchema);

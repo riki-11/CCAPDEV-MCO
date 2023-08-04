@@ -9,6 +9,7 @@
     </div>
     <div class="flex flex-col gap-y-1 text-sm text-neutral-400 w-full">
         <div class="flex overflow-hidden">
+
             <p>{{user.username}} posted a review for
                 <a href="establishment?building={{this.restroomID.buildingID.name}}" class="text-secondary">
                     {{this.restroomID.buildingID.name}}, 
@@ -16,6 +17,7 @@
                     {{this.restroomID.gender}}
                 </a>
             </p>
+
             <p class="w-fit ml-auto">{{this.dateCreated}}</p>
         </div>       
         <div class="text-white mt-1">

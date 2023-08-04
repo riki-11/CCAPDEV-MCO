@@ -14,13 +14,20 @@
             </a>
             <i class="fa-solid fa-microphone push-right pointer-hover"></i>
         </div>
+
     </div>
     <div class="header-right">
-        <a class="write-review-btn no-decoration text-white" href="select-restroom">Write a Review</a>
-        <a href="profile" class="header-profile-btn">
-        <i class="fa-regular fa-user fa-lg"></i>
-        </a>
-        <a class="signup-btn no-decoration" href="register">Sign Up</a>
-        <a class="login-btn no-decoration" href="login">Log In</a>
+            {{#if loggedIn}}
+                <a class="write-review-btn no-decoration text-white" href="select-restroom">Write a Review</a>
+                <a href="profile" class="header-profile-btn">
+                    <i class="fa-regular fa-user fa-lg"></i>
+                </a>
+            {{/if}}
+            {{#if loggedIn}}
+                <a class="login-btn no-decoration" href="logout">Log Out</a>
+            {{else}}
+                <a class="signup-btn no-decoration" href="register">Sign Up</a>
+                <a class="login-btn no-decoration" href="login">Log In</a>
+            {{/if}}
     </div>
 </header>

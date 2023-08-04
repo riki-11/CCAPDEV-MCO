@@ -5,6 +5,9 @@ import Review from '../models/Review.js';
 import buildingController from './buildingController.js';
 import restroomController from './restroomController.js';
 
+import User from '../models/User.js';
+
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
@@ -24,6 +27,9 @@ const reviewController = {
       // Convert the amenities from a string or an array of strings
       const amenitiesArray = Array.isArray(amenities) ? amenities : [amenities];
 
+      // Get user from database
+      // const user = await User.findOne({'username': req.session.username}).exec();
+
 
       const dateCreated = date.toString();
       let newReview;
@@ -36,7 +42,7 @@ const reviewController = {
           title,
           content,
           restroomID: req.body.restroomId,
-
+          user: req.user
         });
 
       } else {
@@ -52,6 +58,7 @@ const reviewController = {
               data: photoData.buffer,
               contentType: photoData.mimetype
             },
+            user: req.user//Mongoose.contentTypereq.session.username
           });
       }
           //user: req.user._id  Assuming you have user authentication and req.user contains the logged-in user's details
@@ -60,9 +67,10 @@ const reviewController = {
       try {
           // Save the new review to the database
           await newReview.save();
+          //console.log('Review created:', newReview);
 
           // Redirect to a success page or send a success response
-          res.redirect('http://localhost:3000/profile'); // Replace with the appropriate URL for the success page
+          res.redirect('/profile'); // Replace with the appropriate URL for the success page
       } catch (error) {
           console.error('Error creating review:', error);
           res.status(500).send('Server error');
@@ -109,7 +117,7 @@ const reviewController = {
       await review.save();
   
       // Redirect or send a response as appropriate
-      res.redirect('http://localhost:3000/profile'); 
+      res.redirect('/profile'); 
     } catch (err) {
       // Handle errors
       console.error(err);
