@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteButtons.forEach(button => {
         button.addEventListener("click", handleDelete);
     });
+
+    // Upon loading the page, update all the buildings' ratings
+    fetch('/update-building-ratings').then(response => console.log(response));
 });
 
 async function handleDelete(event) {

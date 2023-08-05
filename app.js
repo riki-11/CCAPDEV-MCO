@@ -272,7 +272,6 @@ app.get('/search', (req, res) => {
   });
 });
 
-/* ROUTES FOR /select-restroom */
 
 // Upon visiting /select-restroom page
 app.get('/select-restroom', (req, res) => {
@@ -346,8 +345,12 @@ app.get('/get-building-code', async (req, res) => {
     res.status(404).send('Building not found');
   }
 })
-/* END OF ROUTES FOR /select-restroom */
 
+// try the req, res way
+app.get('/update-building-ratings', async (req, res) => {
+  await buildingController.updateBuildingRatings();
+  
+});
 
 app.get('/create-review', (req, res) => {
   const { name, floor, gender, restroomId } = req.query;
