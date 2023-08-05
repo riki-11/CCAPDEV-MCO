@@ -104,10 +104,6 @@ function loggedIn(req, res, next) {
   }
 }
 
-// Configure passport-local-mongoose
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 
 // BEGINNING OF ALL .app functions
@@ -132,13 +128,19 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 10// 1hr
+    maxAge: 1000 * 60 * 60 * 10// 10hr
   }
 }))
 
 // initialize passport and make it deal with session
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Configure passport-local-mongoose
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // Configure middleware to verify login (for logout button)
 app.use((req,res,next) => {
@@ -171,7 +173,7 @@ app.get("/", routeController.renderHomePage);
 app.get('/about', routeController.renderAboutPage);
 app.get('/register', routeController.renderRegisterPage);
 app.get('/login', routeController.renderLogInPage);
-app.get('/profile', loggedIn, routeController.renderProfilePage);
+app.get('/profile', routeController.renderProfilePage);
 app.get('/edit-profile', loggedIn,routeController.renderEditProfilePage);
 app.get('/results', routeController.renderSearchResultsPage);
 app.get('/search', routeController.renderFindBathroomPage);

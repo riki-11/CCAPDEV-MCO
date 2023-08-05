@@ -52,9 +52,25 @@ const routeController = {
     renderProfilePage: async function(req, res) {
 
         try {
+            const { username } = req.query;
+            let user;
+            let currentUser;
+            // console.log(username)
+            
+            //if user is accessing own profile, username is empty. if they click on their name in the reviews, username == req.user.username
+            if (req.user){ 
+                if (!username || username == req.user.username) { // Logged in and accessing own profile
+                    user = req.user;
+                    currentUser = true;
+                }  else { // Logged in and accessing different profile
+                    user = await User.findOne({'username': username}).exec();
+                    currentUser = false
+                }
+            } else { // User is not logged in but views users' profiles
+                user = await User.findOne({'username': username}).exec();
+                currentUser = false
+            }
 
-            // Fetch user data
-            const user = req.user
             if (!user) {
             return res.status(404).send('User not found');
             }
@@ -70,10 +86,11 @@ const routeController = {
             .lean();
             
             const senduser = {
-                firstName: req.user.firstName,
-                lastName: req.user.lastName,
-                username: req.user.username,
-                description: req.user.description
+                isOwner: user.isOwner,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                username: user.username,
+                description: user.description,
             }
 
             const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
@@ -83,10 +100,12 @@ const routeController = {
             forBusiness: false,
             user: senduser,
             profImgSrc: profImgSrc,
+            currentUser: currentUser,
             reviews: reviews.map(review => ({
                 ...review,
                 user: senduser,       // Pass the user object to each review
                 profImgSrc: profImgSrc, // Pass the imageSrc to each review
+                currentUser: currentUser,
                 photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
             }); 
         
@@ -218,6 +237,7 @@ const routeController = {
 
     renderEstablishmentPage: async function(req, res) {
         try {
+            
             const buildingName = req.query.building;
             const reviews = await reviewController.getReviewsByBuilding(buildingName);
             const rating = await buildingController.getBuildingRating(buildingName);
@@ -234,7 +254,7 @@ const routeController = {
               forBusiness: false,
               building: building,
               reviews: reviews,
-              rating: rating
+              rating: rating,
             }); 
         
           } catch (error) {

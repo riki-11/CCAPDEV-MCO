@@ -18,7 +18,9 @@
     </div>
     <div class="header-right">
             {{#if loggedIn}}
+                {{#unless isOwner}}
                 <a class="write-review-btn no-decoration text-white" href="select-restroom">Write a Review</a>
+                {{/unless}}
                 <a href="profile" class="header-profile-btn">
                     <i class="fa-regular fa-user fa-lg"></i>
                 </a>
