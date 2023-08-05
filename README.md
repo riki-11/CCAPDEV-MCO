@@ -45,12 +45,12 @@ To set up the project locally, follow these steps:
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-username/webdev-project.git
+git clone https://github.com/riki-11/CCAPDEV-MCO.git
 ```
 2. Install dependencies:
 
 ```
-cd <project-folder>
+cd <project-folder-path>
 npm install
 ```
 
