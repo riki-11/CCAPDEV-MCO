@@ -85,8 +85,6 @@ const userController = {
         return true;
     },
     
-
-    // Function to check if the email is already registered
     checkEmailAvailability: async function(email) {
         try {
             const user = await User.findOne({ email: email });
@@ -97,7 +95,6 @@ const userController = {
         }
     },
 
-    // Function to check if the username is already taken
     checkUsernameAvailability: async function(username) {
         try {
             const user = await User.findOne({ username: username });
@@ -134,10 +131,7 @@ const userController = {
         return true;
         
     },
-     /*
-        executed when the client sends an HTTP GET request `/profile/:idNum`
-        as defined in `../routes/routes.js`
-    */
+
     updateUser: async function(req, res) {
         // get user ID, find it in database, then update the database
 
