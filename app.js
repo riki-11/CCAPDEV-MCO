@@ -44,7 +44,7 @@ import { match } from "assert";
 
 const port = process.env.PORT;
 
-db.connect();
+await db.connect();
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -52,8 +52,10 @@ const __dirname = dirname(__filename);
 
 
 
+
 // Set View engine as handlebars
 app.engine("hbs", exphbs.engine({extname: 'hbs'}));
+
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
@@ -124,17 +126,43 @@ Handlebars.registerHelper('renderRating', function (averageRating) {
   return new Handlebars.SafeString(html);
 });
 
+Handlebars.registerHelper('renderRatingSearch', function (averageRating) {
+  const maxRating = 5; // Assuming the maximum rating is 5
+  let html = '';
+  
+  for (let i = 1; i <= maxRating; i++) {
+    if (i <= averageRating) {
+      html += '<i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> ';
+    } else {
+      html += '<i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> ';
+    }
+  }
+  
+  return new Handlebars.SafeString(html);
+});
+
 
 // ROUTES
+
 
 // Upon loading the homepage, grab the list of all the buildings
 app.get("/", async (req, res) => {
   const allBldgs = await buildingController.getAllBuildings();
+  const bannerBuildings = await buildingController.getTopBuildings(allBldgs, 2);
+  const topRatedBldgs = await buildingController.getTopBuildings(allBldgs, 5);
+
+  const buildingsPerCarouselItem = 5;
+  const allBldgsChunked = await buildingController.chunkArray(allBldgs, buildingsPerCarouselItem);
+
+  // Update the ratings per building
 
   res.render("index", {
     title: "Flush Finder",
     forBusiness: false,
     allBldgs: allBldgs,
+    allBldgsChunked: allBldgsChunked,
+    bannerBuildings: bannerBuildings,
+    topRatedBldgs: topRatedBldgs
   });
 });
 
@@ -148,6 +176,12 @@ handlebars.handlebars.registerHelper('times', function(n, block) {
   return accum;
 });
 
+app.get('/about', (req, res) => {
+  res.render("about", {
+    title: "About Us",
+    forBusiness: false
+  });
+});
 
 app.get('/register', (req, res) => {
   res.render("register", {
@@ -164,7 +198,9 @@ app.get('/login', (req, res) => {
 });
 
 
+
 app.get('/profile', loggedIn, async (req, res) => {
+
   try {
 
     // Fetch user data
@@ -188,11 +224,13 @@ app.get('/profile', loggedIn, async (req, res) => {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
         username: req.user.username,
+        description: req.user.description,
         isOwner: res.locals.isOwner,
-        loggedIn: loggedIn
+        description: req.user.description
       }
 
     const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
+
     res.render('viewprofile', { 
       title: 'Profile',
       forBusiness: false,
@@ -205,37 +243,12 @@ app.get('/profile', loggedIn, async (req, res) => {
         photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
     }); 
    
-    
-    
-
-   
-    
-    
-
   } catch (error) {
     console.error('Error fetching user data:', error);
     res.status(500).send('Server error');
   }
 });
 
-app.delete('/deleteReviews', async (req, res) => {
-  console.log("app delete");
-  const reviewId = req.query.reviewId;
-
-
-  try {
-    // Find the review in the database by its ID
-    const result = await Review.deleteOne({_id: reviewId}).exec();
-
-    console.log(result);
-
-
-    res.json({ message: 'Review deleted successfully.' });
-  } catch (error) {
-    console.error('Error occurred:', error);
-    res.status(500).json({ message: 'Internal server error.' });
-  }
-});
 
 
 app.get('/edit-profile', loggedIn, async (req, res) => {
@@ -250,7 +263,8 @@ app.get('/edit-profile', loggedIn, async (req, res) => {
       lastName: req.user.lastName,
       username: req.user.username,
       email: req.user.email,
-      password: req.user.password
+      password: req.user.password,
+      description: req.user.description
     }
 
     if (!req.user) {
@@ -326,6 +340,31 @@ app.get('/select-restroom', (req, res) => {
 
 app.get('/find-restroom', loggedIn, restroomController.getRestroomByInfo);
 
+// Gets all the reviews for a building
+app.get('/get-building-reviews', async (req, res) => {
+  const buildingName = req.query.building;
+  const reviews = await reviewController.getReviewsByBuilding(buildingName);
+
+  if (reviews) {
+    res.json(reviews);
+  } else {
+    res.status(500).send('Reviews not found');
+  }
+});
+
+
+// Asynchronous request to get all restrooms in a building
+app.get('/get-building-restrooms', async (req, res) => {
+  const buildingName = req.query.building;
+  const restrooms = await restroomController.getRestroomsByBuilding(buildingName);
+
+  if (restrooms) {
+    res.json(restrooms);
+  } else {
+    res.status(500).send('Restrooms not found');
+  }
+});
+
 // Asynchronous request to get the data of a SPECIFIC building in the database
 app.get('/get-building-data',  async (req, res) => {
   const building = await buildingController.getBuildingByName(req.query.building);
@@ -333,7 +372,7 @@ app.get('/get-building-data',  async (req, res) => {
   if (building) {
     res.json(building);
   } else {
-    res.status(404).send('Building not found');
+    res.status(500).send('Building not found');
   }
 });
 
@@ -419,21 +458,42 @@ app.get('/edit-review', async (req, res) => {
   }
 });
 
+app.delete('/deleteReviews', async (req, res) => {
+  console.log("app delete");
+  const reviewId = req.query.reviewId;
+
+
+  try {
+    // Find the review in the database by its ID
+    const result = await Review.deleteOne({_id: reviewId}).exec();
+    console.log(result);
+    res.json({ message: 'Review deleted successfully.' });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
 app.get('/establishment', async (req, res) => {
 
   try {
     const buildingName = req.query.building;
+    const reviews = await reviewController.getReviewsByBuilding(buildingName);
+    const rating = await buildingController.getBuildingRating(buildingName);
     const building = await buildingController.getBuildingByName(buildingName);
-    console.log(building);
+
+    console.log(`OVERALL RATING IS: ${rating}`);
 
     if (!building) {
       res.redirect('/404');
     }
 
     res.render("establishmentview", {
-      title: buildingName, // replace with title of from db
+      title: buildingName,
       forBusiness: false,
-      building: building
+      building: building,
+      reviews: reviews,
+      rating: rating
     }); 
 
   } catch (error) {
@@ -452,22 +512,36 @@ app.get('/establishment-business', (req, res) => {
 app.get('/search-results', async (req, res) => {
   try {
     const searchQuery = req.query.q;
-    console.log(searchQuery);
-    const searchResults = await buildingController.searchBuildings(searchQuery);
-    console.log(searchResults);
+    const sortBy = req.query.sortBy;
+  
+    // Fetch search results based on searchQuery
+    let searchResults = await buildingController.searchBuildings(searchQuery);
 
+    // If sortBy is provided, sort the searchResults
+    if (sortBy) {
+      searchResults = await buildingController.sortBuildings(searchResults, sortBy);
+      console.log(searchResults);
+
+    }
+  
+    const buildingsWithReviewCount = await Promise.all(
+      searchResults.map(async (building) => {
+        const reviewCount = await reviewController.getReviewsCountForBuilding(building.name);
+        return { ...building, reviewCount };
+      })
+    );
+  
     res.render("results", {
       title: "Search Results",
       forBusiness: false,
-      searchResults: searchResults,
-      searchQuery: searchQuery
-    })
-
-} catch (error) {
-    // Handle any errors that occurred during the search
-    console.error("Error occurred during search:", error);
-    res.status(500).json({ error: "An error occurred during the search" });
-}
+      searchResults: buildingsWithReviewCount,
+      searchQuery: searchQuery,
+      sortBy: sortBy,
+    });
+  } catch (err) {
+    console.error("Error occurred during search:", err);
+    res.status(500).send("An error occurred while fetching search results.");
+  }
 });
 
 app.get('/logout', (req, res) => {

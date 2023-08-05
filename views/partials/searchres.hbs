@@ -13,18 +13,13 @@
             <div class="search-title">
                 <h4><a href="establishment?building={{this.name}}">{{this.name}}</a></h4>
             </div>
-            
+
         </a>
         <div class="rating-rev-container">
             <div class="rating-search">
-                <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                <i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> 
-                            
+                {{renderRatingSearch this.averageRating}}
             </div>
-            <a href="#" class="search-res"><p class="review-num">452 reviews</p>   </a>
+            <a href="#" class="search-res"><p class="review-num">{{this.reviewCount}} reviews</p>   </a>
         </div>
 
 

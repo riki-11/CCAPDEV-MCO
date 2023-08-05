@@ -19,12 +19,16 @@
                 {{/if}}
                 <a href="edit-profile" class="border border-white rounded-lg hover:bg-white hover:text-black p-2"><i class="fa-solid fa-pencil fa-sm"></i> Edit Profile</a>
             </div>
-            <div class="flex flex-col self-center mt-8">
+            <div class="flex flex-col self-center mt-5">
                 <div>
                     <span class="text-4xl font-extrabold">{{user.firstName}} {{user.lastName}}</span>
                 </div>
                 <div>
                     <span class="font-extralight text-sm text-gray-400">@{{user.username}}</span>
+                </div>
+
+                <div>
+                    <span class="mt-5 text-s text-white">{{user.description}}</span>
                 </div>
 
             </div>
@@ -34,8 +38,9 @@
         </div>
         <div class="w-full overflow-auto mb-10" id="reviewDiv"> <!--Review Container-->
             {{!-- Loop through each review in the reviews array --}}
+            <!-- modifiable variable determines whether replies can be edited/deleted or not -->
             {{#each reviews}}
-                {{> review-block user=user profImgSrc=profImgSrc photoSrc=photoSrc}}
+                {{> review-block user=user profImgSrc=profImgSrc photoSrc=photoSrc modifiable=true}}
             {{/each}}
 
 

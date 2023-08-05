@@ -2,7 +2,11 @@ import db from '../models/mongoose.js';
 import multer from 'multer';
 
 import Review from '../models/Review.js';
+import buildingController from './buildingController.js';
+import restroomController from './restroomController.js';
+
 import User from '../models/User.js';
+
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -66,7 +70,7 @@ const reviewController = {
           //console.log('Review created:', newReview);
 
           // Redirect to a success page or send a success response
-          res.redirect('http://localhost:3000/profile'); // Replace with the appropriate URL for the success page
+          res.redirect('/profile'); // Replace with the appropriate URL for the success page
       } catch (error) {
           console.error('Error creating review:', error);
           res.status(500).send('Server error');
@@ -113,14 +117,66 @@ const reviewController = {
       await review.save();
   
       // Redirect or send a response as appropriate
-      res.redirect('http://localhost:3000/profile'); 
+      res.redirect('/profile'); 
     } catch (err) {
       // Handle errors
       console.error(err);
       res.status(500).send("Internal Server Error");
     }
-  }
+  },
 
+  getReviewsByBuilding: async function(buildingName) {
+    try {
+      // Get the restrooms under that building
+      const restrooms = await restroomController.getRestroomsByBuilding(buildingName);
+      // Get all the restroom ids;
+      const restroomIDs = restrooms.map(restroom => restroom._id);
+      
+      // Get all the reviews per restroom
+      const reviewPromises = restroomIDs.map(async restroomID => {
+        // .populate() swaps all the references to foreign keys with THE ACTUAL OBJECT
+        const restroomReviews = await Review.find({ restroomID: restroomID })
+                                            .populate({
+                                              path: 'restroomID',
+                                              populate: {
+                                                path: 'buildingID',
+                                                select: 'name',
+                                              },
+                                            })
+                                            .populate('user')
+                                            .lean();
+                                    
+        // For each review, add the source of the profile image and the review's image to the object 
+        restroomReviews.map(review => {
+          review['profImgSrc'] = review.user.photo && review.user.photo.contentType ? `data:${review.user.photo.contentType};base64,${review.user.photo.data.toString('base64')}` : null;
+          review['photoSrc'] = review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null;
+        })
+
+        return restroomReviews;
+      });
+
+      // Save all the reviews ine one array
+      const reviewArrays = await Promise.all(reviewPromises);
+      const reviews = reviewArrays.reduce((acc, curr) => acc.concat(curr), []);
+
+
+      return reviews;
+      
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Reviews cannot be found");
+    }
+  },
+      
+  getReviewsCountForBuilding: async function(buildingName) {
+    try {
+      const reviews = await reviewController.getReviewsByBuilding(buildingName);
+      return reviews.length;
+    } catch (err) {
+      console.error(err);
+      throw new Error("Reviews cannot be found");
+    }
+  }
 }
 
 export default reviewController;
