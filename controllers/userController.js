@@ -38,6 +38,54 @@ const userController = {
         }
     },
 
+    checkUsernameAvailabilityEdit: async function (username, userId) {
+        try {
+          // Check if the username is already taken by a user other than the one with userId
+          const existingUser = await User.findOne({ username: username, _id: { $ne: userId } });
+          return !!existingUser; // Return true if username is taken, false if not
+        } catch (error) {
+          console.error('Error checking username availability:', error);
+          return true; // In case of an error, consider username as taken to be safe
+        }
+      },
+    
+      checkEmailAvailabilityEdit: async function (email, userId) {
+        try {
+          // Check if the email is already taken by a user other than the one with userId
+          const existingUser = await User.findOne({ email: email, _id: { $ne: userId } });
+          return !!existingUser; // Return true if email is taken, false if not
+        } catch (error) {
+          console.error('Error checking email availability:', error);
+          return true; // In case of an error, consider email as taken to be safe
+        }
+      },
+      formValidationEdit: async function (userId, password, username, email) {
+        // Check if the username or email is already in use in the database, excluding the current user's ID
+        const isUsernameTaken = await userController.checkUsernameAvailabilityEdit(username, userId);
+        const isEmailTaken = await userController.checkEmailAvailabilityEdit(email, userId);
+    
+        if (isUsernameTaken) {
+            return "Username is already taken.";
+        }
+    
+        if (isEmailTaken) {
+            return "Email is already taken.";
+        }
+    
+        if (password.length < 8) {
+            return "Password must be at least 8 characters long.";
+        }
+    
+        // Check if the email is in a valid format using regular expression
+        const emailFormatRegex = /\S+@\S+\.\S+/;
+        if (!emailFormatRegex.test(email)) {
+            return "Invalid email format.";
+        }
+    
+        return true;
+    },
+    
+
     // Function to check if the email is already registered
     checkEmailAvailability: async function(email) {
         try {
@@ -49,6 +97,16 @@ const userController = {
         }
     },
 
+    // Function to check if the username is already taken
+    checkUsernameAvailability: async function(username) {
+        try {
+            const user = await User.findOne({ username: username });
+            return !!user; // Returns true if a user with the username exists, false otherwise
+        } catch (err) {
+            console.error('Error while checking username availability:', err);
+            return false;
+        }
+    },
     formValidation: async function (password, username, email) {
         const isUsernameTaken = await userController.checkUsernameAvailability(username);
         const isEmailTaken = await userController.checkEmailAvailability(email);
@@ -92,10 +150,12 @@ const userController = {
         try {
             
             const updatedUser = req.user; //userID should be obtained from session
+            const userID = updatedUser._id;
+
             if (!updatedUser) {
                 return res.status(404).send('User not found');
             }
-            const response = await userController.formValidation(password, username, email);
+            const response = await userController.formValidationEdit(userID, password, username, email);
             
 
             if (response == true) {
@@ -148,16 +208,6 @@ const userController = {
 
     },
     
-    // Function to check if the username is already taken
-    checkUsernameAvailability: async function(username) {
-        try {
-            const user = await User.findOne({ username: username });
-            return !!user; // Returns true if a user with the username exists, false otherwise
-        } catch (err) {
-            console.error('Error while checking username availability:', err);
-            return false;
-        }
-    },
     
     addUser: async function (req, res) {
         const { firstname, lastname, username, email, password } = req.body; // Extract the form data
