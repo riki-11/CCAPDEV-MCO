@@ -161,7 +161,6 @@ app.get('/establishment', routeController.renderEstablishmentPage);
 app.get('/search-results', routeController.renderSearchResultsPage);
 
 
-/* ROUTES FOR /select-restroom */
 
 app.get('/select-restroom', routeController.getRestroomOptions);
 app.get('/find-restroom', loggedIn, restroomController.getRestroomByInfo);
@@ -169,6 +168,20 @@ app.get('/get-building-reviews', routeController.getBuildingReviews);
 app.get('/get-building-restrooms', routeController.getBuildingRestrooms);
 app.get('/get-building-data',  routeController.getBuildingData);
 app.get('/get-building-code', routeController.getBuildingCode);
+
+
+
+
+
+
+// try the req, res way
+app.get('/update-building-ratings', async (req, res) => {
+  await buildingController.updateBuildingRatings();
+  
+});
+
+
+
 
 
 // Handle form submissions

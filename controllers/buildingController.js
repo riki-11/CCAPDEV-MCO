@@ -41,7 +41,6 @@ const buildingController = {
       try {
         // Get all the reviews for that building
         const reviews = await reviewController.getReviewsByBuilding(buildingName);
-        console.log(`No. of reviews: ${reviews.length}`);
 
         const sumOfRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
         var average = Math.ceil(sumOfRatings / reviews.length);
@@ -59,17 +58,30 @@ const buildingController = {
     },
 
     // Updates a building's averageRating property
-    updateBuildingRating: async function(buildingName) {
+    updateBuildingRatings: async function() {
       try {
-        const building = await this.getBuildingByName(buildingName);
-        const rating = await this.getBuildingRating(buildingName);
+        // Get all the buildings
+        const buildings = await this.getAllBuildings();
+        
+        // For each building, calculate its rating and save it to the database
+        const updatedBuildings = buildings.map(async building => {
+          const rating = await this.getBuildingRating(building.name);
+          await Building.findOneAndUpdate(
+            {_id: building._id},
+            {$set: {averageRating: rating}},
+            {new : true}
+          )
+        })
 
-        // GET LIST OF BUILDINGS THEN DO A FOREACH FOR ALL THE RATINGS NALANG 
-        // CONTINUE TOMO
+        if (!updatedBuildings) {
+          // Building not found
+          return null;
+        }
+        
+        await Promise.all(updatedBuildings);
 
-        building.rating = rating;
-        await building.save();
-      
+        return updatedBuildings;
+
       } catch(error) {
           console.error('Error updating building rating: ', error);
           res.status(500).send('Server Error');

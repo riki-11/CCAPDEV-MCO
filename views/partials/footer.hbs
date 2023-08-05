@@ -9,16 +9,20 @@
     </div>
     </div>
     
-
-    <div class="footer-col">
-    <a class="footer-heading">For Students</a>
-    <a href="login" class="footer-subheading fade-hover">Log In</a>
-    <a href="register" class="footer-subheading fade-hover">Sign Up</a>
-    <a href="select-restroom" class="footer-subheading fade-hover">Write a Review</a>
+    <div class="footer-col text-white">
+        <a href="select-restroom" class="footer-heading">Explore Restrooms</a>
+        <a href="about" class="footer-heading">About</a>
     </div>
 
     <div class="footer-col">
-    <a href="establishment-business" class="footer-heading">For Business</a>
+    <a class="footer-heading">For Students</a>
+    {{#if loggedIn}}
+        <a href="select-restroom" class="footer-subheading fade-hover">Write a Review</a>
+    {{else}}
+        <a href="login" class="footer-subheading fade-hover">Log In</a>
+        <a href="register" class="footer-subheading fade-hover">Sign Up</a>
+    {{/if}}
+
     </div>
 
     <div class="footer-col">
