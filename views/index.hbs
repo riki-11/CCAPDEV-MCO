@@ -11,27 +11,19 @@
   <body class="home-body">
     <div id="carousel-banner" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active">
+        {{#each bannerBuildings}}
+        <div class="carousel-item {{#if @first}}active{{/if}}">
           <div class="banner">
             <div class="banner-comp">
-              <h1 class="banner-text">Henry Sy Sr. Hall</h1>
+              <h1 class="banner-text">{{this.name}}</h1>
               <button type="button" class="banner-button btn">
                 <a class="no-decoration" href="establishment">See Reviews</a>
               </button>
             </div>
           </div>
         </div>
-        <div class="carousel-item ">
-          <div class="banner">
-            <div class="banner-comp">
-              <h1 class="banner-text">Gokongwei Hall</h1>
-              <button type="button" class="banner-button btn">
-                <a class="no-decoration" href="establishment">See Reviews</a>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- More carousel items with different banners... -->
+        {{/each}}
+        
       </div>
       
     </div>
@@ -39,17 +31,19 @@
     
     <!--Explore by Building-->
     <div id="carousel-explore-buildings" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <!--BUILDINGS-->
-        
-            <div class="restrooms">
-              {{#each allBldgs}}
-                {{> building buildingInfo=this}}
+             <div class="carousel-inner">
+              <!-- Split buildings into chunks -->
+              {{#each allBldgsChunked}}
+                <div class="carousel-item {{#if @first}}active{{/if}}">
+                  <!--BUILDINGS-->
+                  <div class="restrooms">
+                    {{#each this}}
+                      {{> building buildingInfo=this}}
+                    {{/each}}
+                  </div>
+                </div>
               {{/each}}
             </div>
-          </div>
-        </div>
         <!-- Carousel controls -->
         <button class="carousel-control-prev" type="button" data-bs-target="#carousel-explore-buildings" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -62,7 +56,7 @@
       </div>
     </div>
     <br/>
-    <h2 class="explore-line"><span class="explore">Top Rated Bathrooms</span></h2>
+    <h2 class="explore-line"><span class="explore">Top Rated Buildings of 2023</span></h2>
     <!--Top Rated-->
     <!-- Added some slight padding so there's space between it and the footer -->
     <div id="carousel-explore-top" class="py-3 carousel slide">
@@ -71,175 +65,24 @@
         <div class="carousel-item active">
           <!--BUILDINGS-->
           <div class="restrooms">
+
             <!--First Building, First Carousel-->
-            <div class="restroom-container">
+            {{#each topRatedBldgs}} 
+                {{> building buildingInfo=this}}
+            {{/each}}
 
-              <div class="restroom-image">
-            
-                <div class="image-name">
-                  <p>6th Floor, Female</p>
-                  <h4>HENRY SY</h4><br/>
-                </div>
-                <div class="image-container">
-                  <img src="images/bldg-henry.jpeg" alt="Bathroom Image">
-                </div>
-
-                <div class="image-description">
-                  <br>
-                  <h4>AMENITIES:</h4>
-                  <p>Bidet</p>
-                  <p>Tissue</p>
-                  <p>Signal</p>
-                </div>
-
-              </div>
-              <div class="rating">
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i>              
-              </div>
-              <button type="button" class="review-button btn">
-                <a href="establishment" class="no-decoration">View</a>
-              </button>
-            </div>
-            <!--Second Building, First Carousel-->
-            <div class="restroom-container">
-
-              <div class="restroom-image">
-            
-                <div class="image-name">
-                  <p>6th Floor, Male</p>
-                  <h4>HENRY SY</h4><br/>
-                </div>
-                <div class="image-container">
-                  <img src="images/bldg-henry.jpeg" alt="Bathroom Image">
-                </div>
-
-                <div class="image-description">
-                  <br>
-                  <h4>AMENITIES:</h4>
-                  <p>Bidet</p>
-                  <p>Tissue</p>
-                  <p>Signal</p>
-                </div>
-
-              </div>
-              <div class="rating">
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i>              
-              </div>
-              <button type="button" class="review-button btn">
-                <a href="establishment" class="no-decoration">View</a>
-              </button>
-            </div>
-            <!--Third Building, First Carousel-->
-            <div class="restroom-container">
-
-              <div class="restroom-image">
-                <div class="image-name">
-                  <p>12th Floor, Male</p>
-                  <h4>BR. ANDREW</h4><br/>
-                </div>
-                <div class="image-container">
-                  <img src="images/bldg-andrew.jpg" alt="Bathroom Image">
-                </div>
-                <div class="image-description">
-                  <br/>
-                  <h4>AMENITIES:</h4>
-                  <p>Soap</p>
-                  <p>Tissue</p>
-                  <p>Signal</p>
-                </div>
-              </div>
-              <div class="rating">
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl no-rating"></i>       
-              </div>
-              <button type="button" class="review-button btn">
-                <a href="establishment" class="no-decoration">View</a>
-              </button>
-
-            </div>
-            <!--Fourth Building, First Carousel-->
-            <div class="restroom-container">
-
-              <div class="restroom-image">
-                <div class="image-name">
-                  <p>9th Floor, Female</p>
-                  <h4>BR. ANDREW</h4><br/>
-                </div>
-                <div class="image-container">
-                  <img src="images/bldg-andrew.jpg" alt="Bathroom Image">
-                </div>
-                <div class="image-description">
-                  <br/>
-                  <h4>AMENITIES:</h4>
-                  <p>Soap</p>
-                  <p>Tissue</p>
-                  <p>Signal</p>
-                </div>
-              </div>
-              <div class="rating">
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl no-rating"></i>                 
-              </div>
-              <button type="button" class="review-button btn">
-                <a href="establishment" class="no-decoration">View</a>
-              </button>
-
-            </div>
-            <!--Fifth Building, First Carousel-->
-            <div class="restroom-container">
-
-              <div class="restroom-image">
-                <div class="image-name">
-                  <p>1st Floor, Female</p>
-                  <h4>HENRY SY</h4><br/>
-                </div>
-                <div class="image-container">
-                  <img src="images/bldg-henry.jpeg" alt="Bathroom Image">
-                </div>
-                <div class="image-description">
-                  <h4>AMENITIES:</h4><br/>
-                  <p>Bidet</p>
-                  <p>Aircon</p>
-                  <p>Signal</p>
-                </div>
-              </div>
-              <div class="rating">
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl with-rating"></i> 
-                <i class="tissue fa-solid fa-toilet-paper fa-rotate-270 fa-xl no-rating"></i>              
-              </div>
-              <button type="button" class="review-button btn">
-                <a href="establishment" class="no-decoration">View</a>
-              </button>
-
-            </div>
+           
           </div>
         </div>
 
         <!-- Add more carousel items  -->
       </div>
       <!-- Carousel controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#carousel-explore-top" data-bs-slide="prev">
+      <button class="carousel-control-prev invisible" type="button" data-bs-target="#carousel-explore-top" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carousel-explore-top" data-bs-slide="next">
+      <button class="carousel-control-next invisible" type="button" data-bs-target="#carousel-explore-top" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>

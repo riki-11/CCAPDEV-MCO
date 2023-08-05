@@ -52,8 +52,10 @@ const __dirname = dirname(__filename);
 
 
 
+
 // Set View engine as handlebars
 app.engine("hbs", exphbs.engine({extname: 'hbs'}));
+
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
@@ -113,9 +115,16 @@ Handlebars.registerHelper('renderRating', function (averageRating) {
 
 // ROUTES
 
+
 // Upon loading the homepage, grab the list of all the buildings
 app.get("/", async (req, res) => {
   const allBldgs = await buildingController.getAllBuildings();
+  const bannerBuildings = await buildingController.getTopBuildings(allBldgs, 2);
+  const topRatedBldgs = await buildingController.getTopBuildings(allBldgs, 5);
+  console.log(topRatedBldgs);
+
+  const buildingsPerCarouselItem = 5;
+  const allBldgsChunked = await buildingController.chunkArray(allBldgs, buildingsPerCarouselItem);
 
   // Update the ratings per building
 
@@ -123,6 +132,9 @@ app.get("/", async (req, res) => {
     title: "Flush Finder",
     forBusiness: false,
     allBldgs: allBldgs,
+    allBldgsChunked: allBldgsChunked,
+    bannerBuildings: bannerBuildings,
+    topRatedBldgs: topRatedBldgs
   });
 });
 

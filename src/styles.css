@@ -28,7 +28,7 @@ p {
 
 .banner {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-  rgba(0, 0, 0, 0.5)), url("../images/bldg-henry.jpeg");
+  rgba(0, 0, 0, 0.5)), url("../images/dlsu-bg.jpg");
   height: 50vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -46,9 +46,11 @@ p {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
 
+.invisible {
+  visibility:hidde;
+}
 
 .banner-button {
   position: absolute;

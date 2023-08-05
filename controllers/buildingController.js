@@ -91,7 +91,26 @@ const buildingController = {
         res.status(500).send('Server error');
 
       }
-    }
+    },
+    chunkArray: async function (allBldgs, buildingsPerCarouselItem) {
+      try {
+        const chunks = [];
+        for (let i = 0; i < allBldgs.length; i += buildingsPerCarouselItem) {
+          chunks.push(allBldgs.slice(i, i + buildingsPerCarouselItem));
+        }
+        return chunks;
+      } catch (error) {
+        console.log('Error chunking array: ', error);
+      }
+    },
+    getTopBuildings: async function (allBldgs, numOfBldgs) {
+      allBldgs.sort((a, b) => b.rating - a.rating);
+
+      // Get the top 5 buildings with the highest ratings
+      const carouselBuildings = allBldgs.slice(0, numOfBldgs);
+
+      return carouselBuildings;
+    },
 }
 
 export default buildingController;
