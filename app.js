@@ -52,8 +52,10 @@ const __dirname = dirname(__filename);
 
 
 
+
 // Set View engine as handlebars
 app.engine("hbs", exphbs.engine({extname: 'hbs'}));
+
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
@@ -110,12 +112,33 @@ Handlebars.registerHelper('renderRating', function (averageRating) {
   return new Handlebars.SafeString(html);
 });
 
+Handlebars.registerHelper('renderRatingSearch', function (averageRating) {
+  const maxRating = 5; // Assuming the maximum rating is 5
+  let html = '';
+  
+  for (let i = 1; i <= maxRating; i++) {
+    if (i <= averageRating) {
+      html += '<i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg with-rating"></i> ';
+    } else {
+      html += '<i class="tissue-search fa-solid fa-toilet-paper fa-rotate-270 fa-lg no-rating"></i> ';
+    }
+  }
+  
+  return new Handlebars.SafeString(html);
+});
+
 
 // ROUTES
+
 
 // Upon loading the homepage, grab the list of all the buildings
 app.get("/", async (req, res) => {
   const allBldgs = await buildingController.getAllBuildings();
+  const bannerBuildings = await buildingController.getTopBuildings(allBldgs, 2);
+  const topRatedBldgs = await buildingController.getTopBuildings(allBldgs, 5);
+
+  const buildingsPerCarouselItem = 5;
+  const allBldgsChunked = await buildingController.chunkArray(allBldgs, buildingsPerCarouselItem);
 
   // Update the ratings per building
 
@@ -123,6 +146,9 @@ app.get("/", async (req, res) => {
     title: "Flush Finder",
     forBusiness: false,
     allBldgs: allBldgs,
+    allBldgsChunked: allBldgsChunked,
+    bannerBuildings: bannerBuildings,
+    topRatedBldgs: topRatedBldgs
   });
 });
 
@@ -473,22 +499,36 @@ app.get('/establishment-business', (req, res) => {
 app.get('/search-results', async (req, res) => {
   try {
     const searchQuery = req.query.q;
-    console.log(searchQuery);
-    const searchResults = await buildingController.searchBuildings(searchQuery);
-    console.log(searchResults);
+    const sortBy = req.query.sortBy;
+  
+    // Fetch search results based on searchQuery
+    let searchResults = await buildingController.searchBuildings(searchQuery);
 
+    // If sortBy is provided, sort the searchResults
+    if (sortBy) {
+      searchResults = await buildingController.sortBuildings(searchResults, sortBy);
+      console.log(searchResults);
+
+    }
+  
+    const buildingsWithReviewCount = await Promise.all(
+      searchResults.map(async (building) => {
+        const reviewCount = await reviewController.getReviewsCountForBuilding(building.name);
+        return { ...building, reviewCount };
+      })
+    );
+  
     res.render("results", {
       title: "Search Results",
       forBusiness: false,
-      searchResults: searchResults,
-      searchQuery: searchQuery
-    })
-
-} catch (error) {
-    // Handle any errors that occurred during the search
-    console.error("Error occurred during search:", error);
-    res.status(500).json({ error: "An error occurred during the search" });
-}
+      searchResults: buildingsWithReviewCount,
+      searchQuery: searchQuery,
+      sortBy: sortBy,
+    });
+  } catch (err) {
+    console.error("Error occurred during search:", err);
+    res.status(500).send("An error occurred while fetching search results.");
+  }
 });
 
 app.get('/logout', (req, res) => {

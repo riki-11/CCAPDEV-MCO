@@ -536,6 +536,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.invisible{
+  visibility: hidden;
+}
+
 .m-auto{
   margin: auto;
 }
@@ -1187,6 +1191,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-red-600{
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
 .drop-shadow-2xl{
   --tw-drop-shadow: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1227,7 +1236,7 @@ p {
 
 .banner {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-  rgba(0, 0, 0, 0.5)), url("../images/bldg-henry.jpeg");
+  rgba(0, 0, 0, 0.5)), url("../images/dlsu-bg.jpg");
   height: 50vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -1244,6 +1253,10 @@ p {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.invisible {
+  visibility:hide;
 }
 
 .banner-button {
