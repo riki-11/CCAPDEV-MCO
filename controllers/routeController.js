@@ -223,8 +223,6 @@ const routeController = {
             const rating = await buildingController.getBuildingRating(buildingName);
             const building = await buildingController.getBuildingByName(buildingName);
         
-            console.log(`OVERALL RATING IS: ${rating}`);
-        
             if (!building) {
               res.redirect('/404');
             }
