@@ -341,6 +341,10 @@ const routeController = {
         }
     },
 
+    updateBuildingRatings: async function(req, res) {
+        await buildingController.updateBuildingRatings();
+    },
+
     deleteReviews: async function(req, res) {
         console.log("app delete");
         const reviewId = req.query.reviewId;

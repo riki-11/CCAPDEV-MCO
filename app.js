@@ -46,51 +46,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Set View engine as handlebars
-app.engine("hbs", exphbs.engine({extname: 'hbs'}));
-
-app.set("view engine", "hbs");
-app.set("views", "./views");
-
-app.use(express.static(__dirname + '/public'));
-
-// listen for requests
-app.listen(port, function () {
-  console.log(`Server is running at:`);
-  console.log(`http://localhost:` + port);
-});
-
-/* Setup session manager and request authentication middleware */ 
-app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 10// 1hr
-  }
-}))
-
-// initialize passport and make it deal with session
-app.use(passport.initialize());
-app.use(passport.session());
-// Configure passport-local-mongoose
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-
-// Configure middleware to verify login (for logout button)
-app.use((req,res,next) => {
-  res.locals.loggedIn = function() {
-    if (req.user) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  next();
-})
-
+// Register Handlebars helpers
 Handlebars.registerHelper('renderRating', function (averageRating) {
   const maxRating = 5; // Assuming the maximum rating is 5
   let html = '';
@@ -131,9 +87,6 @@ handlebars.handlebars.registerHelper('times', function(n, block) {
   return accum;
 });
 
-// parse data and images
-app.use(bodyParser.urlencoded({ extended: true }));
-
 const storage = multer.memoryStorage();
 const upload = multer({ 
   storage,
@@ -142,6 +95,73 @@ const upload = multer({
   }
 });
 
+// Function for user authentication. When a user is logged in (authenticated) then req.user should not be empty
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
+
+// Configure passport-local-mongoose
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+// BEGINNING OF ALL .app functions
+
+// Set View engine as handlebars
+app.engine("hbs", exphbs.engine({extname: 'hbs'}));
+
+app.set("view engine", "hbs");
+app.set("views", "./views");
+
+app.use(express.static(__dirname + '/public'));
+
+// listen for requests
+app.listen(port, function () {
+  console.log(`Server is running at:`);
+  console.log(`http://localhost:` + port);
+});
+
+/* Setup session manager and request authentication middleware */ 
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 10// 1hr
+  }
+}))
+
+// initialize passport and make it deal with session
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Configure middleware to verify login (for logout button)
+app.use((req,res,next) => {
+  res.locals.loggedIn = function() {
+    if (req.user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  res.locals.isOwner = function() {
+    if(req.user && req.user.isOwner){
+      return true; 
+    } else {
+      return false;
+    }
+  }
+  next();
+})
+
+// parse data and images
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // ROUTES
@@ -160,29 +180,14 @@ app.get('/edit-review', routeController.renderEditReviewPage);
 app.get('/establishment', routeController.renderEstablishmentPage);
 app.get('/search-results', routeController.renderSearchResultsPage);
 
-
-
+// Fetch Request Routes
 app.get('/select-restroom', routeController.getRestroomOptions);
 app.get('/find-restroom', loggedIn, restroomController.getRestroomByInfo);
 app.get('/get-building-reviews', routeController.getBuildingReviews);
 app.get('/get-building-restrooms', routeController.getBuildingRestrooms);
 app.get('/get-building-data',  routeController.getBuildingData);
 app.get('/get-building-code', routeController.getBuildingCode);
-
-
-
-
-
-
-// try the req, res way
-app.get('/update-building-ratings', async (req, res) => {
-  await buildingController.updateBuildingRatings();
-  
-});
-
-
-
-
+app.get('/update-building-ratings', routeController.updateBuildingRatings);
 
 // Handle form submissions
 app.post('/usersignup', userController.addUser);
@@ -196,19 +201,6 @@ app.delete('/deleteReviews', routeController.deleteReviews);
 
 // Log out
 app.get('/logout', routeController.logoutUser);
-
-
-
-
-// Function for user authentication. When a user is logged in (authenticated) then req.user should not be empty
-function loggedIn(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.redirect('/login');
-  }
-}
-
 
 // In case path does not exist
 app.use((req, res) => {
