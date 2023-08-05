@@ -103,7 +103,39 @@ const buildingController = {
         res.status(500).send('Server error');
 
       }
+    },
+    chunkArray: async function (allBldgs, buildingsPerCarouselItem) {
+      try {
+        const chunks = [];
+        for (let i = 0; i < allBldgs.length; i += buildingsPerCarouselItem) {
+          chunks.push(allBldgs.slice(i, i + buildingsPerCarouselItem));
+        }
+        return chunks;
+      } catch (error) {
+        console.log('Error chunking array: ', error);
+      }
+    },
+    getTopBuildings: async function (allBldgs, numOfBldgs) {
+      allBldgs.sort((a, b) => b.rating - a.rating);
+
+      // Get the top 5 buildings with the highest ratings
+      const carouselBuildings = allBldgs.slice(0, numOfBldgs);
+
+      return carouselBuildings;
+    },
+    sortBuildings: async function(buildings, sortBy) {
+      switch (sortBy) {
+        case 'name':
+          return buildings.sort((a, b) => a.name.localeCompare(b.name));
+        case 'rating_asc':
+          return buildings.sort((a, b) => a.averageRating - b.averageRating);
+        case 'rating_desc':
+          return buildings.sort((a, b) => b.averageRating - a.averageRating);
+        default:
+          return buildings;
+      }
     }
+
 }
 
 export default buildingController;
