@@ -62,7 +62,6 @@ const buildingController = {
       try {
         // Get all the buildings
         const buildings = await this.getAllBuildings();
-        console.log(buildings);
         
         // For each building, calculate its rating and save it to the database
         const updatedBuildings = buildings.map(async building => {
