@@ -111,6 +111,19 @@ const buildingController = {
 
       return carouselBuildings;
     },
+    sortBuildings: async function(buildings, sortBy) {
+      switch (sortBy) {
+        case 'name':
+          return buildings.sort((a, b) => a.name.localeCompare(b.name));
+        case 'rating_asc':
+          return buildings.sort((a, b) => a.averageRating - b.averageRating);
+        case 'rating_desc':
+          return buildings.sort((a, b) => b.averageRating - a.averageRating);
+        default:
+          return buildings;
+      }
+    }
+
 }
 
 export default buildingController;

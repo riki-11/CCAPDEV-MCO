@@ -166,6 +166,16 @@ const reviewController = {
       console.error(err);
       res.status(500).send("Reviews cannot be found");
     }
+  },
+      
+  getReviewsCountForBuilding: async function(buildingName) {
+    try {
+      const reviews = await reviewController.getReviewsByBuilding(buildingName);
+      return reviews.length;
+    } catch (err) {
+      console.error(err);
+      throw new Error("Reviews cannot be found");
+    }
   }
 }
 
