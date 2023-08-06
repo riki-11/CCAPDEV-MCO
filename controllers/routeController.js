@@ -49,14 +49,19 @@ const routeController = {
         });
     },
 
-    renderProfilePage: async function(req, res) {
+    renderProfilePage: async function(req, res, next) {
 
         try {
             const { username } = req.query;
             let user;
             let currentUser;
             // console.log(username)
-            
+
+            if (req.user.isOwner){
+                routeController.renderEstablishmentPage(req,res);
+                next();
+            }
+
             //if user is accessing own profile, username is empty. if they click on their name in the reviews, username == req.user.username
             if (req.user){ 
                 if (!username || username == req.user.username) { // Logged in and accessing own profile

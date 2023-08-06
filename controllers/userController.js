@@ -139,6 +139,26 @@ const userController = {
         
     },
 
+    loginValidation: async function(req, res, next) {
+        passport.authenticate('local', (err, user, info) => {
+            if (err) {
+              return next(err); // Handle unexpected errors
+            }
+            if (!user) {
+              // User not found or incorrect credentials
+              return res.render('login', { errorMessage: info.message });
+            }
+            // Successful login, perform any additional actions as needed
+            req.login(user, (err) => {
+              if (err) {
+                return next(err);
+              }
+              // Redirect to a success page or do something else
+              return next();
+            });
+          })(req, res, next);
+     },
+
     updateUser: async function(req, res) {
         // get user ID, find it in database, then update the database
 
@@ -167,7 +187,6 @@ const userController = {
                     updatedUser.lastName = lastname;
                     updatedUser.username = username;
                     updatedUser.email = email;
-                    updatedUser.password = password;
                     updatedUser.description = description;
                     updatedUser.photo = {
                         data: photoData.buffer,
@@ -178,7 +197,6 @@ const userController = {
                     updatedUser.lastName = lastname;
                     updatedUser.username = username;
                     updatedUser.email = email;
-                    updatedUser.password = password;
                     updatedUser.description = description;
                 }
                 // Dagdag ung password functionalities passport.save something somth

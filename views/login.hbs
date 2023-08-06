@@ -15,8 +15,8 @@
     <!-- MAKE THIS DYNAMIC PLEASE.  -->
     <div class="h-full bg-cover bg-center overflow-hidden bg-fixed" style="background-image:url('./images/henry_sy-bg.jpg');">
         <div class="h-screen w-screen backdrop-grayscale overflow-auto">
-            <div class="flex flex-col m-auto h-3/5 bg-black/75 mt-32 w-2/5 rounded-[1.5rem]">
-                <div class="w-8/12 self-center h-full">
+            <div class="flex flex-col m-auto h-auto bg-black/75 mt-32 w-2/5 rounded-[1.5rem]">
+                <div class="w-8/12 self-center h-auto overflow-auto h-content">
                     <div class="text-center mt-5">
                         <h2><i class="fa-solid fa-toilet fa-2xl text-white"></i></h2>
                     </div>
@@ -36,17 +36,22 @@
                                     <input class="focus:bg-white pl-2 focus:text-black w-full h-9 bg-transparent border-[2px] border-gray-500 rounded" type="password" name="password" id="password" placeholder="***********"><br>
                                 </div>
                             </div>
-                            <div class="mt-6 text-center">
+                                {{#if errorMessage}}
+                            <div class="mt-1 text-red-600 text-center">
+                                {{errorMessage}}
+                            </div>
+                                {{/if}}
+                            <div class="mt-5 text-center">
                                 <button class="border-[2px] hover:text-black border-white rounded-md border-w hover:bg-secondary hover:border-secondary py-2 px-5">Login</button>
                             </div>
-                            <div class="mt-6 m-auto text-sm flex items-center justify-center">
+                            <div class="mt-5 m-auto text-sm flex items-center justify-center">
                                 <label for="remember" class="text-gray-400 content-center self-center" >Keep me logged in</label>
                                 <input type="checkbox" class="ml-2 mt-1 bg-transparent content-center self-center" name="remember">
                             </div>
                         </form>   
                     </div>
                 </div>
-                <div class="text-xs text-center mb-6 font-thin">
+                <div class="text-xs text-center mt-4 mb-4 font-thin">
                         Don't have an account yet? <a href="register" class="text-secondary hover:underline">Sign up</a>
                 </div>
             </div>
