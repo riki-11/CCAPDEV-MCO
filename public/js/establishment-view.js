@@ -107,8 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Add an event listener to handle delete button clicks
   document.addEventListener('click', async function (event) {
-    console.log("Clicked!");
-
     const deleteBtn = event.target.closest('.delete-reply-btn');
     const editBtn = event.target.closest('.edit-reply-btn');
     const cancelBtn = event.target.closest('.cancel-edit-reply-btn');
