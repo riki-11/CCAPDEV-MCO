@@ -33,6 +33,7 @@ const buildingSchema = new mongoose.Schema({
     },
     averageRating: {
         type: Number,
+        default:0,
         required: true
     },
     photo: {
