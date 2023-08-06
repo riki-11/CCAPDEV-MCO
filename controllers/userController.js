@@ -208,7 +208,8 @@ const userController = {
                 console.log(updatedUser);
     
                 console.log('User updated')
-                res.redirect('/profile');
+
+                res.redirect('/login');
             } else {
                 const user = updatedUser;
                 const userinfo = {
