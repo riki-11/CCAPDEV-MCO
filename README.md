@@ -30,7 +30,7 @@ Flush Finder provides users with a user-friendly platform to discover and review
 
 The project utilizes the following:
 
-- Frontend: HTML, CSS, JavaScript, Bootstrap
+- Frontend: HTML, CSS, JavaScript, Bootstrap, Tailwind
 - Backend: Node.js, Express.js
 - Database: MongoDB
 - Templating Engine: Handlebars
