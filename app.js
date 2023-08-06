@@ -182,7 +182,11 @@ app.get('/search', routeController.renderFindBathroomPage);
 app.get('/create-review', routeController.renderCreateReviewPage);
 app.get('/edit-review', routeController.renderEditReviewPage);
 app.get('/establishment', routeController.renderEstablishmentPage);
+
+
+// Searching
 app.get('/search-results', routeController.renderSearchResultsPage);
+app.get('/review-search', routeController.getReviewSearchResults);
 
 // Fetch Request Routes
 app.get('/select-restroom', routeController.getRestroomOptions);
@@ -204,6 +208,7 @@ app.post('/postreply', loggedIn, reviewController.addReply);
 
 // Delete reviews
 app.delete('/deleteReviews', routeController.deleteReviews);
+app.post('/delete-account', userController.deleteUser);
 
 // Log out
 app.get('/logout', routeController.logoutUser);

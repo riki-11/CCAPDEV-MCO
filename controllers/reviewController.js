@@ -2,6 +2,11 @@ import db from '../models/mongoose.js';
 import multer from 'multer';
 
 import Review from '../models/Review.js';
+
+import Restroom from '../models/Restroom.js';
+import Building from '../models/Building.js';
+import buildingController from './buildingController.js';
+
 import restroomController from './restroomController.js';
 import Reply from '../models/Reply.js';
 
@@ -171,7 +176,7 @@ const reviewController = {
       throw new Error("Reviews cannot be found");
     }
   },
-
+  
   addReply: async function(req, res) {
     try {
       const user = req.user;
@@ -225,7 +230,58 @@ const reviewController = {
       console.error(err);
       res.status(500).send("Replies not found.");
     }
-  }
+  },
+    
+  sortReviews: async function(reviews, sortBy) {
+    switch (sortBy) {
+      case 'rating_asc':
+        return reviews.sort((a, b) => a.rating - b.rating);
+      case 'rating_desc':
+        return reviews.sort((a, b) => b.rating - a.rating);
+      default:
+        return reviews;
+    }
+  },
+    
+  searchReviews: async function(searchQuery, buildingID) {
+    try {
+      const regexQuery = new RegExp(searchQuery, 'i');
+      const reviews = await Review.find({
+        $and: [
+          {
+            $or: [
+              { title: regexQuery },
+              { content: regexQuery },
+          
+            ],
+          },
+        ],
+      }).lean();
+
+      let filteredReviews = [];
+      console.log(reviews.length);
+      for (const review of reviews) {
+        let restroom = await Restroom.findById(review.restroomID);
+        console.log(restroom);
+        let revBuilding = restroom.buildingID;
+        let building = await Building.findById(revBuilding);
+        let actBuildingID = building._id;
+        console.log(actBuildingID);
+        console.log(buildingID);
+        console.log(actBuildingID.toString() == buildingID.toString());
+
+
+        if (actBuildingID.toString() == buildingID.toString()) {
+          filteredReviews.push(review);
+        }
+      }
+      console.log(filteredReviews.length);
+      return filteredReviews;
+    } catch (error) {
+      console.error('Error fetching buildings:', error);
+      res.status(500).send('Server error');
+    }
+  },
 }
 
 export default reviewController;

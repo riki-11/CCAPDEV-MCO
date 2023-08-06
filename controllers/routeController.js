@@ -58,36 +58,45 @@ const routeController = {
             if (!user) {
                 return res.status(404).send('User not found');
             }
-            const reviews = await Review.find({ 'user' : user })
-            .populate({
-                path: 'restroomID', // Populate the restroomID field
-                populate: {
-                path: 'buildingID', // Populate the buildingID field of the nested Restroom model
-                select: 'name', // Select only the name property of the buildingID
-                },
-            })
-            .lean();
-            
-            const senduser = {
-                firstName: req.user.firstName,
-                lastName: req.user.lastName,
-                username: req.user.username,
-                description: req.user.description
+
+            if (user.isOwner) {
+                const bldg = await Building.findOne({ 'ownerID' : user._id }).lean();
+                res.redirect(`/establishment?building=${bldg.name}`);
             }
+            else {
 
-            const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
-
-            res.render('viewprofile', { 
-            title: 'Profile',
-            forBusiness: false,
-            user: senduser,
-            profImgSrc: profImgSrc,
-            reviews: reviews.map(review => ({
-                ...review,
-                user: senduser,       // Pass the user object to each review
-                profImgSrc: profImgSrc, // Pass the imageSrc to each review
-                photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
-            }); 
+                const reviews = await Review.find({ 'user' : user })
+                .populate({
+                    path: 'restroomID', // Populate the restroomID field
+                    populate: {
+                    path: 'buildingID', // Populate the buildingID field of the nested Restroom model
+                    select: 'name', // Select only the name property of the buildingID
+                    },
+                })
+                .lean();
+                
+                const senduser = {
+                    firstName: req.user.firstName,
+                    lastName: req.user.lastName,
+                    username: req.user.username,
+                    description: req.user.description
+                }
+    
+                const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
+    
+                res.render('viewprofile', { 
+                title: 'Profile',
+                forBusiness: false,
+                user: senduser,
+                profImgSrc: profImgSrc,
+                reviews: reviews.map(review => ({
+                    ...review,
+                    user: senduser,       // Pass the user object to each review
+                    profImgSrc: profImgSrc, // Pass the imageSrc to each review
+                    photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
+                }); 
+            }
+            
         
         } catch (error) {
             console.error('Error fetching user data:', error);
@@ -134,11 +143,6 @@ const routeController = {
           }
     },
 
-    renderSearchResultsPage: async function(req, res) {
-        res.render("results", {
-            title: "Search Results",
-          });
-    },
 
     renderFindBathroomPage: async function(req, res) {
         res.render("select-restroom", {
@@ -244,7 +248,8 @@ const routeController = {
               building: building,
               reviews: reviews,
               rating: rating,
-              ownerView: ownerView
+              ownerView: ownerView,
+              searched:false
             }); 
         
           } catch (error) {
@@ -284,6 +289,72 @@ const routeController = {
         } catch (err) {
         console.error("Error occurred during search:", err);
         res.status(500).send("An error occurred while fetching search results.");
+        }
+    },
+
+    getReviewSearchResults: async function(req, res) {
+        try {
+            console.log('Request URL:', req.url);
+
+            const searchQuery = req.query.q;
+            const sortBy = req.query.sortBy;
+            const buildingName = req.query.building;
+
+            const reviews = await reviewController.getReviewsByBuilding(buildingName);
+            const rating = await buildingController.getBuildingRating(buildingName);
+            const building = await buildingController.getBuildingByName(buildingName);
+
+            const buildingID = building._id;
+            
+            // Fetch search results based on searchQuery
+            let searchResults = await reviewController.searchReviews(searchQuery, buildingID);
+            // If sortBy is provided, sort the searchResults
+            if (sortBy) {
+                searchResults = await reviewController.sortReviews(searchResults, sortBy);
+                console.log(searchResults);
+            }
+
+
+              // Assuming searchResults is an array of review objects
+            for (const review of searchResults) {
+                // Assuming review.restroomID.buildingID holds the building ID associated with the review
+                let restroom = await Restroom.findById(review.restroomID);
+                let revBuilding = restroom.buildingID;
+                let building = await Building.findById(revBuilding);
+                let user = await User.findById(review.user);
+
+                const username = user.username;
+                const profpic = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
+                const buildingName = building.name;
+                const floor = restroom.floor;
+                const gender = restroom.gender;
+                const photoSrc = review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null;
+
+                review.photoSrc = photoSrc;
+                review.buildingName = buildingName;
+                review.floor = floor;
+                review.gender = gender;
+
+                review.username = username;
+                review.profpic = profpic;
+        
+            }
+            
+   
+            res.render("establishmentview", {
+                title: buildingName,
+                building: building,
+                reviews: reviews,
+                rating: rating,
+                searchResults: searchResults,
+                searchQuery: searchQuery,
+                sortBy: sortBy,
+                searched:true
+              }); 
+          
+        } catch (err) {
+            console.error("Error occurred during search:", err);
+            res.status(500).send("An error occurred while fetching search results.");
         }
     },
 
