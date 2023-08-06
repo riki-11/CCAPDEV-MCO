@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       replyTextContainer.value = '';
       replyContainer.classList.add('hidden');
     });
-  })
+  });
 
   // Adds functionality to every cancel-reply button
   document.querySelectorAll('.cancel-reply-btn').forEach(cancelBtn => {
@@ -180,13 +180,26 @@ document.addEventListener('DOMContentLoaded', () => {
           replyID: replyID,
           reply: newReplyContent
         };
-        
         fetch('/editreply', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(updatedReplyData)
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Handle the response data if needed
+          console.log('Response from the server:', data);
+        })
+        .catch(error => {
+          // Handle any errors that occurred during the fetch request
+          console.error('Error:', error);
         });
         
         console.log('it reaches here');
