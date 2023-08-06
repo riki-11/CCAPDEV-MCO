@@ -56,9 +56,8 @@ const routeController = {
             // Fetch user data
             const user = req.user
             if (!user) {
-            return res.status(404).send('User not found');
+                return res.status(404).send('User not found');
             }
-            //console.log(user);
             const reviews = await Review.find({ 'user' : user })
             .populate({
                 path: 'restroomID', // Populate the restroomID field
@@ -213,6 +212,7 @@ const routeController = {
 
     renderEstablishmentPage: async function(req, res) {
         try {
+            const user = req.user;
             const buildingName = req.query.building;
             const reviews = await reviewController.getReviewsByBuilding(buildingName);
             const rating = await buildingController.getBuildingRating(buildingName);
@@ -222,17 +222,29 @@ const routeController = {
               res.redirect('/404');
             }
         
+            // If current user is an owner 
+            // TODO: make sure the owner is the owner of THIS particular building  
+            if (user !== undefined) {
+                // If the current user is the owner of the current building
+                if (user.isOwner === true && user._id.toString() === building.ownerID.toString()) {
+                    var ownerView = true;
+                }
+            } else {
+                var ownerView = false;
+            }
+
             res.render("establishmentview", {
               title: buildingName,
               forBusiness: false,
               building: building,
               reviews: reviews,
               rating: rating,
+              ownerView: ownerView
               searched:false
             }); 
         
           } catch (error) {
-            res.status.send('Server error');
+            res.status(500).send('Server error');
           }
     },
 
@@ -406,14 +418,10 @@ const routeController = {
     },
 
     deleteReviews: async function(req, res) {
-        console.log("app delete");
         const reviewId = req.query.reviewId;
-      
-      
         try {
           // Find the review in the database by its ID
           const result = await Review.deleteOne({_id: reviewId}).exec();
-          console.log(result);
           res.json({ message: 'Review deleted successfully.' });
         } catch (error) {
           console.error('Error occurred:', error);

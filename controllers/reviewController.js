@@ -2,17 +2,16 @@ import db from '../models/mongoose.js';
 import multer from 'multer';
 
 import Review from '../models/Review.js';
+
 import Restroom from '../models/Restroom.js';
 import Building from '../models/Building.js';
 import buildingController from './buildingController.js';
+
 import restroomController from './restroomController.js';
-
-import User from '../models/User.js';
-
+import Reply from '../models/Reply.js';
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-
 
 
 const reviewController = {
@@ -32,8 +31,8 @@ const reviewController = {
       // Get user from database
       // const user = await User.findOne({'username': req.session.username}).exec();
 
-
       const dateCreated = date.toString();
+
       let newReview;
       // Create a new Review document based on the Review schema
       if (photoData == undefined){
@@ -69,7 +68,6 @@ const reviewController = {
       try {
           // Save the new review to the database
           await newReview.save();
-          //console.log('Review created:', newReview);
 
           // Redirect to a success page or send a success response
           res.redirect('/profile'); // Replace with the appropriate URL for the success page
@@ -99,7 +97,6 @@ const reviewController = {
     // Update the review fields only if they are not null in the form data
     review.rating = rating || review.rating;
     review.amenities = amenitiesArray.length > 0 ? amenitiesArray : review.amenities;
-    console.log(date);
     review.dateCreated = dateCreated || review.dateCreated;
     review.title = title || review.title;
     review.content = content || review.content;
@@ -157,7 +154,7 @@ const reviewController = {
         return restroomReviews;
       });
 
-      // Save all the reviews ine one array
+      // Save all the reviews in one array
       const reviewArrays = await Promise.all(reviewPromises);
       const reviews = reviewArrays.reduce((acc, curr) => acc.concat(curr), []);
 
@@ -179,6 +176,62 @@ const reviewController = {
       throw new Error("Reviews cannot be found");
     }
   },
+  
+  addReply: async function(req, res) {
+    try {
+      const user = req.user;
+      const replyData = req.body;
+
+      console.log(`CURRENT USER: ${user}`);
+      console.log(`REPLIED TO: ${replyData.reviewID}`);
+      console.log(`REPLY TEXT: ${replyData.reply}`);
+
+      // With all the data create a new reply.
+      var newReply = new Reply({
+        reviewID: replyData.reviewID,
+        ownerID: user.id,
+        reply: replyData.reply,
+        replyDate: replyData.replyDate
+      });
+
+      // Save the new reply to the database
+      await newReply.save();
+
+      // reload the page?
+
+      res.status(200).send('Reply added successfully');
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Cannot add reply");
+    }
+  },
+
+  // Gets all the replies for a specific review
+  getAllReplies: async function(req, res) {
+    try {
+      // Grab the reviewID from the url parameter
+      const reviewID = req.query.reviewID;
+      // Get all the replies for that review
+      const replies = await Reply.find({reviewID: reviewID})
+                            .populate('ownerID')
+                            .lean();
+      
+      // Wait for the promise to be fulfilled before moving on
+      await Promise.all(replies);
+
+      // Return the list of replies to the controller to load it into the DOM
+      if (replies) {
+        res.json(replies);
+      } else {
+        res.status(500).send("Replies not found.");
+      }
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Replies not found.");
+    }
+  },
+    
   sortReviews: async function(reviews, sortBy) {
     switch (sortBy) {
       case 'rating_asc':
@@ -189,6 +242,7 @@ const reviewController = {
         return reviews;
     }
   },
+    
   searchReviews: async function(searchQuery, buildingID) {
     try {
       const regexQuery = new RegExp(searchQuery, 'i');
@@ -226,9 +280,8 @@ const reviewController = {
     } catch (error) {
       console.error('Error fetching buildings:', error);
       res.status(500).send('Server error');
-
     }
-  }
+  },
 }
 
 export default reviewController;
