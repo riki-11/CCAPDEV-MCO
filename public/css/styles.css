@@ -713,6 +713,10 @@ video {
   height: 6rem;
 }
 
+.h-3\/5{
+  height: 60%;
+}
+
 .h-8{
   height: 2rem;
 }
