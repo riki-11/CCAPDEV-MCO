@@ -20,7 +20,17 @@ const replySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
+    photo: {
+        data: {
+            type: Buffer,
+            required: false
+          },
+          contentType: {
+            type: String,
+            required: false
+          },
+        
+    }
 });
 
 export default mongoose.model("Reply", replySchema);
