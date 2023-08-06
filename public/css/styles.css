@@ -621,6 +621,10 @@ video {
   margin-bottom: 2rem;
 }
 
+.ml-2{
+  margin-left: 0.5rem;
+}
+
 .ml-24{
   margin-left: 6rem;
 }
@@ -711,10 +715,6 @@ video {
 
 .h-24{
   height: 6rem;
-}
-
-.h-3\/5{
-  height: 60%;
 }
 
 .h-8{
@@ -841,6 +841,10 @@ video {
 
 .flex-col{
   flex-direction: column;
+}
+
+.content-center{
+  align-content: center;
 }
 
 .items-center{
