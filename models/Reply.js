@@ -9,7 +9,7 @@ const replySchema = new mongoose.Schema({
     },
     ownerID: {
         type: Schema.Types.ObjectId,
-        ref: 'Owner',
+        ref: 'User',
         required: true
     },
     reply: {
@@ -17,20 +17,10 @@ const replySchema = new mongoose.Schema({
         required: true
     },
     replyDate: {
-        type: Date,
-        default: Date.now
+        type: String,
+        required: true
     },
-    photo: {
-        type: Buffer
-    },
-    isEdited: {
-        type: Boolean,
-        default: false
-    },
-    isDeleted: {
-        type: Boolean,
-        default: false
-    },
+
 });
 
 export default mongoose.model("Reply", replySchema);

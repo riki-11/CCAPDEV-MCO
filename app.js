@@ -36,7 +36,7 @@ import User from './models/User.js';
 import Building from './models/Building.js';
 import Restroom from './models/Restroom.js';
 import Review from './models/Review.js';
-
+import Reply from "./models/Reply.js";
 
 const port = process.env.PORT;
 
@@ -104,10 +104,6 @@ function loggedIn(req, res, next) {
   }
 }
 
-// Configure passport-local-mongoose
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 
 // BEGINNING OF ALL .app functions
@@ -132,13 +128,19 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 10// 1hr
+    maxAge: 1000 * 60 * 60 * 10// 10hr
   }
 }))
 
 // initialize passport and make it deal with session
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Configure passport-local-mongoose
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // Configure middleware to verify login (for logout button)
 app.use((req,res,next) => {
@@ -175,7 +177,7 @@ app.get("/", routeController.renderHomePage);
 app.get('/about', routeController.renderAboutPage);
 app.get('/register', routeController.renderRegisterPage);
 app.get('/login', routeController.renderLogInPage);
-app.get('/profile', loggedIn, routeController.renderProfilePage);
+app.get('/profile', routeController.renderProfilePage);
 app.get('/edit-profile', loggedIn,routeController.renderEditProfilePage);
 app.get('/results', routeController.renderSearchResultsPage);
 app.get('/search', routeController.renderFindBathroomPage);
@@ -197,8 +199,15 @@ app.get('/update-building-ratings', routeController.updateBuildingRatings);
 app.post('/usersignup', userController.addUser);
 app.post('/createreview', upload.single('photo'), reviewController.addReview);
 app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.updateUser);
-app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login' }), userController.loginUser);
+app.post('/userlogin', userController.loginValidation, userController.loginUser);//passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), userController.loginUser);
 app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
+
+app.post('/postreply', loggedIn, reviewController.addReply);
+app.post('/editreply', loggedIn, reviewController.editReply);
+
+// Delete Replies
+app.delete('/deleteReply', routeController.deleteReply);
+
 
 // Add Likes and Dislikes
 app.post('/addLikes', loggedIn, reviewController.addLikes);
@@ -210,6 +219,7 @@ app.delete('/deleteReviews', routeController.deleteReviews);
 // Log out
 app.get('/logout', routeController.logoutUser);
 
+
 // In case path does not exist
 app.use((req, res) => {
   res.status(404).render("404", {
@@ -218,3 +228,143 @@ app.use((req, res) => {
   });
 })
 
+/*
+async function add() {
+  try {
+  
+    // buildings
+    let foundOwner = await User.findOne({ username: 'henrysy' }, '_id');
+    let ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'Henry Sy',
+      numOfRestrooms: 24,
+      ownerID: ownerID,
+      description: 'Henry Sy Sr. Hall houses De La Salle University\'s 14-story library. It is named after the generous benefactor, the late Mr. Henry Sy Sr.',
+      photo: './public/images/bldg-henry.jpeg'
+    });
+
+    foundOwner = await User.findOne({ username: 'miguelhall' }, '_id');
+    ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'St. Miguel Hall',
+      numOfRestrooms: 12,
+      ownerID: ownerID,
+      description: 'St. Miguel is De La Salle University\'s College of Liberal Arts.',
+      photo: './public/images/bldg-miguel.jpeg'
+    });
+
+    foundOwner = await User.findOne({ username: 'velascohall' }, '_id');
+    ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'Velasco Hall',
+      numOfRestrooms: 12,
+      ownerID: ownerID,
+      description: 'Velasco Hall features plenty of laboratories and classrooms that foster innovative learning.',
+      photo: './public/images/bldg-velasco.jpeg'
+    });
+
+    // buildings
+    foundOwner = await User.findOne({ username: 'andrew_gonzalez' }, '_id');
+    ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'Br. Andrew Gonzalez',
+      numOfRestrooms: 88,
+      ownerID: ownerID,
+      description: 'Br. Andrew Gonzalez is the tallest higher education building in the Philippines, boasting 21 stories.',
+      photo: './public/images/bldg-andrew.jpg'
+    });
+
+    foundOwner = await User.findOne({ username: 'gokongwei' }, '_id');
+    ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'Gokongwei Hall',
+      numOfRestrooms: 12,
+      ownerID: ownerID,
+      description: 'Gokongwei Hall is DLSU\'s college of Engineering, and it also contains several laboratories for computer science.',
+      photo: './public/images/bldg-goks.jpeg'
+    });
+
+
+    foundOwner = await User.findOne({ username: 'enrique_razon' }, '_id');
+    ownerID = foundOwner._id;
+
+    await Building.create ({
+      name: 'Enrique Razon',
+      numOfRestrooms: 12,
+      ownerID: ownerID,
+      description: 'Enrique Razon Sports Complex contains an olympic-sized pool, basketball courts, and various gyms and classrooms.',
+      photo: './public/images/bldg-razon.jpeg'
+    });
+
+
+
+    // restrooms
+    
+    let currBuilding = await Building.findOne({name: 'Br. Andrew Gonzalez'}, '_id');
+    currBuilding = await Building.findOne({name: 'Gokongwei Hall'}, '_id');
+    currBuilding = await Building.findOne({name: 'Enrique Razon'}, '_id');
+    currBuilding = await Building.findOne({name: 'Henry Sy'}, '_id');
+    currBuilding = await Building.findOne({name: 'St. Miguel Hall'}, '_id');
+    currBuilding = await Building.findOne({name: 'Velasco Hall'}, '_id');
+    
+    let buildingID = currBuilding._id;
+    await Restroom.create ({
+      floor: 1,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 1,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 2,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 2,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 3,
+      gender: 'MALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+    await Restroom.create ({
+      floor: 3,
+      gender: 'FEMALE',
+      category: 'STUDENT',
+      buildingID: buildingID
+    });
+   
+
+
+  } catch (e) {
+    console.log(e.message)
+  }
+}
+
+async function addUser() {
+  await User.create({
+    _id: "64cd14a52e68ad837fe4d2e9",
+    firstName: "Patrick",
+    lastName: "Leonida",
+    username: "patsbbAmazing",
+    email: "pats@gmail.com",
+
+  })
+}
+*/
