@@ -210,17 +210,7 @@ const reviewController = {
 
       console.log(`REPLY ID ${replyID} | Content: ${replyContent}`);
 
-      // Find the reply by its ID
-      const reply = await Reply.findById(replyID);
-      console.log(reply);
-      reply.reply = replyContent;
-
-      // Save the updated reply to the database
-      await reply.save();
-      const user = req.user;
-      const bldg = await Building.findOne({ 'ownerID' : user._id }).lean();
-      console.log(bldg);
-      res.redirect('/profile');     
+      res.status(200).send('Reply updated successfully');
 
     } catch (err) {
       console.error(err);
@@ -251,6 +241,15 @@ const reviewController = {
     } catch (err) {
       console.error(err);
       res.status(500).send("Replies not found.");
+    }
+  },
+
+  editReply: async function(req, res) {
+    try {
+      
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Reply could not be edited");
     }
   },
     
