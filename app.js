@@ -349,3 +349,13 @@ async function add() {
   }
 }
 
+async function addUser() {
+  await User.create({
+    _id: "64cd14a52e68ad837fe4d2e9",
+    firstName: "Patrick",
+    lastName: "Leonida",
+    username: "patsbbAmazing",
+    email: "pats@gmail.com",
+
+  })
+}
