@@ -1,4 +1,4 @@
-import replyTemplate from './reply-block-template.js';
+import generateReplyTemplate from './reply-block-template.js';
 
 // Function that grabs all the replies per review and appends it to their containers
 export async function getReplies() {
@@ -27,7 +27,7 @@ export async function getReplies() {
 };
 
 // Displays all the the replies for a specific review
-export function displayReplies(reviewAndReplies) {
+export function displayReplies(reviewAndReplies, isOwner) {
   const reviewID = reviewAndReplies.reviewID;
   const replies = reviewAndReplies.replies;
 
@@ -40,14 +40,18 @@ export function displayReplies(reviewAndReplies) {
     const data = {
       username: reply.ownerID.username,
       date: reply.replyDate,
-      content: reply.reply
+      content: reply.reply,
+      replyID: reply._id
     };
     
+    const replyTemplate = generateReplyTemplate(isOwner);
+
     // For each reply, create a reply template from 'reply-block-template.js'
     const renderedTemplate = replyTemplate
                               .replace('{{ username }}', data.username)
                               .replace('{{ date }}', data.date)
-                              .replace('{{ content }}', data.content);
+                              .replace('{{ content }}', data.content)
+                              .replace(/{{ replyID }}/g, data.replyID);
 
 
     // Create a temporary div to convert the HTML string to a DOM element

@@ -193,8 +193,8 @@ const reviewController = {
       await newReply.save();
 
       // reload the page?
+      res.redirect(`/establishment?building=${replyData.buildingName}`);
 
-      res.status(200).send('Reply added successfully');
     } catch (err) {
       console.error(err);
       res.status(500).send("Cannot add reply");
