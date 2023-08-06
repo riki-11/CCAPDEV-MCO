@@ -443,6 +443,23 @@ const routeController = {
         res.redirect('/login');
     },
 
+    deleteReply: async function(req, res) {
+        const { replyID } = req.query;
+
+        try {
+          // Delete the reply with the given replyId from the database
+          const result = await Reply.deleteOne({_id: replyID}).exec();
+      
+          // Return a success response if the deletion is successful
+      
+          res.status(200).json({ message: 'Reply deleted successfully' });
+        } catch (error) {
+          // Handle errors and return an error response if needed
+          console.error('Error deleting reply:', error);
+          res.status(500).json({ error: 'Reply deletion failed' });
+        }
+    },
+
 
 
 

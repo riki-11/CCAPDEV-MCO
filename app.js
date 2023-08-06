@@ -213,22 +213,7 @@ app.post('/delete-account', userController.deleteUser);
 // Log out
 app.get('/logout', routeController.logoutUser);
 
-app.delete('/deleteReply', async (req, res) => {
-  const { replyID } = req.query;
-
-  try {
-    // Delete the reply with the given replyId from the database
-    const result = await Reply.deleteOne({_id: replyID}).exec();
-
-    // Return a success response if the deletion is successful
-
-    res.status(200).json({ message: 'Reply deleted successfully' });
-  } catch (error) {
-    // Handle errors and return an error response if needed
-    console.error('Error deleting reply:', error);
-    res.status(500).json({ error: 'Reply deletion failed' });
-  }
-});
+app.delete('/deleteReply', routeController.deleteReply);
 
 // In case path does not exist
 app.use((req, res) => {
