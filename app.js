@@ -162,6 +162,10 @@ app.use((req,res,next) => {
   next();
 })
 
+// Setup parser for JSON data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // parse data and images
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -205,6 +209,10 @@ app.post('/editreply', loggedIn, reviewController.editReply);
 app.delete('/deleteReply', routeController.deleteReply);
 
 
+// Add Likes and Dislikes
+app.post('/addLikes', loggedIn, reviewController.addLikes);
+app.post('/addDislikes', loggedIn,  reviewController.addDislikes);
+
 // Delete reviews
 app.delete('/deleteReviews', routeController.deleteReviews);
 
@@ -220,7 +228,7 @@ app.use((req, res) => {
   });
 })
 
-
+/*
 async function add() {
   try {
   
@@ -359,3 +367,4 @@ async function addUser() {
 
   })
 }
+*/

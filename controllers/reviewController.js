@@ -305,6 +305,82 @@ const reviewController = {
       res.status(500).send('Server error');
     }
   },
+  addLikes: async function (req, res) {
+    try {
+      const reviewId = req.body.reviewId;
+      const username = req.user.username;
+  
+      const review = await Review.findById(reviewId);
+  
+      if (!review) {
+        return res.status(404).json({ error: "Review not found" });
+      }
+  
+      // If the user has already disliked the review, remove the dislike
+      if (review.dislikers.includes(username)) {
+        review.dislikers.pull(username);
+        review.disgustingCount -= 1;
+        res.status(200).json({ message: "Dislike removed", review });
+      } else {
+        // Check if the user has already liked the review
+        if (review.likers.includes(username)) {
+          // If the user already liked the review, remove the like
+          review.likers.pull(username);
+          review.cleanCount -= 1;
+          res.status(200).json({ message: "Like removed", review });
+        } else {
+          // If the user has not liked or disliked, add a like
+          review.cleanCount += 1;
+          review.likers.push(username);
+          res.status(200).json({ message: "Like added successfully", review });
+        }
+      }
+  
+      await review.save();
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Failed to add like");
+    }
+  },
+  
+
+  addDislikes: async function (req, res) {
+    try {
+      const reviewId = req.body.reviewId;
+      const username = req.user.username;
+  
+      const review = await Review.findById(reviewId);
+  
+      if (!review) {
+        return res.status(404).json({ error: "Review not found" });
+      }
+  
+      // If the user has already liked the review, remove the like
+      if (review.likers.includes(username)) {
+        review.likers.pull(username);
+        review.cleanCount -= 1;
+        res.status(200).json({ message: "Like removed", review });
+      } else {
+        // Check if the user has already disliked the review
+        if (review.dislikers.includes(username)) {
+          // If the user already disliked the review, remove the dislike
+          review.dislikers.pull(username);
+          review.disgustingCount -= 1;
+          res.status(200).json({ message: "Dislike removed", review });
+        } else {
+          // If the user has not liked or disliked, add a dislike
+          review.disgustingCount += 1;
+          review.dislikers.push(username);
+          res.status(200).json({ message: "Dislike added successfully", review });
+        }
+      }
+  
+      await review.save();
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Failed to add dislike");
+    }
+  }
 }
 
 export default reviewController;

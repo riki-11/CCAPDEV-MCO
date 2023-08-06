@@ -67,10 +67,12 @@
             <p class="text-xs">(edited)</p>
         {{/if}}
 
-         <div class="flex mt-1 gap-x-5">
-                <a><i class="fa-regular fa-thumbs-up"></i> {{this.cleanCount}}</a>
-                <a><i class="fa-regular fa-thumbs-down"></i> {{this.disgustingCount}}</a>
+        {{!-- {{#if }} shows only when a user is logged in--}}
+        <div class="flex mt-1 gap-x-5 reactions">
+            <button class="fa-regular fa-thumbs-up like-button"data-review-id="{{this._id}}" ></button> {{this.cleanCount}} 
+            <button class="fa-regular fa-thumbs-down dislike-button" data-review-id="{{this._id}}"></button> {{this.disgustingCount}}            
         </div>
+        {{!-- {{/if}} --}}
 
         {{#if modifiable}}
             {{#if currentUser}}
@@ -122,4 +124,5 @@
 
 
     </div>  
+    <script src="js/review-actions.js"></script>
 </div>
