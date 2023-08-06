@@ -63,17 +63,21 @@
             </div>
         {{/if}}
 
-        <!-- Show reply button if logged in and in a page that can be replied -->
-        <!-- ONLY SHOW REPLY BUTTON IF YOU ARE THE OWNER OF THE ESTABLISHMENT -->
-        <div class="flex mt-1 gap-x-5">
-            <button class="reply-btn hover:opacity-80" data-review-id="{{this._id}}">
-                <i class="fa-solid fa-reply"></i>
-                Reply
-            </button>
-        </div>
+        <!-- Input to indicate the id of this review -->
+        <input type="hidden" value="{{this._id}}" name="reviewID" class="review-id">
+
+        {{#if ownerView}}
+            <!-- Show reply button if logged in and in a page that can be replied -->
+            <!-- ONLY SHOW REPLY BUTTON IF YOU ARE THE OWNER OF THE ESTABLISHMENT -->
+            <div class="flex mt-1 gap-x-5">
+                <button class="reply-btn hover:opacity-80" data-review-id="{{this._id}}">
+                    <i class="fa-solid fa-reply"></i>
+                    Reply
+                </button>
+            </div>
+        {{/if}}
 
         <div id="reply-container-{{this._id}}" class="create-reply-container hidden mt-2 min-w-1/2 max-w-80">
-            <input type="hidden" value="{{this._id}}" name="reviewID" class="review-id">
             <textarea name="reply" id="reply-text-{{this._id}}" class="reply-text-container rounded-md p-2" cols="35" rows="5" placeholder="Type your reply here..."></textarea>
             <div class="flex mt-2 gap-x-5">
                 <div class="flex gap-x-2 justify-center items-center">
@@ -90,13 +94,11 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Each reply container is tied to that review via the review id -->
-        <div id="replies-container-{{this._id}}" class="replies-container">
+        <div id="replies-container-{{this._id}}" class="replies-container w-98% ml-auto">
 
         </div>
-        <!-- OR maybe have it twitter style? --> 
-        <!-- Each reply should also be editable/deletable-->
 
     </div>  
 </div>

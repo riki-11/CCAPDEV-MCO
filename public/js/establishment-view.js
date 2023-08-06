@@ -1,5 +1,7 @@
+import { getReplies, displayReplies } from './reply-handler.js';
+
+/*
 // Function that grabs all the replies per review and appends it to their containers
-// MAYBE place this in a separate file so many .js files can use it. 
 async function getReplies() {
 
   // const repliesContainer = document.getElementsByClassName('replies-container');
@@ -9,7 +11,6 @@ async function getReplies() {
     return reviewIDInput.value;
   })
 
-  console.log(`REVIEW IDS: ${reviewIDs}`);
 
   // Once we have all the review IDs 
   // Grab all the replies per review and store them in an array
@@ -25,24 +26,44 @@ async function getReplies() {
   // Wait for the promise to be fulfilled then return the list of all replies of all reviews
   return Promise.all(allReviewsAndReplies);
 };
-
+*/
+/*
 // Displays all the the replies for a specific review
 function displayReplies(reviewAndReplies) {
   const reviewID = reviewAndReplies.reviewID;
   const replies = reviewAndReplies.replies;
-  console.log(`REVIEW ID: ${reviewID} and Replies ${replies}`);
+
   // Grab the reply-container pertaining to that review
   const replyContainer = document.getElementById(`replies-container-${reviewID}`);
 
-
-  // just need to style it well now!
+  // For each reply, render it dynamically`
   replies.forEach(reply => {
-    const newElement = document.createElement('h1');
-    newElement.textContent = reply.reply;
-    replyContainer.appendChild(newElement);
+  
+    const data = {
+      username: reply.ownerID.username,
+      date: reply.replyDate,
+      content: reply.reply
+    };
+    
+    // For each reply, create a reply template from 'reply-block-template.js'
+    const renderedTemplate = replyTemplate
+                              .replace('{{ username }}', data.username)
+                              .replace('{{ date }}', data.date)
+                              .replace('{{ content }}', data.content);
+
+
+    // Create a temporary div to convert the HTML string to a DOM element
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = renderedTemplate;
+
+    // Append the rendered template (DOM element) to the reply container
+      // Append the child nodes of tempDiv to the reply container
+      while (tempDiv.childNodes.length > 0) {
+        replyContainer.appendChild(tempDiv.childNodes[0]);
+      }
   })
 };
-
+*/
 document.addEventListener('DOMContentLoaded', () => {
   const banner = document.getElementById("establishment-banner");
   // GET request parameter to find out which building the user selected
@@ -77,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Get the id of the review that is being replied to
       const reviewID = postBtn.getAttribute('data-review-id');
-      const buildingName = new URLSearchParams(window.location.search).get('building');
       
       // Get the reply container and the text within
       const replyContainer = document.getElementById(`reply-container-${reviewID}`);
@@ -102,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(replyData)
       })
 
-      console.log(`BODY: ${JSON.stringify(replyData)}`);
       // After submitting the post reply, clear the text area and hide the reply container
       replyTextContainer.value = '';
       replyContainer.classList.add('hidden');
@@ -125,9 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
     allReviewsAndReplies.forEach(reviewAndReplies => {
       displayReplies(reviewAndReplies)
       
-    })
-  }
-  );
+    });
+  });
 
   /**
    * TODO: 

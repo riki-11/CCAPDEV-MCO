@@ -92,7 +92,6 @@ const reviewController = {
     // Update the review fields only if they are not null in the form data
     review.rating = rating || review.rating;
     review.amenities = amenitiesArray.length > 0 ? amenitiesArray : review.amenities;
-    console.log(date);
     review.dateCreated = dateCreated || review.dateCreated;
     review.title = title || review.title;
     review.content = content || review.content;
@@ -208,15 +207,12 @@ const reviewController = {
       // Grab the reviewID from the url parameter
       const reviewID = req.query.reviewID;
       // Get all the replies for that review
-      const replies = await Reply.find({reviewID: reviewID}).lean();
+      const replies = await Reply.find({reviewID: reviewID})
+                            .populate('ownerID')
+                            .lean();
       
       // Wait for the promise to be fulfilled before moving on
       await Promise.all(replies);
-
-      console.log(`All replies for ${reviewID}: `);
-      replies.forEach(reply => {
-        console.log(reply);
-      });
 
       // Return the list of replies to the controller to load it into the DOM
       if (replies) {

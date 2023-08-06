@@ -689,10 +689,6 @@ video {
   margin-top: 2rem;
 }
 
-.block{
-  display: block;
-}
-
 .flex{
   display: flex;
 }
@@ -783,6 +779,10 @@ video {
 
 .w-96{
   width: 24rem;
+}
+
+.w-98\%{
+  width: 98%;
 }
 
 .w-\[60\%\]{

@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
     <body>
-        <!-- hidden input to store the current user viewing the page -->
         <div class="w-full px-10">
             <div class="content-container">
                 <div id="establishment-details-container" class="establishment-details-container">
@@ -31,24 +30,10 @@
                                         {{building.description}}
                                     </span>
                                 </div>
-                                <!--
-                                <div class="left-gotomap-details-container"> <br>
-                                    <div class="popup-img" id="popup-1">
-                                        <div class="overlay"></div>
-                                        <div class="content">
-                                            <div class="closebtn" {{!-- onclick="toggleppopupclose()" --}}>&times;</div>
-                                            <img src="images/campus-map-large.jpg" alt="DLSU Map">
-                                        </div>
-                                    </div>
-                                    <button id="mapbtn"{{!--  onclick="togglepopup()" --}}>Go To DLSU Map</button>
-                                </div>
-                                -->
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 
                 <div class="flex w-full m-auto overflow-hidden p-10">
                     <div class="w-full">
@@ -72,17 +57,17 @@
                         <h2 class="search-line"></h2>
                         
                         <div class="w-full overflow-auto mb-10"> <!--Review Container-->
-                        
-                        <!-- HAVE TO ADD A CHECKER SOMEWHERE TO SEE IF THE CURRENT USER IS THE OWNER OF THE BUILDING -->
-                        
-                        {{#each reviews}}
-                            {{> review-block modifiable=false}}
-                        {{/each}}
-
-
+                            {{#if ownerView}}
+                                {{#each reviews}}
+                                    {{> review-block modifiable=false ownerView=true}}
+                                {{/each}}
+                            
+                            {{else}}
+                                {{#each reviews}}
+                                    {{> review-block modifiable=false ownerView=false}}
+                                {{/each}}
+                            {{/if}}
                         </div>
-
-                        
                     </div>
                 </div>                    
             </div>

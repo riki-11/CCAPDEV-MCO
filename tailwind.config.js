@@ -28,6 +28,7 @@ module.exports = {
       },
       width: {
         '18': '4.5rem',
+        '98%': '98%'
       },
       minWidth: {
         '1/2': '50%',
