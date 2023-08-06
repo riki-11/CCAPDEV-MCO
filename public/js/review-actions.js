@@ -1,27 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
   const likeButtons = document.querySelectorAll(".like-button");
-
-  likeButtons.forEach(likeButton => {
-    likeButton.addEventListener("click", event => {
+  likeButtons.forEach(button => {
+    button.addEventListener("click", event => {
       event.preventDefault();
-      const reviewId = event.target.getAttribute("data-review-id");
-      sendLike(reviewId);
-      
+      const reviewId = event.target.dataset.reviewId;
+      // Disable the like button to prevent multiple clicks
+      button.disabled = true;
+      console.log(reviewId);
+      sendLike(reviewId).then(() => {
+        // Re-enable the like button after the server responds
+        button.disabled = false;
+      });
     });
-  });
-
+  }); 
   const dislikeButtons = document.querySelectorAll(".dislike-button");
-  
-  dislikeButtons.forEach(dislikeButton => {
-    dislikeButton.addEventListener("click", event => {
-      event.preventDefault();
-      const reviewId = event.target.getAttribute("data-review-id");
-      sendDislike(reviewId)
-      
+  dislikeButtons.forEach(button => {
+    button.addEventListener("click", event => {
+      const reviewId = event.target.dataset.reviewId;
+      // Disable the dislike button to prevent multiple clicks
+      button.disabled = true;
+
+      sendDislike(reviewId).then(() => {
+        // Re-enable the dislike button after the server responds
+        button.disabled = false;
+      });
     });
   });
 });
-
 
 
 function sendLike(reviewId) {
