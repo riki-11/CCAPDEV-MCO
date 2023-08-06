@@ -62,6 +62,14 @@ npm run dev
 ```
 The application will be available at http://localhost:3000.
 
+For owner accounts, since there is no way to create a new one, they are already registered in the database. The following are the log-in credentials for all owner accounts:
+- **username:** henrysy, **password:** password
+- **username:** miguelhall, **password:** password
+- **username:** velascohall, **password:** password
+- **username:** andrew_gonzalez, **password:** password
+- **username:** enrique_razon, **password:** password
+- **username:** gokongwei, **password:** password
+
 ## Contact
 
 If you have any questions or inquiries, please contact us:
