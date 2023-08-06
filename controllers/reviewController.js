@@ -182,10 +182,6 @@ const reviewController = {
       const user = req.user;
       const replyData = req.body;
 
-      console.log(`CURRENT USER: ${user}`);
-      console.log(`REPLIED TO: ${replyData.reviewID}`);
-      console.log(`REPLY TEXT: ${replyData.reply}`);
-
       // With all the data create a new reply.
       var newReply = new Reply({
         reviewID: replyData.reviewID,
@@ -197,12 +193,28 @@ const reviewController = {
       // Save the new reply to the database
       await newReply.save();
 
-      // reload the page?
+      const bldg = await Building.findOne({ 'ownerID' : user._id }).lean();
+      res.redirect(`/establishment?building=${bldg.name}`);
 
-      res.status(200).send('Reply added successfully');
     } catch (err) {
       console.error(err);
       res.status(500).send("Cannot add reply");
+    }
+  },
+
+  editReply: async function(req, res) {
+    try {
+      const replyData = req.body;
+      const replyID = replyData.replyID;
+      const replyContent = replyData.reply;
+
+      console.log(`REPLY ID ${replyID} | Content: ${replyContent}`);
+
+      res.status(200).send('Reply updated successfully');
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Cannot edit reply.');
     }
   },
 
@@ -229,6 +241,15 @@ const reviewController = {
     } catch (err) {
       console.error(err);
       res.status(500).send("Replies not found.");
+    }
+  },
+
+  editReply: async function(req, res) {
+    try {
+      
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Reply could not be edited");
     }
   },
     

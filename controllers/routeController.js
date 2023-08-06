@@ -9,6 +9,7 @@ import User from '../models/User.js';
 import Building from '../models/Building.js';
 import Restroom from '../models/Restroom.js';
 import Review from '../models/Review.js';
+import Reply from '../models/Reply.js';
 
 
 const routeController = {
@@ -79,39 +80,46 @@ const routeController = {
             if (!user) {
                 return res.status(404).send('User not found');
             }
-            const reviews = await Review.find({ 'user' : user })
-            .populate({
-                path: 'restroomID', // Populate the restroomID field
-                populate: {
-                path: 'buildingID', // Populate the buildingID field of the nested Restroom model
-                select: 'name', // Select only the name property of the buildingID
-                },
-            })
-            .lean();
-            
-            const senduser = {
-                isOwner: user.isOwner,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                username: user.username,
-                description: user.description,
-            }
+          
+            if (user.isOwner) {
+                const bldg = await Building.findOne({ 'ownerID' : user._id }).lean();
+                res.redirect(`/establishment?building=${bldg.name}`);
+            } else {
+          
+                const reviews = await Review.find({ 'user' : user })
+                .populate({
+                    path: 'restroomID', // Populate the restroomID field
+                    populate: {
+                    path: 'buildingID', // Populate the buildingID field of the nested Restroom model
+                    select: 'name', // Select only the name property of the buildingID
+                    },
+                })
+                .lean();
 
-            const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
+                const senduser = {
+                    isOwner: user.isOwner,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    username: user.username,
+                    description: user.description,
+                }
 
-            res.render('viewprofile', { 
-            title: 'Profile',
-            forBusiness: false,
-            user: senduser,
-            profImgSrc: profImgSrc,
-            currentUser: currentUser,
-            reviews: reviews.map(review => ({
-                ...review,
-                user: senduser,       // Pass the user object to each review
-                profImgSrc: profImgSrc, // Pass the imageSrc to each review
+                const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
+
+                res.render('viewprofile', { 
+                title: 'Profile',
+                forBusiness: false,
+                user: senduser,
+                profImgSrc: profImgSrc,
                 currentUser: currentUser,
-                photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
-            }); 
+                reviews: reviews.map(review => ({
+                    ...review,
+                    user: senduser,       // Pass the user object to each review
+                    profImgSrc: profImgSrc, // Pass the imageSrc to each review
+                    currentUser: currentUser,
+                    photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
+                }); 
+            }
         
         } catch (error) {
             console.error('Error fetching user data:', error);
@@ -456,6 +464,23 @@ const routeController = {
     logoutUser: async function(req, res) {
         req.logout(() => {});
         res.redirect('/login');
+    },
+
+    deleteReply: async function(req, res) {
+        const { replyID } = req.query;
+
+        try {
+          // Delete the reply with the given replyId from the database
+          const result = await Reply.deleteOne({_id: replyID}).exec();
+      
+          // Return a success response if the deletion is successful
+      
+          res.status(200).json({ message: 'Reply deleted successfully' });
+        } catch (error) {
+          // Handle errors and return an error response if needed
+          console.error('Error deleting reply:', error);
+          res.status(500).json({ error: 'Reply deletion failed' });
+        }
     },
 
 

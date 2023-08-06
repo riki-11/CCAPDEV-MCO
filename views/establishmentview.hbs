@@ -68,36 +68,40 @@
                         
                         <div class="w-full overflow-auto mb-10"> <!--Review Container-->
 
-                            {{#if ownerView}}
+                        {{#if ownerView}}
+                            {{#if searched}} 
+                                {{#if searchResults}}
+                                    {{#each searchResults}}
+                                        {{> review-block modifiable=false searched=true ownerView=true}}
+                                    {{/each}}
+                                    <input id="isOwner" type="hidden" value="true">
+                                {{else}}
+                                    <p>No results found.</p>
+                                {{/if}}
+                            {{else}}
                                 {{#each reviews}}
                                     {{> review-block modifiable=false ownerView=true}}
                                 {{/each}}
-                            
-                            {{else}}
-                                {{#each reviews}}
-                                    {{> review-block modifiable=false ownerView=false}}
-                                {{/each}}
-                            {{/if}}
-                        {{#if searched}} 
-                            {{#if searchResults}}
-                                {{#each searchResults}}
-                                    {{> review-block modifiable=false searched=true}}
-                                {{/each}}
-                            {{else}}
-                                <p>No results found.</p>
+                                <input id="isOwner" type="hidden" value="true">
                             {{/if}}
                         {{else}}
-                            {{#if ownerView}}
-                                {{#each reviews}}
-                                    {{> review-block modifiable=false ownerView=true}}
-                                {{/each}}
-                            
+                            {{#if searched}} 
+                                {{#if searchResults}}
+                                    {{#each searchResults}}
+                                        {{> review-block modifiable=false searched=true ownerView=false}}
+                                    {{/each}}
+                                    <input id="isOwner" type="hidden" value="false">
+                                {{else}}
+                                    <p>No results found.</p>
+                                {{/if}}
                             {{else}}
                                 {{#each reviews}}
                                     {{> review-block modifiable=false ownerView=false}}
                                 {{/each}}
+                                <input id="isOwner" type="hidden" value="false">
                             {{/if}}
                         {{/if}}
+
                         </div>
                     </div>
                 </div>                    
