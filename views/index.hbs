@@ -9,20 +9,13 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
   <body class="home-body">
-    <div id="carousel-banner" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        {{#each bannerBuildings}}
-        <div class="carousel-item {{#if @first}}active{{/if}}">
+
           <div class="banner">
             <div class="banner-comp">
-              <h1 class="banner-text">{{this.name}}</h1>
-              <button type="button" class="banner-button btn">
-                <a class="no-decoration" href="establishment?building={{this.name}}">See Reviews</a>
-              </button>
+              <h1 class="banner-text">WELCOME TO FLUSH FINDER</h1>
+
             </div>
           </div>
-        </div>
-        {{/each}}
         
       </div>
       
