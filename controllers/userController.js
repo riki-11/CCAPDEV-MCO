@@ -12,13 +12,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 
-// Extends user session when checking 'Remember me'
-function extendSession(req) {
-    req.session.cookie.expires = new Date(Date.now() + 1000*60*60*24*14); // Extend session by 14 days
-    req.session.save(); // Save the updated session to the store
-    console.log( req.session.cookie.expires);
-  }
-  
 /*
     defines an object which contains functions executed as callback
     when a client requests for `profile` paths in the server
@@ -139,26 +132,6 @@ const userController = {
         
     },
 
-    loginValidation: async function(req, res, next) {
-        passport.authenticate('local', (err, user, info) => {
-            if (err) {
-              return next(err); // Handle unexpected errors
-            }
-            if (!user) {
-              // User not found or incorrect credentials
-              return res.render('login', { errorMessage: info.message });
-            }
-            // Successful login, perform any additional actions as needed
-            req.login(user, (err) => {
-              if (err) {
-                return next(err);
-              }
-              // Redirect to a success page or do something else
-              return next();
-            });
-          })(req, res, next);
-     },
-
     updateUser: async function(req, res) {
         // get user ID, find it in database, then update the database
 
@@ -187,6 +160,7 @@ const userController = {
                     updatedUser.lastName = lastname;
                     updatedUser.username = username;
                     updatedUser.email = email;
+                    updatedUser.password = password;
                     updatedUser.description = description;
                     updatedUser.photo = {
                         data: photoData.buffer,
@@ -197,19 +171,14 @@ const userController = {
                     updatedUser.lastName = lastname;
                     updatedUser.username = username;
                     updatedUser.email = email;
+                    updatedUser.password = password;
                     updatedUser.description = description;
                 }
-                // Dagdag ung password functionalities passport.save something somth
-                if (password) {
-                    await updatedUser.setPassword(password);
-                }
-
                 await updatedUser.save();
                 console.log(updatedUser);
     
                 console.log('User updated')
-
-                res.redirect('/login');
+                res.redirect('/profile');
             } else {
                 const user = updatedUser;
                 const userinfo = {
@@ -260,7 +229,7 @@ const userController = {
                     }
 
                     passport.authenticate('local')(req, res, () => {
-                        res.redirect('/logout'); // Redirect to dashboard or any other page on successful registration
+                        res.redirect('/'); // Redirect to dashboard or any other page on successful registration
                     });
                 })
                             
@@ -298,10 +267,9 @@ const userController = {
         }
       },
 
-    loginUser: function(req, res, next) {
-        if (req.body.remember) {
-            extendSession(req)
-        }
+    loginUser: function(req, res) {
+        req.session.username = req.user.username;
+        //console.log(req.user)
         res.redirect('/');
     },
 
