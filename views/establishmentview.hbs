@@ -32,6 +32,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 
@@ -39,24 +40,34 @@
                     <div class="w-full">
                         <div class="flex items-center gap-x-5 header">
                             <h1 class="review-header">Reviews</h1>
-                            <div class="review-search-box text-gray">
-                            <a id="search-box-text" href="#" class="no-decoration text-gray">
-                                <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
-                                Search
-                            </a>
+                            <div>
+                                 <form class="review-search w-full" id="review-search" action="/review-search" method="get">
+                                    <input type="hidden" name="building" value="{{building.name}}" />
+                                    <input  class="text-gray w-96 h-8 px-4 py-2 rounded-md border border-gray-300 hover:bg-transparent bg-transparent"
+                                            type="text" name="q" placeholder="Search Reviews" />
+                                </form>
                             </div>
+                            {{#if searched}}
+                                 <p>Showing all results for "{{searchQuery}}"</p>
+                            {{/if}}
                             <div class="dropdown">
                                 <button class="dropbtn">Sort By &nbsp;<i class="fa-solid fa-sort" style="color: #000000;"></i></button>
                                 <div class="dropdown-content">
-                                <a href="#">Most Recent</a>
-                                <a href="#">Rating (High to Low)</a>
-                                <a href="#">Rating (Low to High)</a>
+                                <a href="/review-search?building={{building.name}}&q={{searchQuery}}&sortBy=rating_desc">Rating (High to Low)</a>
+                                <a href="/review-search?building={{building.name}}&q={{searchQuery}}&sortBy=rating_asc">Rating (Low to High)</a>
                                 </div>
                             </div>
+                             {{#if searched}} 
+                                <a href="/establishment?building={{building.name}}"
+                                                class="px-3 py-2 text-black hover:bg-yellow-300 bg-yellow-400 text-sm rounded">
+                                                    Show All Reviews
+                                </a>                            
+                            {{/if}}
                         </div>
                         <h2 class="search-line"></h2>
                         
                         <div class="w-full overflow-auto mb-10"> <!--Review Container-->
+
                             {{#if ownerView}}
                                 {{#each reviews}}
                                     {{> review-block modifiable=false ownerView=true}}
@@ -67,11 +78,32 @@
                                     {{> review-block modifiable=false ownerView=false}}
                                 {{/each}}
                             {{/if}}
+                        {{#if searched}} 
+                            {{#if searchResults}}
+                                {{#each searchResults}}
+                                    {{> review-block modifiable=false searched=true}}
+                                {{/each}}
+                            {{else}}
+                                <p>No results found.</p>
+                            {{/if}}
+                        {{else}}
+                            {{#if ownerView}}
+                                {{#each reviews}}
+                                    {{> review-block modifiable=false ownerView=true}}
+                                {{/each}}
+                            
+                            {{else}}
+                                {{#each reviews}}
+                                    {{> review-block modifiable=false ownerView=false}}
+                                {{/each}}
+                            {{/if}}
+                        {{/if}}
                         </div>
                     </div>
                 </div>                    
             </div>
         </div>
+
     <script type="module" src="js/establishment-view.js"></script>
     </body>
 </html>
