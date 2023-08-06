@@ -196,6 +196,10 @@ app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.update
 app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login' }), userController.loginUser);
 app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
 
+// Add Likes and Dislikes
+app.post('/addLikes', reviewController.addLikes);
+app.post('/addDisikes', reviewController.addDislikes);
+
 // Delete reviews
 app.delete('/deleteReviews', routeController.deleteReviews);
 

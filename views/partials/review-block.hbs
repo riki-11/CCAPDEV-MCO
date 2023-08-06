@@ -49,9 +49,9 @@
             <p class="text-xs">(edited)</p>
         {{/if}}
 
-         <div class="flex mt-1 gap-x-5">
-                <a><i class="fa-regular fa-thumbs-up"></i> {{this.cleanCount}}</a>
-                <a><i class="fa-regular fa-thumbs-down"></i> {{this.disgustingCount}}</a>
+        <div class="flex mt-1 gap-x-5">
+            <button class="fa-regular fa-thumbs-up like-button"data-review-id="{{this._id}}" ></button> {{this.cleanCount}} 
+            <button class="fa-regular fa-thumbs-down dislike-button" data-review-id="{{this._id}}"></button> {{this.disgustingCount}}            
         </div>
 
         {{#if modifiable}}
@@ -63,4 +63,6 @@
             </div>
         {{/if}}
     </div>  
+    {{!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script src="js/review-actions.js"></script>
 </div>
