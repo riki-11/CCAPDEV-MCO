@@ -79,47 +79,48 @@ const routeController = {
 
             if (!user) {
                 return res.status(404).send('User not found');
-            }
-          
-            if (user.isOwner) {
-                const bldg = await Building.findOne({ 'ownerID' : user._id }).lean();
-                res.redirect(`/establishment?building=${bldg.name}`);
             } else {
-          
-                const reviews = await Review.find({ 'user' : user })
-                .populate({
-                    path: 'restroomID', // Populate the restroomID field
-                    populate: {
-                    path: 'buildingID', // Populate the buildingID field of the nested Restroom model
-                    select: 'name', // Select only the name property of the buildingID
-                    },
-                })
-                .lean();
-
-                const senduser = {
-                    isOwner: user.isOwner,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    username: user.username,
-                    description: user.description,
-                }
-
-                const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
-
-                res.render('viewprofile', { 
-                title: 'Profile',
-                forBusiness: false,
-                user: senduser,
-                profImgSrc: profImgSrc,
-                currentUser: currentUser,
-                reviews: reviews.map(review => ({
-                    ...review,
-                    user: senduser,       // Pass the user object to each review
-                    profImgSrc: profImgSrc, // Pass the imageSrc to each review
+                if (user.isOwner) {
+                    const bldg = await Building.findOne({ 'ownerID' : user._id }).lean();
+                    res.redirect(`/establishment?building=${bldg.name}`);
+                } else {
+              
+                    const reviews = await Review.find({ 'user' : user })
+                    .populate({
+                        path: 'restroomID', // Populate the restroomID field
+                        populate: {
+                        path: 'buildingID', // Populate the buildingID field of the nested Restroom model
+                        select: 'name', // Select only the name property of the buildingID
+                        },
+                    })
+                    .lean();
+    
+                    const senduser = {
+                        isOwner: user.isOwner,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        username: user.username,
+                        description: user.description,
+                    }
+    
+                    const profImgSrc = user.photo && user.photo.contentType ? `data:${user.photo.contentType};base64,${user.photo.data.toString('base64')}` : null;
+    
+                    res.render('viewprofile', { 
+                    title: 'Profile',
+                    forBusiness: false,
+                    user: senduser,
+                    profImgSrc: profImgSrc,
                     currentUser: currentUser,
-                    photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
-                }); 
+                    reviews: reviews.map(review => ({
+                        ...review,
+                        user: senduser,       // Pass the user object to each review
+                        profImgSrc: profImgSrc, // Pass the imageSrc to each review
+                        currentUser: currentUser,
+                        photoSrc: review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null,      }))    
+                    }); 
+                }
             }
+          
         
         } catch (error) {
             console.error('Error fetching user data:', error);
