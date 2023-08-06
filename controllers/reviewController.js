@@ -197,8 +197,8 @@ const reviewController = {
       // Save the new reply to the database
       await newReply.save();
 
-      // reload the page?
-      res.redirect(`/establishment?building=${replyData.buildingName}`);
+      const bldg = await Building.findOne({ 'ownerID' : user._id }).lean();
+      res.redirect(`/establishment?building=${bldg.name}`);
 
     } catch (err) {
       console.error(err);

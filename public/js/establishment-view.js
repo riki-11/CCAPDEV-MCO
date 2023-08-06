@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(replyData)
-      })
+      });
 
       // After submitting the post reply, clear the text area and hide the reply container
       replyTextContainer.value = '';
