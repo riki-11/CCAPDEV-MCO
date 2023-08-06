@@ -11,7 +11,6 @@ const reviewSchema = new mongoose.Schema({
   dateCreated: {
     type: String,
     required: true,
-    // Set the default value to the current date
   },
   rating: {
     type: Number,
@@ -57,6 +56,18 @@ const reviewSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+
+  likers: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'User',
+    default: []
+  }, 
+
+  dislikers: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'User',
+    default: []
   }
 
 });

@@ -7,15 +7,12 @@
                 <p class="font-secondary text-2xl text-white">for business</p> 
             {{/if}}
         </a>
-        <div class="header-search-box text-gray">
-            <a id="search-box-text" href="results" class="no-decoration text-gray">
-                <i class="fa-solid fa-magnifying-glass pointer-hover"></i>
-                Search
-            </a>
-            <i class="fa-solid fa-microphone push-right pointer-hover"></i>
-        </div>
 
     </div>
+       <form action="/search-results" method="get">
+            <input  class="text-gray w-96 h-8 px-4 py-2 rounded-md border border-gray-300 hover:bg-transparent bg-transparent"
+                    type="text" name="q" placeholder="Search for Building" />
+        </form>
     <div class="header-right">
             {{#if loggedIn}}
                 {{#unless isOwner}}

@@ -291,7 +291,42 @@ const userController = {
           return next();
         }
         res.redirect('/login'); // Redirect to login page if user is not authenticated
-      }
+      },
+
+    deleteUser: async function (req, res) {
+        try {
+            // Get the currently logged-in user's ID
+            const userId = req.user._id;
+
+            const userReviews = await Review.find({ user: userId });
+
+            // Step 2: Delete the reviews
+            for (const review of userReviews) {
+                await Review.findByIdAndDelete(review._id);            
+            }
+        
+      
+            // Use the ID to find and delete the user from the database
+            await User.findByIdAndDelete(userId);
+
+      
+            req.logout((err) => {
+                if (err) {
+                  console.error('Error logging out:', err);
+                  // Handle any errors that occur during logout
+                  res.status(500).send('Error logging out');
+                } else {
+                  // Redirect the user to a different page after successful logout
+                  res.redirect('/');
+                }
+              });      
+
+      
+          } catch (error) {
+            console.error('Error deleting account:', error);
+            res.status(500).send('Server error');
+          }
+    }
 
 }
 

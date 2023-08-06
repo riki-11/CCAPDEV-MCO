@@ -39,14 +39,12 @@
             <h2 class="border-b-2 border-secondary leading-[.01rem]"><span class="ml-[6rem] bg-primary px-[10px] text-[30px]">My Reviews: {{reviews.length}}</span></h2>
         </div>
         <div class="w-full overflow-auto mb-10" id="reviewDiv"> <!--Review Container-->
-            {{!-- Loop through each review in the reviews array --}}
             <!-- modifiable variable determines whether replies can be edited/deleted or not -->
             {{#each reviews}}
-                {{> review-block user=user profImgSrc=profImgSrc photoSrc=photoSrc modifiable=true}}
+                {{> review-block user=user profImgSrc=profImgSrc photoSrc=photoSrc modifiable=true ownerView=false}}
             {{/each}}
-
-
         </div>
     </div>
+    <script type="module" src="js/view-profile.js"></script>
 </body>
 </html>

@@ -162,6 +162,10 @@ app.use((req,res,next) => {
   next();
 })
 
+// Setup parser for JSON data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // parse data and images
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -180,7 +184,11 @@ app.get('/search', routeController.renderFindBathroomPage);
 app.get('/create-review', routeController.renderCreateReviewPage);
 app.get('/edit-review', routeController.renderEditReviewPage);
 app.get('/establishment', routeController.renderEstablishmentPage);
+
+
+// Searching
 app.get('/search-results', routeController.renderSearchResultsPage);
+app.get('/review-search', routeController.getReviewSearchResults);
 
 // Fetch Request Routes
 app.get('/select-restroom', routeController.getRestroomOptions);
@@ -190,6 +198,7 @@ app.get('/get-building-restrooms', routeController.getBuildingRestrooms);
 app.get('/get-building-data',  routeController.getBuildingData);
 app.get('/get-building-code', routeController.getBuildingCode);
 app.get('/update-building-ratings', routeController.updateBuildingRatings);
+app.get('/get-replies', reviewController.getAllReplies);
 
 // Handle form submissions
 app.post('/usersignup', userController.addUser);
@@ -197,9 +206,11 @@ app.post('/createreview', upload.single('photo'), reviewController.addReview);
 app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.updateUser);
 app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login' }), userController.loginUser);
 app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
+app.post('/postreply', loggedIn, reviewController.addReply);
 
 // Delete reviews
 app.delete('/deleteReviews', routeController.deleteReviews);
+app.post('/delete-account', userController.deleteUser);
 
 // Log out
 app.get('/logout', routeController.logoutUser);
