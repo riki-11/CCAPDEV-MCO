@@ -4,26 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", event => {
       event.preventDefault();
       const reviewId = event.target.dataset.reviewId;
-      // Disable the like button to prevent multiple clicks
-      button.disabled = true;
       console.log(reviewId);
-      sendLike(reviewId).then(() => {
-        // Re-enable the like button after the server responds
-        button.disabled = false;
-      });
+      sendLike(reviewId);
     });
   }); 
   const dislikeButtons = document.querySelectorAll(".dislike-button");
   dislikeButtons.forEach(button => {
     button.addEventListener("click", event => {
+      event.preventDefault();
       const reviewId = event.target.dataset.reviewId;
-      // Disable the dislike button to prevent multiple clicks
-      button.disabled = true;
-
-      sendDislike(reviewId).then(() => {
-        // Re-enable the dislike button after the server responds
-        button.disabled = false;
-      });
+      sendDislike(reviewId);
     });
   });
 });
@@ -31,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function sendLike(reviewId) {
   // Make an AJAX POST request to the server and return the promise
-  return fetch('/addLikes', {
+  fetch('/addLikes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -51,7 +41,7 @@ function sendLike(reviewId) {
 
 function sendDislike(reviewId) {
     // Make an AJAX POST request to the server
-    return fetch('/addDislikes', {
+    fetch('/addDislikes', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
