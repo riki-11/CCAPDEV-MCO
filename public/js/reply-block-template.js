@@ -5,16 +5,16 @@ function generateReplyTemplate(isOwner) {
   // If the owner of the establishment is the one viewing the replies
   if (isOwner) {
     const replyTemplate = `
-                          <div class="reply-container flex flex-col p-3 gap-y-3">
+                          <div class="reply-container flex flex-col p-3 gap-y-3 data-reply-id="{{ replyID }}">
                             <input id="replyID" type="hidden" value="{{ replyID }}">
                             <p><span class="text-secondary">(Establishment Owner) {{ username }}</span> replied | {{ date }}</p>
                             <p id="reply-text-{{ replyID }}">{{ content }}</p>
                             <div class="flex gap-x-3">
-                              <button class="hover:opacity-80">
+                              <button class="edit-reply-btn hover:opacity-80">
                                 <i class="fa-solid fa-pencil"></i> Edit Reply
                               </button>
-                              <button class="hover:opacity-80">
-                                  <i class="fa-solid fa-trash-can"></i> Delete Reply
+                              <button class="delete-reply-btn hover:opacity-80">
+                                <i class="fa-solid fa-trash-can"></i> Delete Reply
                               </button> 
                             </div>
                           </div>

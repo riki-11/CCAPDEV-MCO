@@ -36,7 +36,7 @@ import User from './models/User.js';
 import Building from './models/Building.js';
 import Restroom from './models/Restroom.js';
 import Review from './models/Review.js';
-
+import Reply from "./models/Reply.js";
 
 const port = process.env.PORT;
 
@@ -213,6 +213,23 @@ app.post('/delete-account', userController.deleteUser);
 // Log out
 app.get('/logout', routeController.logoutUser);
 
+app.delete('/deleteReply', async (req, res) => {
+  const { replyID } = req.query;
+
+  try {
+    // Delete the reply with the given replyId from the database
+    const result = await Reply.deleteOne({_id: replyID}).exec();
+
+    // Return a success response if the deletion is successful
+
+    res.status(200).json({ message: 'Reply deleted successfully' });
+  } catch (error) {
+    // Handle errors and return an error response if needed
+    console.error('Error deleting reply:', error);
+    res.status(500).json({ error: 'Reply deletion failed' });
+  }
+});
+
 // In case path does not exist
 app.use((req, res) => {
   res.status(404).render("404", {
@@ -220,3 +237,4 @@ app.use((req, res) => {
     forBusiness: false
   });
 })
+
