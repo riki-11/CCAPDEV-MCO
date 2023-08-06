@@ -239,7 +239,7 @@ const routeController = {
               building: building,
               reviews: reviews,
               rating: rating,
-              ownerView: ownerView
+              ownerView: ownerView,
               searched:false
             }); 
         
