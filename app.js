@@ -205,6 +205,10 @@ app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.update
 app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login' }), userController.loginUser);
 app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
 app.post('/postreply', loggedIn, reviewController.addReply);
+app.post('/editreply', loggedIn, reviewController.editReply);
+
+// Delete Replies
+app.delete('/deleteReply', routeController.deleteReply);
 
 // Delete reviews
 app.delete('/deleteReviews', routeController.deleteReviews);
@@ -213,7 +217,6 @@ app.post('/delete-account', userController.deleteUser);
 // Log out
 app.get('/logout', routeController.logoutUser);
 
-app.delete('/deleteReply', routeController.deleteReply);
 
 // In case path does not exist
 app.use((req, res) => {

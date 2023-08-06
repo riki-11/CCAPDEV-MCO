@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reply: replyText,
         replyDate: date,
         buildingName: buildingName
-      }
+      };
       
       // Submit the reply contents to the database via fetch request
       fetch('/postreply', {
@@ -95,10 +95,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
+
+  // Add an event listener to handle edit button clicks
+  document.querySelectorAll('.edit-reply-btn').forEach(editBtn => {
+    editBtn.addEventListener('click', () => {
+      const replyID = editBtn.value;
+      console.log(`Reply ID: ${replyID}`);
+    });
+  });
+
   
   // Add an event listener to handle delete button clicks
   document.addEventListener('click', async function (event) {
     const deleteBtn = event.target.closest('.delete-reply-btn');
+    const editBtn = event.target.closest('.edit-reply-btn');
+    const cancelBtn = event.target.closest('.cancel-edit-reply-btn');
+    const postEditBtn = event.target.closest('.post-edit-reply-btn');
+
     if (deleteBtn) {
       const replyContainer = deleteBtn.closest('.reply-container');
       console.log("Reply Container: ", replyContainer);
@@ -114,6 +127,83 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Remove the reply container from the DOM after deletion
       replyContainer.remove();
-    }
+    } 
+    // If edit reply button was clicked
+      else if (editBtn) {
+
+      const replyID = editBtn.value;
+      console.log(`Reply ID: ${replyID}`);
+
+      // Show edit reply text area
+      const editReplyContainer = document.querySelector(`#edit-reply-container-${replyID}`);
+      editReplyContainer.classList.remove('hidden');
+
+      // Hide edit and delete reply buttons
+      const editAndDeleteBtns = document.querySelector(`#edit-delete-btns-${replyID}`);
+      editAndDeleteBtns.classList.add('hidden');
+
+      // Grab the contents of the reply and fill the textarea
+      const replyContainer = document.querySelector(`#reply-text-${replyID}`);
+      replyContainer.classList.add('hidden');
+
+      document.querySelector(`#edit-reply-area-${replyID}`).value = replyContainer.textContent;
+    } 
+    // If cancel edit reply button was clicked
+      else if (cancelBtn) {
+      const replyID = cancelBtn.value;
+      console.log(`Reply ID: ${replyID}`);
+
+      // Hide edit reply text area
+      const editReplyContainer = document.querySelector(`#edit-reply-container-${replyID}`);
+      editReplyContainer.classList.add('hidden');
+
+      // Show edit and delete reply buttons
+      const editAndDeleteBtns = document.querySelector(`#edit-delete-btns-${replyID}`);
+      editAndDeleteBtns.classList.remove('hidden');
+
+      // Show reply contents again
+      const replyContainer = document.querySelector(`#reply-text-${replyID}`);
+      replyContainer.classList.remove('hidden');
+
+    } 
+    // If post edit reply button was clicked
+      else if (postEditBtn) {
+        const replyID = postEditBtn.value;
+        const editReplyArea = document.querySelector(`#edit-reply-area-${replyID}`);
+        const newReplyContent = editReplyArea.value;
+
+        console.log(`NEW REPLY CONTENT: ${newReplyContent}`);
+
+        // Send the new reply content to the route via fetch
+        
+        const updatedReplyData = {
+          replyID: replyID,
+          reply: newReplyContent
+        };
+        
+        fetch('/editreply', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedReplyData)
+        });
+        
+        console.log('it reaches here');
+        // After submitting the post reply, clear the text area and hide the reply container
+        editReplyArea.value = '';
+
+        // Hide edit reply text area
+        const editReplyContainer = document.querySelector(`#edit-reply-container-${replyID}`);
+        editReplyContainer.classList.add('hidden');
+
+        // Show edit and delete reply buttons
+        const editAndDeleteBtns = document.querySelector(`#edit-delete-btns-${replyID}`);
+        editAndDeleteBtns.classList.remove('hidden');
+
+        // Show reply contents again
+        const replyContainer = document.querySelector(`#reply-text-${replyID}`);
+        replyContainer.classList.remove('hidden');
+      }
   });
 });

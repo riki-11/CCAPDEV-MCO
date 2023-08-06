@@ -9,6 +9,7 @@ import User from '../models/User.js';
 import Building from '../models/Building.js';
 import Restroom from '../models/Restroom.js';
 import Review from '../models/Review.js';
+import Reply from '../models/Reply.js';
 
 
 const routeController = {
