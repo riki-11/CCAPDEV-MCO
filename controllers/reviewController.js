@@ -318,11 +318,17 @@ const reviewController = {
         review.disgustingCount -= 1;
         res.status(200).json({ message: "Dislike removed", review });
       } else {
+
         // Check if the user has already liked the review
         if (review.likers.includes(username)) {
+
+          review.cleanCount += 1;
+          review.likers.push(username);
+
           // If the user already liked the review, remove the like
           review.likers.pull(username);
           review.cleanCount -= 1;
+
           res.status(200).json({ message: "Like removed", review });
         } else {
           // If the user has not liked or disliked, add a like
@@ -353,16 +359,24 @@ const reviewController = {
   
       // If the user has already liked the review, remove the like
       if (review.likers.includes(username)) {
+
         review.likers.pull(username);
         review.cleanCount -= 1;
+
+        review.disgustingCount += 1;
+        review.dislikers.push(username);
+
         res.status(200).json({ message: "Like removed", review });
       } else {
+
         // Check if the user has already disliked the review
         if (review.dislikers.includes(username)) {
           // If the user already disliked the review, remove the dislike
+
           review.dislikers.pull(username);
           review.disgustingCount -= 1;
           res.status(200).json({ message: "Dislike removed", review });
+          
         } else {
           // If the user has not liked or disliked, add a dislike
           review.disgustingCount += 1;

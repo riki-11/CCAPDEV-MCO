@@ -184,7 +184,10 @@ app.get('/search', routeController.renderFindBathroomPage);
 app.get('/create-review', routeController.renderCreateReviewPage);
 app.get('/edit-review', routeController.renderEditReviewPage);
 app.get('/establishment', routeController.renderEstablishmentPage);
+
+// Searching
 app.get('/search-results', routeController.renderSearchResultsPage);
+app.get('/review-search', routeController.getReviewSearchResults);
 
 // Fetch Request Routes
 app.get('/select-restroom', routeController.getRestroomOptions);
@@ -203,11 +206,13 @@ app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.update
 app.post('/userlogin', userController.loginValidation, userController.loginUser);//passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), userController.loginUser);
 app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
 
+// Replies
 app.post('/postreply', loggedIn, reviewController.addReply);
 app.post('/editreply', loggedIn, reviewController.editReply);
-
-// Delete Replies
 app.delete('/deleteReply', routeController.deleteReply);
+
+// Delete account
+app.post('/delete-account', userController.deleteUser);
 
 
 // Add Likes and Dislikes

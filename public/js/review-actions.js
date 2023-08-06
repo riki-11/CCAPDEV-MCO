@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const reviewId = event.target.dataset.reviewId;
       console.log(reviewId);
-      sendLike(reviewId);
+      sendLike(reviewId).then(() => {
+        // Refresh the page after the server responds to the like request
+        location.reload();
+      });
     });
   }); 
   const dislikeButtons = document.querySelectorAll(".dislike-button");
@@ -13,7 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", event => {
       event.preventDefault();
       const reviewId = event.target.dataset.reviewId;
-      sendDislike(reviewId);
+      sendLike(reviewId).then(() => {
+        // Refresh the page after the server responds to the like request
+        location.reload();
+      });
     });
   });
 });
