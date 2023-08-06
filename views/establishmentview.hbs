@@ -72,11 +72,13 @@
                                 {{#each reviews}}
                                     {{> review-block modifiable=false ownerView=true}}
                                 {{/each}}
-                            
+                                <!-- This input will be used by establishment-view.js to check whether the current user is an owner-->
+                                <input id="isOwner" type="hidden" value="true">
                             {{else}}
                                 {{#each reviews}}
                                     {{> review-block modifiable=false ownerView=false}}
                                 {{/each}}
+                                <input id="isOwner" type="hidden" value="false">
                             {{/if}}
                         {{#if searched}} 
                             {{#if searchResults}}
