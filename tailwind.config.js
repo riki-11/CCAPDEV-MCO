@@ -29,6 +29,12 @@ module.exports = {
       width: {
         '18': '4.5rem',
       },
+      minWidth: {
+        '1/2': '50%',
+      },
+      maxWidth: {
+        '80': '80%'
+      },
       backgroundImage: {
         'bg-henry-sy': "url('../images/henry_sy-bg.jpg')" // can't figure this out yet. please find a way 
       }

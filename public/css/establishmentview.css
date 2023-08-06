@@ -428,9 +428,7 @@ body {
     transform: translate(-50%,-50%) scale(1);
     
 }
-.replies-container{
-    padding-left: 30%;
-}
+
 .reply-blocks{
     padding-left: 5%;
 }
@@ -440,9 +438,7 @@ body {
     padding: 2% 0 2% 5%;
     display: none;
 }
-.replies-container h1{
-    display: none;
-}
+
 .reply-form-container textarea{
     padding: 1.5%;
     margin: 1% 1% 1% 0;

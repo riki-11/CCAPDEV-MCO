@@ -6,7 +6,8 @@
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
-    <body>  
+    <body>
+        <!-- hidden input to store the current user viewing the page -->
         <div class="w-full px-10">
             <div class="content-container">
                 <div id="establishment-details-container" class="establishment-details-container">
@@ -30,6 +31,7 @@
                                         {{building.description}}
                                     </span>
                                 </div>
+                                <!--
                                 <div class="left-gotomap-details-container"> <br>
                                     <div class="popup-img" id="popup-1">
                                         <div class="overlay"></div>
@@ -38,36 +40,12 @@
                                             <img src="images/campus-map-large.jpg" alt="DLSU Map">
                                         </div>
                                     </div>
-                                    <!--<button id="mapbtn"{{!--  onclick="togglepopup()" --}}>Go To DLSU Map</button>-->
+                                    <button id="mapbtn"{{!--  onclick="togglepopup()" --}}>Go To DLSU Map</button>
                                 </div>
+                                -->
                             </div>
-                            <!--
-                            <div class="right-details-container">
-                                <div class="right-details">
-                                    <h1 class="right-details-amenities">Property Amenities</h1>
-                                    <h2 class="search-line"></h2>
-                                    <div class="right-amenities">
-
-                                        <i class="fa-solid fa-water"></i> <span> Bidet</span>
-                                        <br><i class="fa-solid fa-toilet"></i><span> Flush</span>
-                                        <br><i class="fa-solid fa-box-tissue"></i><span> Tissue</span>
-                                    </div>
-                                </div>
-                                <div class="other-right-details">
-                                    <br><i class="fa-solid fa-faucet"></i><span> Faucet</span>
-                                    <br><i class="fa-solid fa-hands"></i><span> Hand Dryer</span>
-                                    <br><i class="fa-solid fa-soap"></i><span> Hand Soap</span>
-                                </div>
-                            </div>
-                            -->
                         </div>
-                        <!-- 
-                        IMAGES 
-                        <div class="right-details-container">
-                            <div class="img1" onclick="location.href='images/cr-henry.png'"></div>
-                            <div class="img2" onclick="location.href='images/3.jpg'"></div>
-                            <div class="img3" onclick="location.href='images/cr-temp2.jpg'"></div>
-                        </div> -->
+
                     </div>
                 </div>
 
@@ -94,6 +72,9 @@
                         <h2 class="search-line"></h2>
                         
                         <div class="w-full overflow-auto mb-10"> <!--Review Container-->
+                        
+                        <!-- HAVE TO ADD A CHECKER SOMEWHERE TO SEE IF THE CURRENT USER IS THE OWNER OF THE BUILDING -->
+                        
                         {{#each reviews}}
                             {{> review-block modifiable=false}}
                         {{/each}}
@@ -106,6 +87,6 @@
                 </div>                    
             </div>
         </div>
-    <script src="js/establishment-view.js"></script>
+    <script type="module" src="js/establishment-view.js"></script>
     </body>
 </html>
