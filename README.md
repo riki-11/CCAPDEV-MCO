@@ -32,7 +32,7 @@ The project utilizes the following:
 
 - Frontend: HTML, CSS, JavaScript, Bootstrap, Tailwind
 - Backend: Node.js, Express.js
-- Database: MongoDB
+- Database: MongoDB, Mongoose
 - Templating Engine: Handlebars
 - User Authentication: Passport.js
 - Image Storage: Multer
