@@ -49,10 +49,12 @@
             <p class="text-xs">(edited)</p>
         {{/if}}
 
+        {{!-- {{#if }} shows only when a user is logged in--}}
         <div class="flex mt-1 gap-x-5">
             <button class="fa-regular fa-thumbs-up like-button"data-review-id="{{this._id}}" ></button> {{this.cleanCount}} 
             <button class="fa-regular fa-thumbs-down dislike-button" data-review-id="{{this._id}}"></button> {{this.disgustingCount}}            
         </div>
+        {{!-- {{/if}} --}}
 
         {{#if modifiable}}
             <div class="flex mt-1 gap-x-5">

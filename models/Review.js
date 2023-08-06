@@ -60,15 +60,13 @@ const reviewSchema = new mongoose.Schema({
   },
 
   likers: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: 'User',
-    default: []
+    type: [String],
+    default: [] 
   }, 
 
   dislikers: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: 'User',
-    default: []
+    type: [String],
+    default: [] 
   }
 
 });

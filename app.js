@@ -160,6 +160,10 @@ app.use((req,res,next) => {
   next();
 })
 
+// Setup parser for JSON data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // parse data and images
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -197,8 +201,8 @@ app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login
 app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
 
 // Add Likes and Dislikes
-app.post('/addLikes', reviewController.addLikes);
-app.post('/addDisikes', reviewController.addDislikes);
+app.post('/addLikes', loggedIn, reviewController.addLikes);
+app.post('/addDislikes', loggedIn,  reviewController.addDislikes);
 
 // Delete reviews
 app.delete('/deleteReviews', routeController.deleteReviews);
@@ -213,3 +217,4 @@ app.use((req, res) => {
     forBusiness: false
   });
 })
+
