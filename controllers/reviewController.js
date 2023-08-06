@@ -208,8 +208,6 @@ const reviewController = {
       const replyID = replyData.replyID;
       const replyContent = replyData.reply;
 
-      console.log(`REPLY ID ${replyID} | Content: ${replyContent}`);
-
       // Find the reply by its ID
       const reply = await Reply.findById(replyID);
       console.log(reply);

@@ -13,10 +13,10 @@
     <div class="w-[60%] flex h-screen justify-center gap-10 m-auto overflow-auto mt-28">
         <div class="justify center mt-5 w-48 text-center">
             {{#if imageSrc}}
-            <img src="{{imageSrc}}" alt="Profile Picture" class="justify-center h-[9.5rem] w-[9.5rem] m-auto rounded-[5rem]">
+                <img src="{{imageSrc}}" alt="Profile Picture" class="justify-center h-[9.5rem] w-[9.5rem] m-auto rounded-[5rem]">
             {{else}}
-            <img src="../images/profile-icon.png" alt="Profile Picture" class="justify-center h-[9.5rem] w-[9.5rem] m-auto rounded-[5rem]">
-            <p class="mt-2">@{{user.username}}</p>
+                <img src="../images/profile-icon.png" alt="Profile Picture" class="justify-center h-[9.5rem] w-[9.5rem] m-auto rounded-[5rem]">
+                <p class="mt-2">@{{user.username}}</p>
             {{/if}}
             <div class="mt-96 text-center">
                 <form action="/delete-account" method="POST">

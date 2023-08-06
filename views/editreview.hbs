@@ -83,22 +83,22 @@
                     <textarea name="form-review" id="form-review" cols="10" rows="10" placeholder="I experienced the best bidet of my life...">{{review.content}}</textarea>
                     <br>
                     {{#if photoSrc}}
-                     <div>
-                        <span class="label text-white">Current Image</span><br>
-                        <img src="{{photoSrc}}" alt="Current Image" style="max-width: 300px; max-height: 300px;">
-                    </div>
+                        <div>
+                            <span class="label text-white">Current Image</span><br>
+                            <img src="{{photoSrc}}" alt="Current Image" style="max-width: 300px; max-height: 300px;">
+                        </div>
 
-                    <!-- Image Upload -->
-                    <div>
-                        <span class="label text-white">Replace Image (optional)</span><br>
-                        <input type="file" name="form-image" accept="image/*"><br>
-                    </div>
+                        <!-- Image Upload -->
+                        <div>
+                            <span class="label text-white">Replace Image (optional)</span><br>
+                            <input type="file" name="form-image" accept="image/*"><br>
+                        </div>
                     
                     {{else}}
-                     <div>
-                        <span class="label text-white">Add Image (optional)</span><br>
-                        <input type="file" name="photo" accept="image/*"><br>
-                    </div>
+                        <div>
+                            <span class="label text-white">Add Image (optional)</span><br>
+                            <input type="file" name="photo" accept="image/*"><br>
+                        </div>
                     
                     {{/if}}
                 

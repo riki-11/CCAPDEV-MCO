@@ -29,12 +29,8 @@ const userController = {
     viewProfile: async function (req, res) {
         try {
             
-        // Assuming you have the user ID from the session or request
-        // const userId = '64bd2ba04e2c41c0fa918e4f'; // Replace with the actual user ID
-        // User.find({'username': req.session.username}).exec();
-
             // Fetch the user's data from the database
-            //const user = await User.findById(userId);
+
             const user = await User.findbyId(req.user._id).exec();
             
             // Render the template and pass the user's data
@@ -166,7 +162,6 @@ const userController = {
         const photoData = req.file;
 
         const { firstname, lastname, username, email, password, description } = req.body;
-        // const sampleUserID = new mongoose.Types.ObjectId('64bd2ba04e2c41c0fa918e4f'); 
 
         try {
             
@@ -178,7 +173,6 @@ const userController = {
             }
             const response = await userController.formValidationEdit(userID, password, username, email);
             
-
             if (response == true) {
 
                 if (photoData) {
@@ -230,7 +224,6 @@ const userController = {
             console.error('Error updating user ', e);
             res.redirect('/edit-profile');
         }
-
     },
     
     
@@ -264,8 +257,6 @@ const userController = {
                     });
                 })
                             
-                // await newUser.save();
-                console.log(newUser);
             } else {
                 res.render("register", {
                     error: response,
@@ -276,10 +267,7 @@ const userController = {
                   });
                 
             }
-            
-            // Redirect to a success page or send a success response
-            // res.redirect('http://localhost:3000/profile'); // Replace with the appropriate URL for the success page
-        
+                    
         } catch (error) {
             console.error('Error creating user:', error);
             res.status(500).send('Server error');

@@ -194,6 +194,7 @@ app.get('/get-building-restrooms', routeController.getBuildingRestrooms);
 app.get('/get-building-data',  routeController.getBuildingData);
 app.get('/get-building-code', routeController.getBuildingCode);
 app.get('/update-building-ratings', routeController.updateBuildingRatings);
+app.get('/get-replies', reviewController.getAllReplies);
 
 // Handle form submissions
 app.post('/usersignup', userController.addUser);
