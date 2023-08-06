@@ -14,7 +14,6 @@ const restroomController = {
     try {
       // Get building id 
       const buildingobj = await Building.findOne({name: building});
-      //console.log(buildingobj._id);
       //build query
       const query = {
         floor: floor,
@@ -24,12 +23,9 @@ const restroomController = {
 
       //get restroom id
       const restroom = await Restroom.findOne(query);
-      //console.log(restroom._id)
-      //res.send(restroom)
       const dataToSend = { name: building, floor: floor, gender: gender, restroomId: restroom._id};
       const queryString = new URLSearchParams(dataToSend).toString();
       res.redirect(`create-review?${queryString}`);
-      //res.redirect('http://localhost:3000/create-review');
 
     } catch (error) {
       console.error('Error fetching restrooms:', error);
