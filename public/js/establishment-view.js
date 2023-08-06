@@ -94,5 +94,27 @@ document.addEventListener('DOMContentLoaded', () => {
       
     });
   });
+  
+  
+  // Add an event listener to handle delete button clicks
+  document.addEventListener('click', async function (event) {
+    console.log("Hello");
+    const deleteBtn = event.target.closest('.delete-reply-btn');
+    if (deleteBtn) {
+      const replyContainer = deleteBtn.closest('.reply-container');
+      console.log("Reply Container: ", replyContainer);
+      const replyID = replyContainer.querySelector('#replyID').value;
 
+      console.log("Reply ID: ", replyID);
+      
+      // Assuming you have a function to handle reply deletion, call it here
+      // For example: deleteReplyFromServer(replyID);
+      const response = await fetch(`/deleteReply?replyID=${replyID}`, {
+        method: "DELETE",
+      });
+      
+      // Remove the reply container from the DOM after deletion
+      replyContainer.remove();
+    }
+  });
 });
