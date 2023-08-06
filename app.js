@@ -104,6 +104,10 @@ function loggedIn(req, res, next) {
   }
 }
 
+// Configure passport-local-mongoose
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 // BEGINNING OF ALL .app functions
@@ -128,19 +132,13 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 10// 10hr
+    maxAge: 1000 * 60 * 60 * 10// 1hr
   }
 }))
 
 // initialize passport and make it deal with session
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Configure passport-local-mongoose
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
 
 // Configure middleware to verify login (for logout button)
 app.use((req,res,next) => {
@@ -162,6 +160,10 @@ app.use((req,res,next) => {
   next();
 })
 
+// Setup parser for JSON data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // parse data and images
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -173,14 +175,18 @@ app.get("/", routeController.renderHomePage);
 app.get('/about', routeController.renderAboutPage);
 app.get('/register', routeController.renderRegisterPage);
 app.get('/login', routeController.renderLogInPage);
-app.get('/profile', routeController.renderProfilePage);
+app.get('/profile', loggedIn, routeController.renderProfilePage);
 app.get('/edit-profile', loggedIn,routeController.renderEditProfilePage);
 app.get('/results', routeController.renderSearchResultsPage);
 app.get('/search', routeController.renderFindBathroomPage);
 app.get('/create-review', routeController.renderCreateReviewPage);
 app.get('/edit-review', routeController.renderEditReviewPage);
 app.get('/establishment', routeController.renderEstablishmentPage);
+
+
+// Searching
 app.get('/search-results', routeController.renderSearchResultsPage);
+app.get('/review-search', routeController.getReviewSearchResults);
 
 // Fetch Request Routes
 app.get('/select-restroom', routeController.getRestroomOptions);
@@ -190,23 +196,23 @@ app.get('/get-building-restrooms', routeController.getBuildingRestrooms);
 app.get('/get-building-data',  routeController.getBuildingData);
 app.get('/get-building-code', routeController.getBuildingCode);
 app.get('/update-building-ratings', routeController.updateBuildingRatings);
+app.get('/get-replies', reviewController.getAllReplies);
 
 // Handle form submissions
 app.post('/usersignup', userController.addUser);
 app.post('/createreview', upload.single('photo'), reviewController.addReview);
 app.post('/updateinfo',  loggedIn, upload.single('photo'), userController.updateUser);
-app.post('/userlogin', userController.loginValidation, userController.loginUser);//passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), userController.loginUser);
+app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/login' }), userController.loginUser);
 app.post('/updatereview', loggedIn,  upload.single('photo'), reviewController.updateReview);
-
 app.post('/postreply', loggedIn, reviewController.addReply);
 app.post('/editreply', loggedIn, reviewController.editReply);
 
 // Delete Replies
 app.delete('/deleteReply', routeController.deleteReply);
 
-
 // Delete reviews
 app.delete('/deleteReviews', routeController.deleteReviews);
+app.post('/delete-account', userController.deleteUser);
 
 // Log out
 app.get('/logout', routeController.logoutUser);

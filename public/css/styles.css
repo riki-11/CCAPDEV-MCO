@@ -621,10 +621,6 @@ video {
   margin-bottom: 2rem;
 }
 
-.ml-2{
-  margin-left: 0.5rem;
-}
-
 .ml-24{
   margin-left: 6rem;
 }
@@ -697,10 +693,6 @@ video {
   margin-top: 24rem;
 }
 
-.mb-5{
-  margin-bottom: 1.25rem;
-}
-
 .flex{
   display: flex;
 }
@@ -751,11 +743,6 @@ video {
 
 .h-screen{
   height: 100vh;
-}
-
-.h-fit{
-  height: -moz-fit-content;
-  height: fit-content;
 }
 
 .min-h-300{
@@ -854,10 +841,6 @@ video {
 
 .flex-col{
   flex-direction: column;
-}
-
-.content-center{
-  align-content: center;
 }
 
 .items-center{

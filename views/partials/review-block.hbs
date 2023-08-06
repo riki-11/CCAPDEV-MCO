@@ -18,7 +18,7 @@
     <div class="flex flex-col gap-y-1 text-sm text-neutral-400 w-full">
         <div class="flex overflow-hidden">
             {{#if searched}}
-                 <p><a href="/profile?username={{user.username}}" class="hover:text-white hover:underline">{{user.username}}</a> posted a review for
+                <p>{{this.username}} posted a review for
                     <a href="establishment?building={{this.buildingName}}" class="text-secondary">
                         {{this.buildingName}}, 
                         Floor {{this.floor}},
@@ -27,7 +27,7 @@
                 </p>
 
             {{else}}
-                 <p><a href="/profile?username={{user.username}}" class="hover:text-white hover:underline">{{user.username}}</a> posted a review for
+                <p>{{user.username}} posted a review for
                     <a href="establishment?building={{this.restroomID.buildingID.name}}" class="text-secondary">
                         {{this.restroomID.buildingID.name}}, 
                         Floor {{this.restroomID.floor}},
@@ -73,14 +73,12 @@
         </div>
 
         {{#if modifiable}}
-            {{#if currentUser}}
             <div class="flex mt-1 gap-x-5">
                 <a href="edit-review?reviewId={{this._id}}" class="hover:opacity-80"><i class="fa-solid fa-pencil"></i> Edit Review</a>
                 <button class="hover:opacity-80 delete" data-review-id="{{this._id}}">
                     <i class="fa-solid fa-trash-can"></i> Delete Review
                 </button>   
             </div>
-            {{/if}}
         {{/if}}
 
         <!-- Input to indicate the id of this review -->
