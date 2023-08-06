@@ -146,11 +146,12 @@ const reviewController = {
                                             .lean();
                                     
         // For each review, add the source of the profile image and the review's image to the object 
-        restroomReviews.map(review => {
+     /*   restroomReviews.map(review => {
           review['profImgSrc'] = review.user.photo && review.user.photo.contentType ? `data:${review.user.photo.contentType};base64,${review.user.photo.data.toString('base64')}` : null;
           review['photoSrc'] = review.photo && review.photo.contentType ? `data:${review.photo.contentType};base64,${review.photo.data.toString('base64')}` : null;
         })
 
+*/
         return restroomReviews;
       });
 
